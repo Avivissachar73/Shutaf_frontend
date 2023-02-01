@@ -1,0 +1,132 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: $app-font;
+  font-weight: 500;
+}
+
+.app {
+  background-color: #c4fad3;
+  color: black;
+}
+
+.app-header {
+  min-height: $header-height;
+}
+
+.app-main {
+  // min-height: calc(100vh - #{$header-height} - #{$footer-height});
+  height: calc(100vh - #{$header-height} - #{$footer-height});
+  background-color: rgb(222, 250, 196);
+  overflow-y: auto;
+  position: relative;
+}
+
+.app-footer {
+  min-height: $footer-height;
+  padding-inline-start: $app-aside-width;
+  @media (max-width: $small-screen-breake) {
+    padding-inline-start: 0;
+  }
+}
+
+.app-content {
+  display: flex;
+  .right {
+    flex: 1;
+  }
+}
+
+.app-aside {
+  width: $app-aside-width;
+  background-color: rgba(0,0,0,0.1);
+  @media (max-width: $small-screen-breake) {
+    display: none !important;
+  }
+}
+
+.inner-app {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  .inner-app-content {
+    height: 100%;
+    flex: 1;
+  }
+}
+
+.app.dark {
+  color: white;
+  background-color: #505050;
+}
+.app.dark .app-main {
+  background-color: #252525;
+}
+.app.dark .app-aside {
+  background-color: rgba(255,255,255,0.1);
+}
+
+.app.dark {
+  @media (max-width: $small-screen-breake) {
+    .app-header {
+      nav {
+        background-color: #1a1a1a;
+        border-color: white;
+        >* {
+          border-color: white;
+          &:hover {
+            background-color: #505050;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.rtl {
+  direction: rtl;
+}
+
+::-webkit-scrollbar {
+  margin-left: 2.5px;
+  padding: 1px;
+  width: 5px;
+  /* background-color: rgb(255, 137, 137); */
+  background-color: rgb(228, 59, 59);
+}
+::-webkit-scrollbar-thumb {
+  /* width: 5px; */
+  /* background-color: rgb(255, 239, 149); */
+  background-color: rgb(255, 137, 137);
+  border-radius: 10px;
+  
+}
+::-webkit-scrollbar-button {
+  /* width: 5px; */
+  /* background-color: blue; */
+  background-color: rgb(228, 59, 59);
+}
+
+
+.container {
+  margin: 0 auto;
+  padding: 10px 20px;
+  max-width: 1500px;
+} @media (max-width: $big-screen-breake) {
+  .container {
+      max-width: 1200px;
+  }
+} @media (max-width: $medium-screen-breake) {
+  .container {
+      padding: 10px 24px;
+      max-width: unset;
+  }
+} @media (max-width: $small-screen-breake) {
+  .container {
+      padding: 10px 12px;
+  }
+}

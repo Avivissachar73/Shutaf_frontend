@@ -1,0 +1,59 @@
+
+// FONT SIZES:
+$font-size-smaller: 12px;
+$font-size-small: 13px;
+$font-size-normal: 15px;
+$font-size-medium: 17px;
+$font-size-big: 18px;
+
+// FONTS:
+$app-font: sans-serif;
+// $app-font: 'Courier New', Courier, monospace;
+
+// SREEN BREAK BREAK POINTS:
+$small-screen-breake: 800px;
+$medium-screen-breake: 1200px;
+$big-screen-breake: 1500px;
+
+// COLORS:
+
+$clr-1: black;
+$clr-2: gray;
+$clr-3: blue;
+
+$clr-safe: green;
+$clr-warn: yellow;
+$clr-danger: red;
+
+// layout:
+
+$header-height: 60px;
+$footer-height: 100px;
+$app-aside-width: 50px;
+
+// oters:
+
+$light-shadow: 0px 0px 10px 1px rgba(0,0,0,0.1);
+$blure-clr: rgba(0, 0, 0, 0.05);
+
+
+:export {
+  fontSizeSmaller: $font-size-smaller;
+  fontSizeSmall: $font-size-small;
+  fontSizeNormal: $font-size-normal;
+  fontSizeMedium: $font-size-medium;
+  fontSizeBig: $font-size-big;
+  appFont: $app-font;
+  smallScreenBreak: $small-screen-breake;
+  mediumScreenBreak: $medium-screen-breake;
+  bigScreenBreak: $big-screen-breake;
+  clr1: $clr-1;
+  clr2: $clr-2;
+  clr3: $clr-3;
+  clrSafe: $clr-safe;
+  clrWarn: $clr-warn;
+  clrDanger: $clr-danger;
+  fontSizeSmall: $header-height;
+  fontSizeSmall: $footer-height;
+  lightShadow: $light-shadow;
+}

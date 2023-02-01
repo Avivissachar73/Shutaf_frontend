@@ -1,0 +1,16 @@
+{
+  "hello": "Hello",
+  "filter": "Filter",
+  "edit": "Edit",
+  "submit": "Submit",
+  "signup": "Signup",
+  "login": "Login",
+  "about": "About",
+  "settings": "Settings",
+  "example": "Example",
+  "admin": "Admin",
+  "logout": "Logout",
+  "delete": "Delete",
+  "addNew": "Add new",
+  "darkMode": "Dark mode"
+}

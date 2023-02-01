@@ -1,0 +1,18 @@
+
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // gap: 10px;
+}
+
+
+@mixin font-size-big {
+  font-size: rem($font-size-big);
+}
+// $font-size-smaller: rem(12px);
+// $font-size-small: rem(13px);
+// $font-size-normal: rem(15px);
+// $font-size-medium: rem(17px);
+// $font-size-big: rem(18px);

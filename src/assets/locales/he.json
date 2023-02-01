@@ -1,0 +1,16 @@
+{
+  "hello": "שלום",
+  "filter": "לפלטר",
+  "edit": "ערוך",
+  "submit": "שלח",
+  "signup": "הרשם",
+  "login": "התחבר",
+  "about": "אודות",
+  "settings": "הגדרות",
+  "example": "דוגמה",
+  "admin": "אדמין",
+  "logout": "התנתק",
+  "delete": "מחק",
+  "addNew": "הוסף חדש",
+  "darkMode": "מצב חשוך"
+}
