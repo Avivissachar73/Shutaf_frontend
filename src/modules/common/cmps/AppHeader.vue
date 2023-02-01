@@ -9,19 +9,14 @@
       <nav :class="{show: mobileShow}">
         <router-link :to="{name: 'AboutPage'}">{{$t('about')}}</router-link> 
         <!-- <router-link :to="{name: 'SettingsPage'}">{{$t('settings')}}</router-link> -->
-        <router-link :to="{name: 'ExamplePage'}">{{$t('example')}}</router-link>
         <router-link :to="{name: 'SettingsPage'}">{{$t('settings')}}</router-link>
         <router-link :to="{name: 'PostPage', params: {organizationId: 'public'} }">{{$t('posts')}}</router-link>
-        <router-link :to="{name: 'SandBox' }">{{$t('SandBox')}}</router-link>
         <template>
           <router-link v-if="!loggedUser" :to="{name: 'LoginPage'}">{{$t('login')}}</router-link>
           <template v-else>
             <router-link :to="{name: 'AccountDetails', params: {id: loggedUser._id} }">{{loggedUser.username}}</router-link>
             <router-link v-if="isAdmin" :to="{name: 'AccountPage'}">{{$t('admin')}}</router-link>
-            <router-link v-if="isAdmin" :to="{name: 'DashboardPage'}">{{$t('dashboard')}}</router-link>
             <router-link :to="{name: 'OrganizationPage'}">{{$t('organizations')}}</router-link>
-            <router-link :to="{name: 'ChatApp'}">{{$t('chat')}}</router-link>
-            <router-link :to="{name: 'EdMapPage'}">ED</router-link>
             <button @click="logout">{{$t('logout')}}</button>
           </template>
         </template>
