@@ -1,4 +1,4 @@
-# frontend-starter
+# Shutaf-frontend
 
 ## Project setup
 ```

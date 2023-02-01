@@ -1,5 +1,6 @@
 {
-  "name": "frontend-starter",
+  "name": "shutaf-frontend",
+  "author": "Aviv Issachar",
   "version": "0.1.0",
   "private": true,
   "scripts": {
