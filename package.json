@@ -5,7 +5,7 @@
   "scripts": {
     "start": "vue-cli-service serve --open",
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --mode production"
+    "build": "SET NODE_ENV = production && vue-cli-service build --mode production"
   },
   "dependencies": {
     "axios": "^0.21.1",
