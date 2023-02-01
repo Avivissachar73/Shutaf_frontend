@@ -1,0 +1,12 @@
+{
+  "en": {
+    "organization": "Organization",
+    "organizations": "Organizations",
+    "newOrganization": "New Organization"
+  },
+  "he": {
+    "organization": "ארגון",
+    "organizations": "ארגונים",
+    "newOrganization": "ארגון חדש"
+  }
+}

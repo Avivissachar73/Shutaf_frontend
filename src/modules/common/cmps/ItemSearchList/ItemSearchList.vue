@@ -90,6 +90,7 @@ export default {
     overflow-y: auto;
     .item-preview {
       width: 300px;
+      max-width: 90vw;
       height: 200px;
       border-radius: 5px;
       background-color: #fff;

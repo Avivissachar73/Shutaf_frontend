@@ -14,9 +14,9 @@
         <template>
           <router-link v-if="!loggedUser" :to="{name: 'LoginPage'}">{{$t('login')}}</router-link>
           <template v-else>
-            <router-link :to="{name: 'AccountDetails', params: {id: loggedUser._id} }">{{loggedUser.username}}</router-link>
             <router-link v-if="isAdmin" :to="{name: 'AccountPage'}">{{$t('admin')}}</router-link>
             <router-link :to="{name: 'OrganizationPage'}">{{$t('organizations')}}</router-link>
+            <router-link :to="{name: 'AccountDetails', params: {id: loggedUser._id} }"><Avatar :account="loggedUser"/></router-link>
             <button @click="logout">{{$t('logout')}}</button>
           </template>
         </template>
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import Avatar from './Avatar.vue';
 import CreditLogo from './CreditLogo.vue'
 export default {
   name: 'AppHeader',
@@ -57,7 +58,7 @@ export default {
       this.mobileShow = false;
     }
   },
-  components: { CreditLogo },
+  components: { CreditLogo, Avatar },
 }
 </script>
 

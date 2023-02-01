@@ -3,21 +3,14 @@ import { alertService } from '@/modules/common/services/alert.service'
 import { delay } from '@/modules/common/services/util.service';
 import { basicStoreService } from '@/modules/common/services/basic-store.service';
 
-const initState = () => ({
-  data: { items: [], total: 0},
-  selectedOrganization: null,
-  filterBy: basicStoreService.initFilterBy(),
-  isLoading: false
-});
-
 const _organizationStore = {
   namespaced: true,
-  state: initState(),
+  state: basicStoreService.initState(),
   getters: {
     organizationData: (state) => state.data,
     organizations: (state) => state.data.items,
     totalItems: (state) => state.data.total,
-    selectedOrganization: (state) => state.selectedOrganization,
+    selectedOrganization: (state) => state.selectedItem,
     filterBy: (state) => state.filterBy,
     isLoading: (state) => state.isLoading,
   },
@@ -29,7 +22,7 @@ const _organizationStore = {
       state.data = data;
     },
     setSelectedOrganization(state, { organization }) {
-      state.selectedOrganization = organization;
+      state.selectedItem = organization;
     },
     removeOrganization(state, { id }) {
     },
@@ -40,13 +33,13 @@ const _organizationStore = {
       state.isLoading = val;
     },
     resetState(state) {
-      const newState = initState();
+      const newState = basicStoreService.initState();
       for (let key in state) state[key] = newState[key];
     },
 
     updateOrgStatus(state, { organizationId, newStatus }) {
       const doUpdateSttatus = (org) => org.loggedAccountData.status = newStatus;
-      if (state.selectedOrganization?._id === organizationId) doUpdateSttatus(state.selectedOrganization);
+      if (state.selectedItem?._id === organizationId) doUpdateSttatus(state.selectedItem);
       // const idxIdList = state.data.items.find(c => c._id === organizationId);
       // if (idxIdList !== -1) doUpdateSttatus(state.data.items[idxIdList]);
     }

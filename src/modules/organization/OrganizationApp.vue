@@ -1,5 +1,5 @@
 <template>
-  <div class="organization-app container inner-app">
+  <div class="organization-app container inner-app flex column gap20">
     <nav v-if="orgId" class="flex align-center gap10">
       <router-link :to="{name: 'PostPage', params: {organizationId: orgId} }">{{$t('posts')}}</router-link>
       <router-link :to="{name: 'ShoppingListPage', params: {organizationId: orgId} }">{{$t('shoppingLists')}}</router-link>

@@ -1,11 +1,12 @@
 <template>
-  <li class="organization-preview item-preview">
-    <div v-if="accountOrgStatus === 'pending'">
-      <button @click="updateStatus('approved')">{{$t('approve')}}</button>
-      <button @click="updateStatus('declined')">{{$t('decline')}}</button>
+  <li class="organization-preview item-preview flex column gap10">
+    <div v-if="accountOrgStatus === 'pending'" class="flex gap5">
+      <span>{{$t('newOrganization')}}!</span>
+      <button @click.prevent.stop="updateStatus('approved')" class="btn safe">{{$t('approve')}}</button>
+      <button @click.prevent.stop="updateStatus('declined')" class="btn danger">{{$t('decline')}}</button>
     </div>
-    <router-link :to="'/organization/' + organization._id">
-      <pre>{{organization}}</pre>
+    <router-link :to="'/organization/' + organization._id" class="flex-1">
+      <h3>{{organization.name}}</h3>
     </router-link>
   </li>
 </template>

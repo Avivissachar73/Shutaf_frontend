@@ -4,7 +4,6 @@
     <nav class="flex column">
       <router-link :to="{name: 'AboutPage'}">!</router-link>
       <router-link :to="{name: 'SettingsPage'}">S</router-link>
-      <router-link :to="{name: 'ExamplePage'}">E</router-link>
     </nav>
   </aside>
 </template>

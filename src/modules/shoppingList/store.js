@@ -2,21 +2,14 @@ import { shoppingListService } from './services/shoppingList.service';
 import { alertService } from '@/modules/common/services/alert.service';
 import { basicStoreService } from '@/modules/common/services/basic-store.service';
 
-const initState = () => ({
-  data: { items: [], total: 0},
-  selectedShoppingList: null,
-  filterBy: basicStoreService.initFilterBy(),
-  isLoading: false
-});
-
 export const _shoppingListStore = {
   namespaced: true,
-  state: initState(),
+  state: basicStoreService.initState(),
   getters: {
     shoppingListsData: (state) => state.data,
     shoppingLists: (state) => state.data.items,
     totalShoppingList: (state) => state.data.total,
-    selectedShoppingList: (state) => state.selectedShoppingList,
+    selectedShoppingList: (state) => state.selectedItem,
     filterBy: (state) => state.filterBy,
     isLoading: (state) => state.isLoading,
   },
@@ -28,7 +21,7 @@ export const _shoppingListStore = {
       state.data = data;
     },
     setSelectedShoppingList(state, { shoppingList }) {
-      state.selectedShoppingList = shoppingList;
+      state.selectedItem = shoppingList;
     },
     removeShoppingList(state, { id }) {
       const idx = state.data.items.findIndex(c => c._id === id);
@@ -44,7 +37,7 @@ export const _shoppingListStore = {
       state.isLoading = val;
     },
     resetState(state) {
-      const newState = initState();
+      const newState = basicStoreService.initState();
       for (let key in state) state[key] = newState[key];
     },
     saveShoppingList(state, { shoppingList }) {

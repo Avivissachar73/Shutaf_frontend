@@ -1,8 +1,8 @@
-import { commentService } from './services/comment.service';
+import { activityService } from './services/activity.service';
 import { alertService } from '@/modules/common/services/alert.service';
 import { basicStoreService } from '@/modules/common/services/basic-store.service';
 
-export const _commentStore = {
+export const _activityStore = {
   namespaced: true,
   state: basicStoreService.initState(),
   getters: {
@@ -17,13 +17,11 @@ export const _commentStore = {
     setProp(state, { key, val }) {
       state[key] = val;
     },
-    setComments(state, { data }) {
+    setActivities(state, { data }) {
       state.data = data;
     },
-    setSelectedComment(state, { comment }) {
-      state.selectedItem = comment;
-    },
-    removeComment(state, { id }) {
+    setSelectedActivity(state, { activity }) {
+      state.selectedItem = activity;
     },
     setFilterBy(state, { filterBy }) {
       state.filterBy = filterBy;
@@ -43,52 +41,52 @@ export const _commentStore = {
         type: '_Ajax',
         do: async () => {
           if (filterBy) commit({ type: 'setFilterBy', filterBy });
-          const commentsRes = await commentService.query(filterBy);
+          const commentsRes = await activityService.query(filterBy);
           return commentsRes;
         },
-        // onSuccess: (data) => commit({ type: 'setComments', data })
+        // onSuccess: (data) => commit({ type: 'setActivities', data })
         onSuccess: (data) => {}
       });
     },
     async loadComment({ commit, dispatch }, { id }) {
-      commit({ type: 'setSelectedComment', comment: null });
+      commit({ type: 'setSelectedActivity', activity: null });
       return dispatch({
         type: '_Ajax',
-        do: async () => commentService.get(id),
-        onSuccess: (comment) => commit({ type: 'setSelectedComment', comment })
+        do: async () => activityService.get(id),
+        onSuccess: (activity) => commit({ type: 'setSelectedActivity', activity })
       });
     },
     async removeComment({ commit, dispatch }, { id }) {
-      if (!await alertService.Confirm('Are you sure you want to remove this comment?')) return;
+      if (!await alertService.Confirm('Are you sure you want to remove this activity?')) return;
       console.log('WOWO!');
       return dispatch({
         type: '_Ajax',
-        do: async () => commentService.remove(id),
-        onSuccess: () => alertService.toast({type: 'success', msg: `comment removed successfully! id: ${id}`})
+        do: async () => activityService.remove(id),
+        onSuccess: () => alertService.toast({type: 'success', msg: `activity removed successfully! id: ${id}`})
       });
     },
-    async addComment({ commit, dispatch }, { comment, attachedId }) {
-      comment.attachedId = attachedId;
+    async addComment({ commit, dispatch }, { activity, attachedId }) {
+      activity.attachedId = attachedId;
       return dispatch({
         type: '_Ajax',
-        do: async () => commentService.add(comment),
-        onSuccess: ((addedComment) => {
-          // commit({ type: 'addComment', comment: addedComment });
+        do: async () => activityService.add(activity),
+        onSuccess: ((addedActicvity) => {
+          // commit({ type: 'addComment', activity: addedActicvity });
         })
       });
     },
-    async saveComment({ commit, dispatch }, { comment }) {
+    async saveComment({ commit, dispatch }, { activity }) {
       return dispatch({
         type: '_Ajax',
-        do: async () => commentService.save(comment),
-        onSuccess: (data) => alertService.toast({type: 'success', msg: `comment saved successfully! id: ${data._id}`})
+        do: async () => activityService.save(activity),
+        onSuccess: (data) => alertService.toast({type: 'success', msg: `activity saved successfully! id: ${data._id}`})
       });
     },
 
     async simpleLoadComments(context, { filterBy }) {
-      return await commentService.query(filterBy);
+      return await activityService.query(filterBy);
     }
   }
 }
 
-export const commentStore = { comment: _commentStore };
+export const activityStore = { activity: _activityStore };

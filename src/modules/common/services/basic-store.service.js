@@ -13,6 +13,13 @@ const initFilterBy = () => ({
   sort: {},
 });
 
+const initState = () => ({
+  data: { items: [], total: 0},
+  selectedItem: null,
+  filterBy: initFilterBy(),
+  isLoading: false
+});
+
 async function StoreAjax({ commit, dispatch }, { do: toDo, onSuccess, onError, dontDelay = false }) {
   try {
     commit({ type: 'setLoading', val: true });
@@ -42,5 +49,6 @@ async function StoreAjax({ commit, dispatch }, { do: toDo, onSuccess, onError, d
 
 export const basicStoreService = {
   initFilterBy,
-  StoreAjax
+  StoreAjax,
+  initState
 }

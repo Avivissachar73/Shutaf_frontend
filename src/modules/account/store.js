@@ -2,16 +2,9 @@ import { accountService } from './services/account.service';
 import { alertService } from '@/modules/common/services/alert.service';
 import { basicStoreService } from '@/modules/common/services/basic-store.service';
 
-const initState = () => ({
-  data: { items: [], total: 0},
-  selectedAccount: null,
-  filterBy: basicStoreService.initFilterBy(),
-  isLoading: false
-});
-
 export const _accountStore = {
   namespaced: true,
-  state: initState(),
+  state: basicStoreService.initState(),
   getters: {
     data: (state) => state.data,
     accounts: (state) => state.data.items,
@@ -39,7 +32,7 @@ export const _accountStore = {
       state.isLoading = val;
     },
     resetState(state) {
-      const newState = initState();
+      const newState = basicStoreService.initState();
       for (let key in state) state[key] = newState[key];
     }
   },

@@ -2,21 +2,14 @@ import { postService } from './services/post.service';
 import { alertService } from '@/modules/common/services/alert.service';
 import { basicStoreService } from '@/modules/common/services/basic-store.service';
 
-const initState = () => ({
-  data: { items: [], total: 0},
-  selectedPost: null,
-  filterBy: basicStoreService.initFilterBy(),
-  isLoading: false
-});
-
 export const _postStore = {
   namespaced: true,
-  state: initState(),
+  state: basicStoreService.initState(),
   getters: {
     postsData: (state) => state.data,
     posts: (state) => state.data.items,
     totalPosts: (state) => state.data.total,
-    selectedPost: (state) => state.selectedPost,
+    selectedPost: (state) => state.selectedItem,
     filterBy: (state) => state.filterBy,
     isLoading: (state) => state.isLoading,
   },
@@ -28,7 +21,7 @@ export const _postStore = {
       state.data = data;
     },
     setSelectedPost(state, { post }) {
-      state.selectedPost = post;
+      state.selectedItem = post;
     },
     removePost(state, { id }) {
       const idx = state.data.items.findIndex(c => c._id === id);
@@ -44,19 +37,19 @@ export const _postStore = {
       state.isLoading = val;
     },
     resetState(state) {
-      const newState = initState();
+      const newState = basicStoreService.initState();
       for (let key in state) state[key] = newState[key];
     },
 
     addComment(state, { comment }) {
-      state.selectedPost.comments.items.unshift(comment);
-      state.selectedPost.comments.total++;
+      state.selectedItem.comments.items.unshift(comment);
+      state.selectedItem.comments.total++;
     },
     removeComment(state, { commentId }) {
-      const idx = state.selectedPost.comments.items.findIndex(c => c._id === commentId);
+      const idx = state.selectedItem.comments.items.findIndex(c => c._id === commentId);
       if (idx === -1) return;
-      state.selectedPost.comments.items.splice(idx, 1);
-      state.selectedPost.comments.total--;
+      state.selectedItem.comments.items.splice(idx, 1);
+      state.selectedItem.comments.total--;
     }
   },
   actions: {
