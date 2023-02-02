@@ -23,7 +23,7 @@ const initState = () => ({
 async function StoreAjax({ commit, dispatch }, { do: toDo, onSuccess, onError, dontDelay = false }) {
   try {
     commit({ type: 'setLoading', val: true });
-    if (!dontDelay) await delay(700);
+    // if (!dontDelay) await delay(700);
   
     const res = await toDo();
     if (res.err) {

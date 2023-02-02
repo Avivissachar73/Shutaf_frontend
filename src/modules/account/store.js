@@ -2,14 +2,18 @@ import { accountService } from './services/account.service';
 import { alertService } from '@/modules/common/services/alert.service';
 import { basicStoreService } from '@/modules/common/services/basic-store.service';
 
+const initState = () => ({
+  ...basicStoreService.initState()
+});
+
 export const _accountStore = {
   namespaced: true,
-  state: basicStoreService.initState(),
+  state: initState(),
   getters: {
     data: (state) => state.data,
     accounts: (state) => state.data.items,
     totalAccounts: (state) => state.data.total,
-    selectedAccount: (state) => state.selectedAccount,
+    selectedAccount: (state) => state.selectedItem,
     filterBy: (state) => state.filterBy,
     isLoading: (state) => state.isLoading
   },
@@ -21,7 +25,7 @@ export const _accountStore = {
       state.data = data;
     },
     setSelectedAccount(state, { item }) {
-      state.selectedAccount = item;
+      state.selectedItem = item;
     },
     removeAccount(state, { id }) {
     },
@@ -32,7 +36,7 @@ export const _accountStore = {
       state.isLoading = val;
     },
     resetState(state) {
-      const newState = basicStoreService.initState();
+      const newState = initState();
       for (let key in state) state[key] = newState[key];
     }
   },
@@ -61,14 +65,14 @@ export const _accountStore = {
       return dispatch({
         type: '_Ajax',
         do: async () => accountService.remove(id),
-        onSuccess: () => alertService.toast({type: 'success', msg: `Account removed successfully! id: ${id}`})
+        onSuccess: () => alertService.toast({type: 'safe', msg: `Account removed successfully! id: ${id}`})
       });
     },
     async saveAccount({ commit, dispatch }, { item }) {
       return dispatch({
         type: '_Ajax',
         do: async () => accountService.save(item),
-        onSuccess: () => alertService.toast({type: 'success', msg: `Account saved successfully! id: ${item._id}`})
+        onSuccess: () => alertService.toast({type: 'safe', msg: `Account saved successfully! id: ${item._id}`})
       });
     }
   }

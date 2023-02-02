@@ -2,9 +2,13 @@ import { commentService } from './services/comment.service';
 import { alertService } from '@/modules/common/services/alert.service';
 import { basicStoreService } from '@/modules/common/services/basic-store.service';
 
+const initState = () => ({
+  ...basicStoreService.initState()
+});
+
 export const _commentStore = {
   namespaced: true,
-  state: basicStoreService.initState(),
+  state: initState(),
   getters: {
     commentsData: (state) => state.data,
     comments: (state) => state.data.items,
@@ -32,7 +36,7 @@ export const _commentStore = {
       state.isLoading = val;
     },
     resetState(state) {
-      const newState = basicStoreService.initState();
+      const newState = initState();
       for (let key in state) state[key] = newState[key];
     },
   },
@@ -64,7 +68,7 @@ export const _commentStore = {
       return dispatch({
         type: '_Ajax',
         do: async () => commentService.remove(id),
-        onSuccess: () => alertService.toast({type: 'success', msg: `comment removed successfully! id: ${id}`})
+        onSuccess: () => alertService.toast({type: 'safe', msg: `comment removed successfully! id: ${id}`})
       });
     },
     async addComment({ commit, dispatch }, { comment, attachedId }) {
@@ -81,7 +85,7 @@ export const _commentStore = {
       return dispatch({
         type: '_Ajax',
         do: async () => commentService.save(comment),
-        onSuccess: (data) => alertService.toast({type: 'success', msg: `comment saved successfully! id: ${data._id}`})
+        onSuccess: (data) => alertService.toast({type: 'safe', msg: `comment saved successfully! id: ${data._id}`})
       });
     },
 

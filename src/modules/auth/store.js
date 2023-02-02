@@ -39,7 +39,7 @@ export const _authStore = {
         do: async () => authService.login(cred),
         onSuccess: (res) => {
           commit({ type: 'setLoggedUser', user: res.user });
-          alertService.toast({type: 'success', msg: `Welcome back, ${res.user.username}!`});
+          alertService.toast({type: 'safe', msg: `Welcome back, ${res.user.username}!`});
         }
       });
     },
@@ -57,7 +57,7 @@ export const _authStore = {
         do: async () => authService.logout(),
         onSuccess: (res) => {
           commit({ type: 'setLoggedUser', user: null });
-          alertService.toast({type: 'success', msg: `Goodby`});
+          alertService.toast({type: 'safe', msg: `Goodby`});
           dispatch('resetState', {}, {root: true});
         }
       });
@@ -68,7 +68,7 @@ export const _authStore = {
         do: async () => authService.signup(cred),
         onSuccess: (res) => {
           commit({ type: 'setLoggedUser', user: res.user });
-          alertService.toast({type: 'success', msg: `Welcome, ${res.user.username}!`});
+          alertService.toast({type: 'safe', msg: `Welcome, ${res.user.username}!`});
         }
       });
     },

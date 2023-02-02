@@ -1,5 +1,5 @@
 <template>
-  <section class="organization-page height-all width-all flex column">
+  <section class="organization-page height-all width-all flex column gap10">
     <h2>{{$t('organizations')}}</h2>
     <ItemSearchList
       :itemsData="organizationData"

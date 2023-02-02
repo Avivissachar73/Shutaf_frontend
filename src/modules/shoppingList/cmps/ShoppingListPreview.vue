@@ -20,9 +20,9 @@
           </div>
           <div class="flex align-center gap5">
             <div class="flex align-center gap5">
-              <button @click="item.count++" class="btn small">+</button>
+              <button @click="updateItemCount(item, 1)" class="btn small">+</button>
               <FormInput :min="0" type="number" placeholder="count" v-model="item.count"/>
-              <button :disabled="(+item.count <= 0)" @click="item.count--" class="btn small">-</button>
+              <button :disabled="(+item.count <= 0)" @click="updateItemCount(item, -1)" class="btn small">-</button>
             </div>
             <div v-if="showActions" class="flex align-center gap5">
               <button @click="removeProduct(item.id)" class="btn icon"><img :src="require('@/assets/images/garbage.png')"/></button>
@@ -44,6 +44,7 @@
             <FormInput type="number" placeholder="count" label="count" v-model="productToEdit.count"/>
             <FormInput type="number" :min="0" placeholder="minCount" label="minCount" v-model="productToEdit.minCount"/>
             <FormInput type="number" :min="0" placeholder="maxCount" label="maxCount" v-model="productToEdit.maxCount"/>
+            <FormInput type="number" :min="1" :max="10" placeholder="healthRate" label="healthRate" v-model="productToEdit.healthRate"/>
           </div>
           <div class="flex column gap10">
             <p>{{$t('prices')}}</p>
@@ -92,6 +93,7 @@ import FormInput from '@/modules/common/cmps/FormInput.vue';
 import { shoppingListService } from '../services/shoppingList.service';
 import { socketService } from '@/modules/common/services/socket.service';
 import { alertService } from '@/modules/common/services/alert.service';
+import { randItem } from '@/modules/common/services/util.service';
 
 export default {
   name: 'ShoppingListPreview',
@@ -218,6 +220,11 @@ export default {
       return this.shoppingList.cart.includes(id);
     },
     settleUpCatr() {
+      this.createProductCountActivity(
+        this.shoppingListToEdit.cart.map(id => {
+          const item = this.shoppingList.products.find(c => c.id === id);
+          return { item, updateBy: item.max - item.count };
+        }) , false);
       this.shoppingListToEdit.products.forEach(c => {
         if (this.isProdactInCart(c.id)) c.count = c.maxCount
       });
@@ -235,6 +242,44 @@ export default {
       else if (newIdx >= this.shoppingListToEdit.products.length) newIdx = newIdx - this.shoppingListToEdit.products.length;
       const item = this.shoppingListToEdit.products.splice(idx, 1)[0];
       this.shoppingListToEdit.products.splice(newIdx, 0, item);
+    },
+
+
+    updateItemCount(item, updateBy = 0) {
+      item.count += updateBy;
+      this.healthAlertToUser(item, updateBy);
+      this.createProductCountActivity([{ item, updateBy }], updateBy < 0);
+    },
+
+    createProductCountActivity(itemsData, isMinus = false) {
+      let activity = {
+        name: isMinus? 'productEaten' : 'boughtProduct',
+        data: {
+          listId: this.shoppingList._id,
+          items: itemsData.map(({ item, updateBy }) => ({
+            product: item.name,
+            healthRate: item.healthRate,
+            count: (isMinus? -1 : 1) * updateBy,
+            price: item.prices.find(c => c.shopName === (this.viewdShop || this.shopViewData.shops[0] || ''))?.value || 0
+          }))
+        }
+      };
+      this.$store.dispatch({ type: 'activity/addActivity', activity, attachedId: this.orgId });
+    },
+
+    healthAlertToUser(item, diff) {
+      if (diff >= 0) return;
+      const msgsMap = {
+        safe: ['Sweet!', 'Kaboom!', 'Getting health!', 'Nice shape!', 'Looking good!', 'Warthy'],
+        warning: ['Bon apatite!', 'Nice!'],
+        danger: ['The summer body wont shape itself', 'NOT worthy!', 'WoopyDoo!', 'Getting Faty!']
+      }
+      const { healthRate } = item;
+      let type;
+      if (healthRate > 7) type = 'safe';
+      else if (healthRate > 3) type = 'warning';
+      else type = 'danger';
+      alertService.toast({ type, msg: randItem(msgsMap[type]) });
     }
   },
   created() {

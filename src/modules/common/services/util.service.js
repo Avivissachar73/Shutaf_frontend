@@ -49,11 +49,14 @@ export function getRandomId() {
     return `${pt3}-${pt1}-${pt2}`.toUpperCase();
 }
 
-export function getRandomInt(num1, num2) {
-    var max = (num1 >= num2)? num1+1 : num2+1;
+export function getRandomInt(num1, num2, inclusive = false) {
+    var max = (num1 >= num2)? num1 : num2;
+    if (inclusive) max += 1;
     var min = (num1 <= num2)? num1 : num2;
     return (Math.floor(Math.random()*(max - min)) + min);
 }
+
+export const randItem = (arr, start = 0, end = arr.length) => arr[getRandomInt(start, end)];
 
 export function copy(obj) {
     if (typeof(obj) !== 'object') return obj;

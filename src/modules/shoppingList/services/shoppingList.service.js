@@ -51,7 +51,8 @@ function getEmptyShoppingProduct() {
     count: 0,
     minCount: 0,
     maxCount: 0,
-    prices: []
+    prices: [],
+    healthRate: 1
   }
 }
 

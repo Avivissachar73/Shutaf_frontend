@@ -8,6 +8,7 @@ import { settingsStore } from '@/modules/settings/store'
 import { organizationStore } from '@/modules/organization/store'
 import { postStore } from '@/modules/post/store'
 import { commentStore } from '@/modules/comment/store'
+import { activityStore } from '@/modules/activity/store'
 import { dashboardStore } from '../modules/dashboard/store'
 import { shoppingListStore } from '../modules/shoppingList/store'
 
@@ -28,6 +29,7 @@ export default new Vuex.Store({
     ...organizationStore,
     ...postStore,
     ...commentStore,
+    ...activityStore,
     ...dashboardStore,
     ...shoppingListStore,
   }

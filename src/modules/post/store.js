@@ -2,9 +2,13 @@ import { postService } from './services/post.service';
 import { alertService } from '@/modules/common/services/alert.service';
 import { basicStoreService } from '@/modules/common/services/basic-store.service';
 
+const initState = () => ({
+  ...basicStoreService.initState()
+});
+
 export const _postStore = {
   namespaced: true,
-  state: basicStoreService.initState(),
+  state: initState(),
   getters: {
     postsData: (state) => state.data,
     posts: (state) => state.data.items,
@@ -37,7 +41,7 @@ export const _postStore = {
       state.isLoading = val;
     },
     resetState(state) {
-      const newState = basicStoreService.initState();
+      const newState = initState();
       for (let key in state) state[key] = newState[key];
     },
 
@@ -78,14 +82,14 @@ export const _postStore = {
       return dispatch({
         type: '_Ajax',
         do: async () => postService.remove(id, organizationId),
-        onSuccess: () => alertService.toast({type: 'success', msg: `post removed successfully! id: ${id}`})
+        onSuccess: () => alertService.toast({type: 'safe', msg: `post removed successfully! id: ${id}`})
       });
     },
     async savePost({ commit, dispatch }, { post, organizationId }) {
       return dispatch({
         type: '_Ajax',
         do: async () => postService.save(post, organizationId),
-        onSuccess: (data) => alertService.toast({type: 'success', msg: `post saved successfully! id: ${data._id}`})
+        onSuccess: (data) => alertService.toast({type: 'safe', msg: `post saved successfully! id: ${data._id}`})
       });
     },
   }

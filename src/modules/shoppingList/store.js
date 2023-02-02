@@ -2,9 +2,13 @@ import { shoppingListService } from './services/shoppingList.service';
 import { alertService } from '@/modules/common/services/alert.service';
 import { basicStoreService } from '@/modules/common/services/basic-store.service';
 
+const initState = () => ({
+  ...basicStoreService.initState()
+});
+
 export const _shoppingListStore = {
   namespaced: true,
-  state: basicStoreService.initState(),
+  state: initState(),
   getters: {
     shoppingListsData: (state) => state.data,
     shoppingLists: (state) => state.data.items,
@@ -37,7 +41,7 @@ export const _shoppingListStore = {
       state.isLoading = val;
     },
     resetState(state) {
-      const newState = basicStoreService.initState();
+      const newState = initState();
       for (let key in state) state[key] = newState[key];
     },
     saveShoppingList(state, { shoppingList }) {
@@ -74,7 +78,7 @@ export const _shoppingListStore = {
         do: async () => shoppingListService.remove(id, organizationId),
         onSuccess: () => {
           commit({ type: 'removeShoppingList', id });
-          alertService.toast({type: 'success', msg: `shoppingList removed successfully! id: ${id}`});
+          alertService.toast({type: 'safe', msg: `shoppingList removed successfully! id: ${id}`});
         }
       });
     },
@@ -83,7 +87,7 @@ export const _shoppingListStore = {
         type: '_Ajax',
         do: async () => shoppingListService.save(shoppingList, organizationId),
         onSuccess: (shoppingList) => {
-          // alertService.toast({type: 'success', msg: `shoppingList saved successfully! id: ${data._id}`})
+          // alertService.toast({type: 'safe', msg: `shoppingList saved successfully! id: ${data._id}`})
           // commit({ type: 'saveShoppingList', shoppingList });
         }
       });

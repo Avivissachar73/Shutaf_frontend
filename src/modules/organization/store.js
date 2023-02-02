@@ -1,11 +1,14 @@
 import { organizationService } from './services/organization.service';
 import { alertService } from '@/modules/common/services/alert.service'
-import { delay } from '@/modules/common/services/util.service';
 import { basicStoreService } from '@/modules/common/services/basic-store.service';
+
+const initState = () => ({
+  ...basicStoreService.initState()
+});
 
 const _organizationStore = {
   namespaced: true,
-  state: basicStoreService.initState(),
+  state: initState(),
   getters: {
     organizationData: (state) => state.data,
     organizations: (state) => state.data.items,
@@ -33,7 +36,7 @@ const _organizationStore = {
       state.isLoading = val;
     },
     resetState(state) {
-      const newState = basicStoreService.initState();
+      const newState = initState();
       for (let key in state) state[key] = newState[key];
     },
 
@@ -69,14 +72,14 @@ const _organizationStore = {
       return dispatch({
         type: '_Ajax',
         do: async () => organizationService.remove(id),
-        onSuccess: () => alertService.toast({type: 'success', msg: `Organization removed successfully! id: ${id}`})
+        onSuccess: () => alertService.toast({type: 'safe', msg: `Organization removed successfully! id: ${id}`})
       });
     },
     async saveOrganization({ commit, dispatch }, { organization }) {
       return dispatch({
         type: '_Ajax',
         do: async () => organizationService.save(organization),
-        onSuccess: (data) => alertService.toast({type: 'success', msg: `Organization saved successfully! id: ${data._id}`})
+        onSuccess: (data) => alertService.toast({type: 'safe', msg: `Organization saved successfully! id: ${data._id}`})
       });
     },
 
@@ -85,7 +88,7 @@ const _organizationStore = {
       return dispatch({
         type: '_Ajax',
         do: async () => organizationService.inviteAccount(organizationId, accountId),
-        onSuccess: () => alertService.toast({type: 'success', msg: `Invetation sent successfully!`})
+        onSuccess: () => alertService.toast({type: 'safe', msg: `Invetation sent successfully!`})
       });
     },
     async updateAccountStatus({ commit, dispatch, getters }, { organizationId, accountId, newStatus }) {
