@@ -1,10 +1,12 @@
 <template>
-  <div class="account-edit">
-    <form v-if="AccountToEdit" @submit.prevent="saveAccount">
-      <pre>{{AccountToEdit}}</pre>
-      <FormInput type="text" placeholder="username" v-model="AccountToEdit.username"/>
-      <FormInput type="text" placeholder="email" v-model="AccountToEdit.email"/>
-      <FormInput type="text" placeholder="role" v-model="AccountToEdit.roles[0]"/>
+  <div class="account-edit simple-form flex column gap20">
+    <h2>{{$t('editAccount')}}</h2>
+    <form v-if="AccountToEdit" @submit.prevent="saveAccount" class="flex column align-start gap10">
+      <FormInput type="text" label="firstname" placeholder="firstname" v-model="AccountToEdit.firstname"/>
+      <FormInput type="text" label="lastname" placeholder="lastname" v-model="AccountToEdit.lastname"/>
+      <FormInput type="text" label="username" placeholder="username" v-model="AccountToEdit.username"/>
+      <FormInput type="text" label="email" placeholder="email" v-model="AccountToEdit.email"/>
+      <!-- <FormInput type="text" placeholder="role" v-model="AccountToEdit.roles[0]"/> -->
       <button :disabled="!isAccountValid">{{$t('submit')}}</button>
     </form>
   </div>
@@ -46,3 +48,7 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+
+</style>

@@ -26,10 +26,6 @@ export default {
   methods: {
     getAccount() {
       this.$store.dispatch({ type: 'account/loadAccount', id: this.$route.params.id });
-      console.log('WOWO?');
-      setTimeout(() => {
-        console.log(this.$store.getters['account/selectedAccount']);
-      })
     }
   },
   computed: {

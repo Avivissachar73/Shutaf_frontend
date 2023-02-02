@@ -22,7 +22,7 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
-    commonStore,
+    ...commonStore,
     ...authStore,
     ...accountStore,
     ...settingsStore,

@@ -14,7 +14,8 @@
       }"
     >
       <input
-        v-if="componentType === 'input'"
+        v-if="['input', 'autocomplete'].includes(componentType)"
+        :list="componentType === 'autocomplete' ? 'autocomplete-datalist-' + this.inputId : ''"
         ref="elInput"
         :disabled="disabled"
         :id="inputId"
@@ -82,6 +83,10 @@
           </label>
         </div>
       </div>
+
+      <datalist v-if="componentType === 'autocomplete'" :id="'autocomplete-datalist-' + this.inputId">
+        <option v-for="item in itemsToRender" :key="item.value" :value="item.value" :label="item.label"/>
+      </datalist>
 
       <template>
         <div class="icon-img" @click="$refs.elInput.$el.querySelector('input').focus()" v-if="$slots.default || showError"></div>
@@ -209,6 +214,8 @@ export default {
   // min-width: 150px;
   display: flex;
   align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
   gap: 5px;
   .input {
     position: relative;

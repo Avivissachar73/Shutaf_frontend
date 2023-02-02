@@ -25,7 +25,12 @@ export const _commonStore = {
     resetState({ commit }) {
       commit('account/resetState');
       commit('auth/resetState');
-      commit('example/resetState');
+      commit('activity/resetState');
+      commit('comment/resetState');
+      commit('post/resetState');
+      commit('shoppingList/resetState');
+      commit('organization/resetState');
+      commit('dashboard/resetState');
       // commit('settings/resetState');
     }
   }

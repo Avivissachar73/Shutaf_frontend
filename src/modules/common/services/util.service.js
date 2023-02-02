@@ -259,6 +259,19 @@ export function getElPosOnScreen(el) {
     }
     return pos;
 }
+export function getElPosInParent(el, parentSelector = 'body') {
+    const pos = {y: 0, x: 0};
+    if (!el) return pos;
+
+    const parent = document.querySelector(parentSelector);
+    const clientRect = el.getBoundingClientRect();
+    const parentClientRect = parent.getBoundingClientRect();
+
+    pos.y = clientRect.top - parentClientRect.top;
+    pos.x = clientRect.left - parentClientRect.left;
+
+    return pos;
+}
 
 
 export function sortEverything(sorter = '', isSortUp = true) {

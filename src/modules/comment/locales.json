@@ -1,10 +1,16 @@
 {
   "en": {
     "comment": "Comment",
-    "comments": "Comments"
+    "comments": "Comments",
+    "showComments": "Show comments",
+    "hideComments": "Hide comments",
+    "noMoreComments": "No more comments"
   },
   "he": {
     "comment": "תגובה",
-    "comments": "תגובות"
+    "comments": "תגובות",
+    "showComments": "הצג תגובות",
+    "hideComments": "הסתר תגובות",
+    "noMoreComments": "אין תגובות נוספות"
   }
 }

@@ -2,11 +2,21 @@
   "en": {
     "organization": "Organization",
     "organizations": "Organizations",
-    "newOrganization": "New Organization"
+    "newOrganization": "New Organization",
+    "editOrganization": "Edit organization",
+    "createOrganization": "Create new organization",
+    "yourRoles": "Your roles",
+    "members": "Members",
+    "inviteMembers": "Invite members"
   },
   "he": {
     "organization": "ארגון",
     "organizations": "ארגונים",
-    "newOrganization": "ארגון חדש"
+    "newOrganization": "ארגון חדש",
+    "editOrganization": "ערוך ארגון",
+    "createOrganization": "צור ארגון חדש",
+    "yourRoles": "התפקידים שלך",
+    "members": "חברים",
+    "inviteMembers": "הזמן משתמשים"
   }
 }

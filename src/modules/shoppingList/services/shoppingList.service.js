@@ -40,7 +40,8 @@ function getEmptyShoppingList() {
   return {
     title: '',
     products: [],
-    cart: []
+    cart: [],
+    type: 'smart'
   }
 }
 
@@ -52,7 +53,8 @@ function getEmptyShoppingProduct() {
     minCount: 0,
     maxCount: 0,
     prices: [],
-    healthRate: 1
+    healthRate: 1,
+    category: ''
   }
 }
 

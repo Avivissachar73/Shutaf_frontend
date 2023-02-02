@@ -1,4 +1,4 @@
-import utils from './util.service';
+import { Utils } from './util.service';
 
 import axios from 'axios';
 axios.default.withCredentials = true;
@@ -36,7 +36,7 @@ export const httpService = {
 
 
 async function download(endpoint, params) {
-  const url = `${BASE_URL}${endpoint}${utils.getQuerysStr(params)}`;
+  const url = `${BASE_URL}${endpoint}${Utils.getQuerysStr(params)}`;
   let fileName;
   let blob;
   try {

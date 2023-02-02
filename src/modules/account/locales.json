@@ -1,0 +1,20 @@
+{
+  "en": {
+    "acount": "Account",
+    "accounts": "Accounts",
+    "firstname": "First name",
+    "lastname": "Last name",
+    "username": "Username",
+    "email": "Email",
+    "password": "Password"
+  },
+  "he": {
+    "acount": "משתמש",
+    "accounts": "משתמשים",
+    "firstname": "שם פרטי",
+    "lastname": "שם משפחה",
+    "username": "שם משתמש",
+    "email": "דואר אלקטרוני",
+    "password": "סיסמה"
+  }
+}

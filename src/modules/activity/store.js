@@ -66,7 +66,6 @@ export const _activityStore = {
         ...activity,
         attachedId: attachedId
       }
-      console.log(activity);
       return dispatch({
         type: '_Ajax',
         do: async () => activityService.add(activity),

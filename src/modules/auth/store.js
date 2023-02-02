@@ -58,7 +58,7 @@ export const _authStore = {
         onSuccess: (res) => {
           commit({ type: 'setLoggedUser', user: null });
           alertService.toast({type: 'safe', msg: `Goodby`});
-          dispatch('resetState', {}, {root: true});
+          dispatch('resetState', {}, { root: true });
         }
       });
     },

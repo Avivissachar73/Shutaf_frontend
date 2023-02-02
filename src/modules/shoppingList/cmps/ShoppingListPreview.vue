@@ -41,16 +41,32 @@
         <div v-if="showAddProductSection" class="new-product-section flex column gap10">
           <div class="flex column gap5">
             <FormInput type="text" placeholder="title" v-model="productToEdit.name"/>
-            <FormInput type="number" placeholder="count" label="count" v-model="productToEdit.count"/>
-            <FormInput type="number" :min="0" placeholder="minCount" label="minCount" v-model="productToEdit.minCount"/>
-            <FormInput type="number" :min="0" placeholder="maxCount" label="maxCount" v-model="productToEdit.maxCount"/>
-            <FormInput type="number" :min="1" :max="10" placeholder="healthRate" label="healthRate" v-model="productToEdit.healthRate"/>
+            <FormInput type="autocomplete" :items="allCategories" placeholder="category" v-model="productToEdit.category"/>
+            <div class="flex align-center width-all space-between gap10">
+              <FormInput class="flex-1" type="number" placeholder="count" label="count" v-model="productToEdit.count"/>
+              <Tooltip attachToElement=".shoppingList-preview" msg="shoppinglistTooltip.count"/>
+            </div>
+            <div class="flex align-center width-all space-between gap10">
+              <FormInput class="flex-1" type="number" :min="0" placeholder="minCount" label="minCount" v-model="productToEdit.minCount"/>
+              <Tooltip attachToElement=".shoppingList-preview" msg="shoppinglistTooltip.minCount"/>
+            </div>
+            <div class="flex align-center width-all space-between gap10">
+              <FormInput class="flex-1" type="number" :min="0" placeholder="maxCount" label="maxCount" v-model="productToEdit.maxCount"/>
+              <Tooltip attachToElement=".shoppingList-preview" msg="shoppinglistTooltip.maxCount"/>
+            </div>
+            <div class="flex align-center width-all space-between gap10">
+              <FormInput class="flex-1" type="number" :min="1" :max="10" placeholder="healthRate" label="healthRate" v-model="productToEdit.healthRate"/>
+              <Tooltip attachToElement=".shoppingList-preview" msg="shoppinglistTooltip.healthRate"/>
+            </div>
           </div>
           <div class="flex column gap10">
-            <p>{{$t('prices')}}</p>
+            <p class="flex align-center gap5">
+              <span>{{$t('prices')}}</span>
+              <Tooltip attachToElement=".shoppingList-preview" msg="shoppinglistTooltip.prices"/>
+            </p>
             <ul class="flex column gap10">
               <li v-for="(price, i) in productToEdit.prices" :key="price.id" class="flex space-between align-end">
-                <FormInput type="text" placeholder="shopName" v-model="price.shopName"/>
+                <FormInput type="autocomplete" :items="allShops" placeholder="shopName" v-model="price.shopName"/>
                 <FormInput type="number" :min="0" placeholder="price" v-model="price.value"/>
                 <button @click="productToEdit.prices.splice(i, 1)" class="btn icon"><img :src="require('@/assets/images/garbage.png')"/></button>
               </li>
@@ -66,14 +82,15 @@
       </div>
     </div>
     <div v-else class="flex column gap10 space-between height-all">
-      <template v-if="shoppingItemsToRender.length">
+      <template v-if="shoppingItemsToRender.total">
         <div class="flex column gap20">
-          <nav class="flex space-between wrap">
-            <button @click="viewdShop = shop" v-for="shop in shopViewData.shops" :key="shop">{{shop}}</button>
+          <nav class="flex space-between wrap gap3">
+            <button @click="viewdShop = shop" :class="{ selected: viewdShop === shop }" v-for="shop in shopViewData.shops" :key="shop">{{shop}} </button>
           </nav>
-          <ul class="flex column gap10">
-            <li v-for="item in shoppingItemsToRender" :key="item.id" class="flex space-between">
-              <p class="flex align-center gap5"><FormInput type="checkbox" @click.native="val => toggleItemToCart(item.id, val)" :value="isProdactInCart(item.id)"/> {{item.toByCount}} {{item.name}}</p>
+          <ul  v-for="(items, key) in shoppingItemsToRender.data" :key="key" class="flex column gap10">
+            <p>{{key}}:</p>
+            <li v-for="item in items" :key="item.id" class="flex space-between">
+              <p class="flex align-center gap5"><FormInput type="checkbox" @click.native="val => toggleItemToCart(item.id, val)" :value="isProdactInCart(item.id)"/> {{item.toBuyCount}} {{item.name}}</p>
               <p>{{item.totalPrice}}</p>
             </li>
           </ul>
@@ -94,6 +111,7 @@ import { shoppingListService } from '../services/shoppingList.service';
 import { socketService } from '@/modules/common/services/socket.service';
 import { alertService } from '@/modules/common/services/alert.service';
 import { randItem } from '@/modules/common/services/util.service';
+import Tooltip from '../../common/cmps/Tooltip.vue';
 
 export default {
   name: 'ShoppingListPreview',
@@ -129,18 +147,40 @@ export default {
                 .sort((a, b) => {
                   const priceA = this.calcTotalPricePerShop(a);
                   const priceB = this.calcTotalPricePerShop(b);
-                  if (priceA === 'unknown') return 1;
-                  if (priceB === 'unknown') return -1;
+                  if (typeof priceA === 'string') return 1;
+                  if (typeof priceB === 'string') return -1;
                   return priceA - priceB;
                 }),
         products: this.shoppingList.products
       }
     },
     shoppingItemsToRender() {
-      return this.calcShoppingItemsDataPerShop(this.viewdShop);
+      return {
+        total: this.shopViewData.products.length,
+        data: this.calcShoppingItemsDataPerShop(this.viewdShop).reduce((acc, c) => {
+          if (!acc[c.category]) acc[c.category] = [];
+          acc[c.category].push(c)
+          return acc;
+        }, {})
+      }
     },
     totalPrice() {
       return this.calcTotalPricePerShop(this.viewdShop);
+    },
+
+    allShops() {
+      return this.shoppingList.products.reduce((acc, c) => {
+        c.prices.forEach(price => {
+          if (!acc.includes(price.shopName || 'unknown')) acc.push(price.shopName || 'unknown');
+        });
+        return acc;
+      }, []);
+    },
+    allCategories() {
+      return this.shoppingList.products.reduce((acc, c) => {
+        if (!acc.includes(c.category || 'unknown')) acc.push(c.category || 'unknown');
+        return acc;
+      }, []);
     }
   },
   methods: {
@@ -195,20 +235,24 @@ export default {
     calcShoppingItemsDataPerShop(shop) {
       return this.shoppingList.products.filter(c => c.count <= c.minCount).map(c => {
         const price = c.prices.find(i => i.shopName === shop)?.value || 'unknown';
-        const toByCount = c.maxCount - c.count;
+        const toBuyCount = c.maxCount - c.count;
         return {
           id: c.id,
           name: c.name,
           price,
-          toByCount,
-          totalPrice: price === 'unknown' ? price : price*toByCount
+          toBuyCount,
+          totalPrice: price === 'unknown' ? price : price*toBuyCount,
+          category: c.category
         }
       });
     },
     calcTotalPricePerShop(shop) {
       const currPrices = this.calcShoppingItemsDataPerShop(shop).map(c => c.totalPrice);
-      if (currPrices.includes('unknown')) return 'unknown';
-      return currPrices.reduce((sum, c) => sum+c, 0);
+      const isNotShure = currPrices.includes('unknown');
+      const pricesToCalc = currPrices.filter(c => c !== 'unknown');
+      const totalPrice = pricesToCalc.reduce((sum, c) => sum+c, 0);
+      if (isNotShure) return 'min ~ ' + totalPrice;
+      return totalPrice;
     },
 
     toggleItemToCart(prodartId, val) {
@@ -270,9 +314,9 @@ export default {
     healthAlertToUser(item, diff) {
       if (diff >= 0) return;
       const msgsMap = {
-        safe: ['Sweet!', 'Kaboom!', 'Getting health!', 'Nice shape!', 'Looking good!', 'Warthy'],
+        safe: ['Sweet!', 'Kaboom!', 'Getting health!', 'Nice shape!', 'Looking good!', 'Warthy!'],
         warning: ['Bon apatite!', 'Nice!'],
-        danger: ['The summer body wont shape itself', 'NOT worthy!', 'WoopyDoo!', 'Getting Faty!']
+        danger: ['The summer body wont shape itself..', 'NOT worthy!', 'WoopyDoo!', 'Getting Fatty!']
       }
       const { healthRate } = item;
       let type;
@@ -307,7 +351,7 @@ export default {
       }
     }
   },
-  components: { FormInput }
+  components: { FormInput, Tooltip }
 }
 </script>
 
@@ -328,6 +372,13 @@ export default {
   .new-product-section {
     .form-input {
       justify-content: space-between;
+    }
+  }
+
+  button {
+    &.selected {
+      border-width: 2px;
+      font-weight: bold;
     }
   }
 }

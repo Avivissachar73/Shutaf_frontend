@@ -84,7 +84,6 @@ export default {
               lineWidth: 0.5
             }
           });
-          // if (prev.id === animationItems[animationItems.length-1].id) console.log(prev.id, idx, (idx || (!idx && (prev.id !== prev.id))));
           if (showAllConnections) res.push(...animationItems.filter((c, i) => (i > idx) && (c.id !== shape.id) && (closeShape || idx === animationItems.length-1? i : true) && (closeShape || idx || (c.id !== prev.id))).map(c => ({
             ...currPos,
             zIndex: -1,

@@ -64,7 +64,6 @@ export const _commentStore = {
     },
     async removeComment({ commit, dispatch }, { id }) {
       if (!await alertService.Confirm('Are you sure you want to remove this comment?')) return;
-      console.log('WOWO!');
       return dispatch({
         type: '_Ajax',
         do: async () => commentService.remove(id),

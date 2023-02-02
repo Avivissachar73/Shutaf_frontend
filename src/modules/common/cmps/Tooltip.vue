@@ -1,11 +1,12 @@
 <template>
   <span class="tooltip">
-    <span ref="elPreview" class="tooltip-preview" @click="toggleShow" @mouseleave="toggleHoverShow(false)" @mouseover="handleHover($event)">
-      <!-- <img class="tooltip-img" v-if="!$slots.preview" :src="require('@/assets/tooltip.svg')" alt="" /> -->
-      <span v-if="!$slots.preview">(?)</span>
+    <span ref="elPreview" class="tooltip-preview flex align-center justify-center" @click="toggleShow" @mouseleave="toggleHoverShow(false)" @mouseover="handleHover($event)">
+      <img class="tooltip-img" v-if="!$slots.preview" :src="require('@/assets/images/tooltip.png')" alt="" />
+      <!-- <span v-if="!$slots.preview">(?)</span> -->
       <slot v-else name="preview"/>
     </span>
     <div v-show="show || hoverShow" ref="elMsg" class="tooltip-msg">
+      <button v-if="show" class="btn small close-btn" @click="toggleShow(false)">X</button>
       <p v-if="!$slots.content">{{ msg? $t(msg) : 'No tooltip message...' }}</p>
       <slot v-else name="content"/>
     </div>
@@ -13,7 +14,7 @@
 </template>
 
 <script>
-import { getElPosOnScreen } from '../services/util.service';
+import { getElPosOnScreen, getElPosInParent } from '../services/util.service';
 export default {
   name: 'Tooltip',
   props: {
@@ -52,10 +53,10 @@ export default {
     viewMsg(ev) {
       const { elPreview, elMsg } = this.$refs;
       const { offsetWidth: preWidth, offsetHeight: preHeight } = elPreview;
-      const { offsetWidth: msgWidth, offsetHeight: msgHeight } = elMsg;
+      let { offsetWidth: msgWidth, offsetHeight: msgHeight } = elMsg;
       const { offsetWidth: parentWidth, offsetHeight: parentHeight } = document.querySelector(this.attachToElement);
 
-      const elPreviewPos = getElPosOnScreen(elPreview);
+      const elPreviewPos = getElPosInParent(elPreview, this.attachToElement);
 
       const { clientX, clientY } = ev? ev : { clientX: elPreviewPos.x, clientY: elPreviewPos.y };
 
@@ -63,10 +64,11 @@ export default {
       style.left = style.right = style.bottom = style.top = style.width = style.transform = '';
       
       let width = 270;
+      const height = msgHeight || 100;
 
       style.left = 0;
       let diffXFromBorder;
-      if ((parentWidth - clientX) < width) {
+      if ((parentWidth - elPreviewPos.x) < width) {
         style.left -= width
         diffXFromBorder = elPreviewPos.x - width;
       } else diffXFromBorder = elPreviewPos.x + width;
@@ -77,8 +79,9 @@ export default {
       
       style.top = 0;
       let diffYFromBorder;
-      if ((parentHeight - clientY) < msgHeight) {
-        style.top -= preHeight
+      if ((parentHeight - elPreviewPos.y) < height) {
+        // style.top -= preHeight
+        style.top -= height;
         diffYFromBorder = elPreviewPos.y - preHeight;
       } else diffYFromBorder = elPreviewPos.y + preHeight;
       if (diffYFromBorder < 0) style.top -= diffYFromBorder;
@@ -86,11 +89,13 @@ export default {
       else style.top += preHeight / 2;
       style.top += 'px';
 
-      const windowWidth = window.innerWidth;
+      // const windowWidth = window.innerWidth;
 
-      if ((width*1.5) > windowWidth) {
-        style.width = '95vw';
-        style.left = windowWidth / 2 - elPreviewPos.x + 'px';
+      // if ((width*1.5) > windowWidth) {
+      if ((width*1.5) > parentWidth) {
+        // style.width = '95vw';
+        style.width = 0.90*parentWidth + 'px';
+        style.left = parentWidth / 2 - elPreviewPos.x + 'px';
         style.transform = 'translateX(-50%)';
       } else style.width = width + 'px';
 
@@ -103,10 +108,18 @@ export default {
 <style lang="scss" scoped>
 .tooltip {
   position: relative;
+  display: inline-block;
+  // widows: 15px;
+  // height: 15px;
   .tooltip-preview {
     .tooltip-img {
-      height: 100%;
-      width: 100%;
+      width: 17px;
+      height: 17px;
+      // padding: 0.5px;
+      border-radius: 50%;
+      background-color: #fff;
+      // height: 100%;
+      // width: 100%;
     }
   }
   .tooltip-msg {
@@ -119,6 +132,12 @@ export default {
     color: #ffffff;
     box-shadow: 0 5px 13px 0 #44444478;
     font-weight: normal;
+
+    .close-btn {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+    }
   }
 }
 </style>

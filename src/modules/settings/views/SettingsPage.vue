@@ -1,12 +1,13 @@
 <template>
   <div class="settings-page flex column gap10">
+    <h2>{{$t('settings')}}</h2>
     <!-- <pre>{{settings}}</pre>
     <form @submit.prevent="saveSettings">
       <FormInput label="Google API key" v-model="settings.GOOGLE_API_KEY"/>
       <button>{{$t('save')}}</button>
     </form> -->
-    <FormInput placeholder="locale" :value="currLocale" type="select" :items="langs" @change="setLocale"/>
-    <FormInput :label="$t('darkMode')" :value="isDarkMode" type="checkbox" @input="setDarkMode"/>
+    <FormInput class="width-content" placeholder="locale" :value="currLocale" type="select" :items="langs" @change="setLocale"/>
+    <FormInput class="width-content" :label="$t('darkMode')" :value="isDarkMode" type="checkbox" @input="setDarkMode"/>
   </div>
 </template>
 

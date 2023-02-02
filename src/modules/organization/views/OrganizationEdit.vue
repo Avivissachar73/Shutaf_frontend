@@ -1,35 +1,51 @@
 <template>
-  <div class="organization-edit">
-    <form v-if="organization" @submit.prevent="saveOrganization">
-      <FormInput type="text" placeholder="name" label="name" v-model="organization.name"/>
-      <FormInput type="text" placeholder="description" label="description" v-model="organization.desc"/>
+  <div class="organization-edit flex column gap20">
+    <h2>{{$t($route.params.id? 'editOrganization' : 'createOrganization')}}</h2>
+    <form v-if="organization" @submit.prevent="saveOrganization" class="simple-form gap30">
+      <div class="flex column gap5">
+        <FormInput type="text" placeholder="name" label="name" v-model="organization.name"/>
+        <FormInput type="text" placeholder="description" label="description" v-model="organization.desc"/>
+      </div>
 
-      <ul v-if="organization._id">
-        <li v-for="account in accounts" :key="account._id">
-          {{account.username}} <button @click.prevent="() => inviteAccount(account._id)">{{$t('invite')}}</button>
-        </li>
-      </ul>
-      <button :disabled="!isOrganizationValid">{{$t('submit')}}</button>
+      <div v-if="organization._id" class="flex column gap10">
+        <p>{{$t('inviteMembers')}}</p>
+        <div class="flex align-center gap10">
+          <FormInput class="width-content" type="text" placeholder="search" v-model="searchAccountStr"/>
+          <div class="button-like" @click.prevent.stop="getAccounts">{{$t('search')}}</div>
+        </div>
+        <ul v-if="accounts.length" class="flex column gap5">
+          <li v-for="account in accounts" :key="account._id" class="flex align-center gap5">
+             <button @click.prevent="() => inviteAccount(account._id)">{{$t('invite')}}</button> <MiniAccountPreview :account="account"/>
+          </li>
+        </ul>
+        <p v-else-if="!searchPristin">{{$t('noMatches')}}...</p>
+      </div>
+      <button :disabled="!isOrganizationValid">{{$t('save')}}</button>
     </form>
   </div>
 </template>
 
 <script>
+import MiniAccountPreview from '../../account/cmps/MiniAccountPreview.vue'
 import FormInput from '../../common/cmps/FormInput.vue'
 export default {
   name: 'OrganizationEdit',
   data() {
     return {
-      organization: null
+      organization: null,
+      searchAccountStr: '',
+      searchPristin: true
     }
   },
   computed: {
     isOrganizationValid() {
-      return true
-      // return this.organization && this.organization.key;
+      return this.organization && this.organization.name;
+    },
+    loggedUser() {
+      return this.$store.getters['auth/loggedUser'];
     },
     accounts() {
-      return this.$store.getters['account/accounts'];
+      return this.$store.getters['account/accounts'].filter(c => c._id !== this.loggedUser?._id);
     }
   },
   methods: {
@@ -37,7 +53,8 @@ export default {
       this.organization = await this.$store.dispatch({ type: 'organization/loadOrganization', id: this.$route.params.id });
     },
     async getAccounts() {
-      this.$store.dispatch({ type: 'account/loadAccounts' });
+      this.searchPristin = false;
+      this.$store.dispatch({ type: 'account/loadAccounts', filterBy: { filter: { search: this.searchAccountStr } } });
     },
     async saveOrganization() {
       if (!this.isOrganizationValid) return;
@@ -50,7 +67,7 @@ export default {
   },
   created() {
     this.getOrganization();
-    this.getAccounts();
+    // this.getAccounts();
   },
   watch: {
     '$route.params.id'() {
@@ -59,7 +76,8 @@ export default {
     }
   },
   components: {
-    FormInput
+    FormInput,
+    MiniAccountPreview
   }
 }
 </script>
