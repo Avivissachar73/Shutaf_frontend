@@ -40,5 +40,6 @@ export default {
   "invite": "Invite",
   "createdBy": "Created by",
   "search": "Search",
-  "noMatches": "No matches"
+  "noMatches": "No matches",
+  "noItemsFound": "No items found"
 }

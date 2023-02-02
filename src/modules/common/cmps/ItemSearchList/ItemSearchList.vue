@@ -8,7 +8,7 @@
       <ItemList :items="items" v-if="items" :singlePreviewCmp="singlePreviewCmp" :itemDetailesPageName="itemDetailesPageName"/>
       <PaginationBtns v-if="filterBy" :total="totalItems" :perPage="filterBy.pagination.limit" v-model="filterBy.pagination.page"/>
     </template>
-    <h3 v-else-if="!isLoading">{{$t('noItemsFound')}}</h3>
+    <h3 v-else-if="!isLoading">{{$t('noItemsFound')}}...</h3>
     <Loader v-if="isLoading"/>
   </div>
 </template>

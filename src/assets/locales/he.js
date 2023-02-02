@@ -38,5 +38,6 @@ export default {
   "invite": "הזמן",
   "createdBy": "יוצר על ידי",
   "search": "חפש",
-  "noMatches": "אין התאמות"
+  "noMatches": "אין התאמות",
+  "noItemsFound": "לא נמצאו תוצאות"
 }
