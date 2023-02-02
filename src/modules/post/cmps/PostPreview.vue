@@ -12,7 +12,7 @@
         <p>{{post.createdBy.username}}</p>
         <p>{{post.content}}</p>
       </div>
-      <button @click="showComments = !showComments">{{$t(showComments? 'hideComments' : 'showComments')}}</button>
+      <button @click="showComments = !showComments">{{$t(showComments? 'comment.hideComments' : 'comment.showComments')}}</button>
       <CommentList v-show="showComments" :attachedId="post._id"/>
     </div>
   </li>

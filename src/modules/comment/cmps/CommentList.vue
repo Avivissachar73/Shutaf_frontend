@@ -1,6 +1,6 @@
 <template>
   <section class="comment-list-container flex column gap10">
-    <FormInput placeholder="comment" v-model="commentToAdd.content" @keypress.native.enter="addComment"/>
+    <FormInput placeholder="comment.comment" v-model="commentToAdd.content" @keypress.native.enter="addComment"/>
     <ul class="comment-list flex column gap5">
         <li v-for="comment in comments" :key="comment._id" class="width-all flex align-start space-between">
           <div>
@@ -17,7 +17,7 @@
         <button @click="loadChunk">{{$t('loadMore')}}</button>
       </li>
       <li v-else>
-        {{$t('noMoreComments')}}
+        {{$t('comment.noMoreComments')}}
       </li>
     </ul>
   </section>

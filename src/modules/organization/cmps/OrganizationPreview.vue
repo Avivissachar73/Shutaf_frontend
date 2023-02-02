@@ -1,7 +1,7 @@
 <template>
   <li class="organization-preview item-preview flex column gap10">
     <div v-if="accountOrgStatus === 'pending'" class="flex gap5">
-      <span>{{$t('newOrganization')}}!</span>
+      <span>{{$t('organization.newOrganization')}}!</span>
       <button @click.prevent.stop="updateStatus('approved')" class="btn safe">{{$t('approve')}}</button>
       <button @click.prevent.stop="updateStatus('declined')" class="btn danger">{{$t('decline')}}</button>
     </div>

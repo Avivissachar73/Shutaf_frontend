@@ -1,6 +1,6 @@
 <template>
   <section class="shoppingList-page height-all width-all flex column gap10">
-    <h2>{{$t('shoppingList')}}</h2>
+    <h2>{{$t('shoppingList.shoppingList')}}</h2>
     <ItemSearchList
       :itemsData="shoppingListsData"
       :initFilterBy="filterBy"

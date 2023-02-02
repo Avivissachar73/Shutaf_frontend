@@ -1,6 +1,6 @@
 <template>
   <section class="post-page height-all width-all flex column gap10">
-    <h2>{{$t('posts')}}</h2>
+    <h2>{{$t('post.posts')}}</h2>
     <ItemSearchList
       :itemsData="postsData"
       :initFilterBy="filterBy"

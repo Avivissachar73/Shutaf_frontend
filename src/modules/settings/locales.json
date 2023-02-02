@@ -1,8 +1,16 @@
 {
   "en": {
-    "settings": "Settings"
+    "settings": {
+      "settings": "Settings",
+      "darkMode": "Dark mode",
+      "locale": "Locale"
+    }
   },
   "he": {
-    "settings": "הגדרות"
+    "settings": {
+      "settings": "הגדרות",
+      "darkMode": "מצב חשוך",
+      "locale": "שפה"
+    }
   }
 }

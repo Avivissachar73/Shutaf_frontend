@@ -1,7 +1,8 @@
 <template>
   <div class="shoppingList-edit">
+    <h2>{{$t('shoppingList.createNewShoppingList')}}</h2>
     <form v-if="shoppingListToEdit" @submit.prevent="saveShoppingList">
-      <FormInput placeholder="shoppingListName" type="text" v-model="shoppingListToEdit.title"/>
+      <FormInput placeholder="name" type="text" v-model="shoppingListToEdit.title"/>
       <button :disabled="!isItemValid">{{$t('submit')}}</button>
     </form>
   </div>

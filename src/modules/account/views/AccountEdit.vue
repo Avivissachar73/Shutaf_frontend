@@ -1,12 +1,14 @@
 <template>
   <div class="account-edit simple-form flex column gap20">
-    <h2>{{$t('editAccount')}}</h2>
-    <form v-if="AccountToEdit" @submit.prevent="saveAccount" class="flex column align-start gap10">
-      <FormInput type="text" label="firstname" placeholder="firstname" v-model="AccountToEdit.firstname"/>
-      <FormInput type="text" label="lastname" placeholder="lastname" v-model="AccountToEdit.lastname"/>
-      <FormInput type="text" label="username" placeholder="username" v-model="AccountToEdit.username"/>
-      <FormInput type="text" label="email" placeholder="email" v-model="AccountToEdit.email"/>
-      <!-- <FormInput type="text" placeholder="role" v-model="AccountToEdit.roles[0]"/> -->
+    <h2>{{$t('account.editAccount')}}</h2>
+    <form v-if="accountToEdit" @submit.prevent="saveAccount" class="flex column align-start gap10">
+      <FormInput type="text" label="account.firstname" placeholder="account.firstname" v-model="accountToEdit.firstname"/>
+      <FormInput type="text" label="account.lastname" placeholder="account.lastname" v-model="accountToEdit.lastname"/>
+      <FormInput type="text" label="account.username" placeholder="account.username" v-model="accountToEdit.username"/>
+      <FormInput type="text" label="account.email" placeholder="account.email" v-model="accountToEdit.email"/>
+      <FormInput type="text" label="account.newPassword" placeholder="account.newPassword" v-model="accountToEdit.password"/>
+      <FormInput type="text" label="account.confirmPassword" placeholder="account.confirmPassword" v-model="confirmPassword"/>
+      <!-- <FormInput type="text" placeholder="role" v-model="accountToEdit.roles[0]"/> -->
       <button :disabled="!isAccountValid">{{$t('submit')}}</button>
     </form>
   </div>
@@ -18,21 +20,25 @@ export default {
   name: 'AccountEdit',
   data() {
     return {
-      AccountToEdit: null
+      accountToEdit: null,
+      confirmPassword: ''
     }
   },
   computed: {
     isAccountValid() {
-      return this.AccountToEdit && this.AccountToEdit.key;
+      const user = this.accountToEdit;
+      return user && user.username && user.firstname && user.lastname && user.email &&
+             (user.password? this.confirmPassword === user.password : true);
     }
   },
   methods: {
     async getAccount() {
-      this.AccountToEdit = await this.$store.dispatch({ type: 'account/loadAccount', id: this.$route.params.id });
+      this.accountToEdit = await this.$store.dispatch({ type: 'account/loadAccount', id: this.$route.params.id });
     },
     async saveAccount() {
       if (!this.isAccountValid) return;
-      await this.$store.dispatch({ type: 'account/saveAccount', item: this.AccountToEdit });
+      await this.$store.dispatch({ type: 'account/saveAccount', item: this.accountToEdit });
+      this.$router.push({ name: 'HomePage' })
     }
   },
   created() {

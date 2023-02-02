@@ -13,7 +13,7 @@
         <button @click="loadChunk">{{$t('loadMore')}}</button>
       </li>
       <li v-else>
-        {{$t('noMoreActivities')}}
+        {{$t('activities.noMoreActivities')}}
       </li>
     </ul>
   </section>

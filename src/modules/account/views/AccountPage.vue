@@ -1,6 +1,6 @@
 <template>
   <section class="account-page height-all width-all flex column gap10">
-    <h2>{{$t('accounts')}}</h2>
+    <h2>{{$t('account.accounts')}}</h2>
     <ItemSearchList
       :itemsData="accountData"
       :initFilterBy="filterBy"

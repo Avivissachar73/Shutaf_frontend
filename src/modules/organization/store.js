@@ -1,6 +1,8 @@
 import { organizationService } from './services/organization.service';
-import { alertService } from '@/modules/common/services/alert.service'
+import { alertService } from '@/modules/common/services/alert.service';
 import { basicStoreService } from '@/modules/common/services/basic-store.service';
+
+import { $t } from '@/plugins/i18n';
 
 const initState = () => ({
   ...basicStoreService.initState()
@@ -68,18 +70,18 @@ const _organizationStore = {
       });
     },
     async removeOrganization({ commit, dispatch }, { id }) {
-      if (!await alertService.Confirm('Are you sure you want to remove this organization?')) return;
+      if (!await alertService.Confirm($t('organization.alerts.confirmRemoveOrg'))) return;
       return dispatch({
         type: '_Ajax',
         do: async () => organizationService.remove(id),
-        onSuccess: () => alertService.toast({type: 'safe', msg: `Organization removed successfully! id: ${id}`})
+        onSuccess: () => alertService.toast({type: 'safe', msg: `${$t('organization.alerts.removedSuccess')}! id: ${id}`})
       });
     },
     async saveOrganization({ commit, dispatch }, { organization }) {
       return dispatch({
         type: '_Ajax',
         do: async () => organizationService.save(organization),
-        onSuccess: (data) => alertService.toast({type: 'safe', msg: `Organization saved successfully! id: ${data._id}`})
+        onSuccess: (data) => alertService.toast({type: 'safe', msg: `${$t('organization.alerts.savedSuccess')}! id: ${data._id}`})
       });
     },
 
@@ -88,7 +90,7 @@ const _organizationStore = {
       return dispatch({
         type: '_Ajax',
         do: async () => organizationService.inviteAccount(organizationId, accountId),
-        onSuccess: () => alertService.toast({type: 'safe', msg: `Invetation sent successfully!`})
+        onSuccess: () => alertService.toast({type: 'safe', msg: `${$t('organization.alerts.invetationSentSuccess')}!`})
       });
     },
     async updateAccountStatus({ commit, dispatch, getters }, { organizationId, accountId, newStatus }) {

@@ -2,6 +2,8 @@ import { postService } from './services/post.service';
 import { alertService } from '@/modules/common/services/alert.service';
 import { basicStoreService } from '@/modules/common/services/basic-store.service';
 
+import { $t } from '@/plugins/i18n';
+
 const initState = () => ({
   ...basicStoreService.initState()
 });
@@ -78,18 +80,18 @@ export const _postStore = {
       });
     },
     async removePost({ commit, dispatch }, { id, organizationId }) {
-      if (!await alertService.Confirm('Are you sure you want to remove this post?')) return;
+      if (!await alertService.Confirm($t('post.alerts.confirmRemove'))) return;
       return dispatch({
         type: '_Ajax',
         do: async () => postService.remove(id, organizationId),
-        onSuccess: () => alertService.toast({type: 'safe', msg: `post removed successfully! id: ${id}`})
+        onSuccess: () => alertService.toast({type: 'safe', msg: `${$t('post.alerts.removeSuccess')}! id: ${id}`})
       });
     },
     async savePost({ commit, dispatch }, { post, organizationId }) {
       return dispatch({
         type: '_Ajax',
         do: async () => postService.save(post, organizationId),
-        onSuccess: (data) => alertService.toast({type: 'safe', msg: `post saved successfully! id: ${data._id}`})
+        onSuccess: (data) => alertService.toast({type: 'safe', msg: `${$t('post.alerts.savedSuccess')}! id: ${data._id}`})
       });
     },
   }

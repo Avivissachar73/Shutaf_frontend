@@ -1,6 +1,6 @@
 <template>
   <div class="organization-edit flex column gap20">
-    <h2>{{$t($route.params.id? 'editOrganization' : 'createOrganization')}}</h2>
+    <h2>{{$t($route.params.id? 'organization.editOrganization' : 'organization.createOrganization')}}</h2>
     <form v-if="organization" @submit.prevent="saveOrganization" class="simple-form gap30">
       <div class="flex column gap5">
         <FormInput type="text" placeholder="name" label="name" v-model="organization.name"/>
@@ -8,7 +8,7 @@
       </div>
 
       <div v-if="organization._id" class="flex column gap10">
-        <p>{{$t('inviteMembers')}}</p>
+        <p>{{$t('organization.inviteMembers')}}</p>
         <div class="flex align-center gap10">
           <FormInput class="width-content" type="text" placeholder="search" v-model="searchAccountStr"/>
           <div class="button-like" @click.prevent.stop="getAccounts">{{$t('search')}}</div>

@@ -2,7 +2,6 @@ import { settingsService } from './services/settings.service';
 import { alertService } from '@/modules/common/services/alert.service'
 import { basicStoreService } from '@/modules/common/services/basic-store.service';
 
-
 const initState = () => ({
   settings: null,
   isLoading: false

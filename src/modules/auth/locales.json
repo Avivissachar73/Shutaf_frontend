@@ -1,0 +1,20 @@
+{
+  "en": {
+    "auth": {
+      "alerts": {
+        "welcomeBack": "Welcome back",
+        "goodby": "Goodby",
+        "welcome": "Welcome"
+      }
+    }
+  },
+  "he": {
+    "auth": {
+      "alerts": {
+        "welcomeBack": "ברוך שובך",
+        "goodby": "להתראות",
+        "welcome": "ברוך הבא"
+      }
+    }
+  }
+}

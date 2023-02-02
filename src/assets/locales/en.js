@@ -5,6 +5,7 @@ import { en as activityEn } from '@/modules/activity/locales.json';
 import { en as shoppingListEn } from '@/modules/shoppingList/locales.json';
 import { en as accountEn } from '@/modules/account/locales.json';
 import { en as settingsEn } from '@/modules/settings/locales.json';
+import { en as authEn } from '@/modules/auth/locales.json';
 
 export default {
   ...organizationEn,
@@ -14,6 +15,7 @@ export default {
   ...activityEn,
   ...accountEn,
   ...settingsEn,
+  ...authEn,
   "hello": "Hello",
   "filter": "Filter",
   "edit": "Edit",
@@ -24,10 +26,10 @@ export default {
   "settings": "Settings",
   "example": "Example",
   "admin": "Admin",
+  "creator": "Creator",
   "logout": "Logout",
   "delete": "Delete",
   "addNew": "Add new",
-  "darkMode": "Dark mode",
   "approve": "Approve",
   "decline": "Decline",
   "systemRoles": "System roles",
@@ -41,5 +43,6 @@ export default {
   "createdBy": "Created by",
   "search": "Search",
   "noMatches": "No matches",
-  "noItemsFound": "No items found"
+  "noItemsFound": "No items found",
+  "leave": "Leave"
 }

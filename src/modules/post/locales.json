@@ -1,10 +1,24 @@
 {
   "en": {
-    "post": "Post",
-    "posts": "Posts"
+    "post": {
+      "post": "Post",
+      "posts": "Posts",
+      "alerts": {
+        "confirmRemove": "Are you sure you want to remove this post?",
+        "removeSuccess": "post removed successfully",
+        "savedSuccess": "post saved successfully"
+      }
+    }
   },
   "he": {
-    "post": "פוסט",
-    "posts": "פוסטים"
+    "post": {
+      "post": "פוסט",
+      "posts": "פוסטים",
+      "alerts": {
+        "confirmRemove": "האם אתה בטוח שאתה מעוניין למחוק את הפוסט?",
+        "removeSuccess": "פוסט נמחק בהצלחה",
+        "savedSuccess": "פוסט נשמר בהצלחה"
+      }
+    }
   }
 }

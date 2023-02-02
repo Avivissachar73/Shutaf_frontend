@@ -2,6 +2,8 @@ import { shoppingListService } from './services/shoppingList.service';
 import { alertService } from '@/modules/common/services/alert.service';
 import { basicStoreService } from '@/modules/common/services/basic-store.service';
 
+import { $t } from '@/plugins/i18n';
+
 const initState = () => ({
   ...basicStoreService.initState()
 });
@@ -72,13 +74,13 @@ export const _shoppingListStore = {
       });
     },
     async removeShoppingList({ commit, dispatch }, { id, organizationId }) {
-      if (!await alertService.Confirm('Are you sure you want to remove this shoppingList?')) return;
+      if (!await alertService.Confirm($t('shoppingList.alerts.confirmRemove'))) return;
       return dispatch({
         type: '_Ajax',
         do: async () => shoppingListService.remove(id, organizationId),
         onSuccess: () => {
           commit({ type: 'removeShoppingList', id });
-          alertService.toast({type: 'safe', msg: `shoppingList removed successfully! id: ${id}`});
+          alertService.toast({type: 'safe', msg: `${$t('shoppingList.alerts.removeSuccess')}! id: ${id}`});
         }
       });
     },
@@ -87,7 +89,7 @@ export const _shoppingListStore = {
         type: '_Ajax',
         do: async () => shoppingListService.save(shoppingList, organizationId),
         onSuccess: (shoppingList) => {
-          // alertService.toast({type: 'safe', msg: `shoppingList saved successfully! id: ${data._id}`})
+          // alertService.toast({type: 'safe', msg: `${$t('shoppingList.alerts.savedSuccess')}! id: ${data._id}`})
           // commit({ type: 'saveShoppingList', shoppingList });
         }
       });

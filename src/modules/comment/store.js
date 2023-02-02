@@ -2,6 +2,8 @@ import { commentService } from './services/comment.service';
 import { alertService } from '@/modules/common/services/alert.service';
 import { basicStoreService } from '@/modules/common/services/basic-store.service';
 
+import { $t } from '@/plugins/i18n';
+
 const initState = () => ({
   ...basicStoreService.initState()
 });
@@ -63,11 +65,11 @@ export const _commentStore = {
       });
     },
     async removeComment({ commit, dispatch }, { id }) {
-      if (!await alertService.Confirm('Are you sure you want to remove this comment?')) return;
+      if (!await alertService.Confirm($t('comment.alerts.confirmRemove'))) return;
       return dispatch({
         type: '_Ajax',
         do: async () => commentService.remove(id),
-        onSuccess: () => alertService.toast({type: 'safe', msg: `comment removed successfully! id: ${id}`})
+        onSuccess: () => alertService.toast({type: 'safe', msg: `${$t('comment.alerts.removedSuccess')}! id: ${id}`})
       });
     },
     async addComment({ commit, dispatch }, { comment, attachedId }) {
@@ -84,7 +86,7 @@ export const _commentStore = {
       return dispatch({
         type: '_Ajax',
         do: async () => commentService.save(comment),
-        onSuccess: (data) => alertService.toast({type: 'safe', msg: `comment saved successfully! id: ${data._id}`})
+        onSuccess: (data) => alertService.toast({type: 'safe', msg: `${$t('comment.alerts.savedSuccess')}! id: ${data._id}`})
       });
     },
 

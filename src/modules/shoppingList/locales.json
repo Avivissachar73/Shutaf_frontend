@@ -1,44 +1,60 @@
 {
   "en": {
-    "shoppingList": "Shopping list",
-    "shoppingLists": "Shopping lists",
-    "products": "Products",
-    "addProduct": "Add product",
-    "prices": "Prices",
-    "addPrice": "Add price",
-    "count": "Count",
-    "category": "Category",
-    "minCount": "Min",
-    "maxCount": "Max",
-    "healthRate": "Health rate",
-    "settleUp": "Settle up",
-    "shoppinglistTooltip": {
-      "count": "How many items of this product you already have?",
-      "minCount": "What is the minimum capacety of this product in your appartment to add it to the shopping list?",
-      "maxCount": "What is the max capacity of this product you want to have in your appartment?",
-      "healthRate": "How health is the product from 1 to 10? (while 10 is the best score)",
-      "prices": "You can define prices for different stores for this specific product, the system will let you know where it will be best to shop!"
+    "shoppingList": {
+      "shoppingList": "Shopping list",
+      "shoppingLists": "Shopping lists",
+      "products": "Products",
+      "addProduct": "Add product",
+      "prices": "Prices",
+      "addPrice": "Add price",
+      "count": "Count",
+      "category": "Category",
+      "minCount": "Min",
+      "maxCount": "Max",
+      "healthRate": "Health rate",
+      "settleUp": "Settle up",
+      "createNewShoppingList": "Create new Shopping list",
+      "tooltip": {
+        "count": "How many items of this product you already have?",
+        "minCount": "What is the minimum capacety of this product in your appartment to add it to the shopping list?",
+        "maxCount": "What is the max capacity of this product you want to have in your appartment?",
+        "healthRate": "How health is the product from 1 to 10? (while 10 is the best score)",
+        "prices": "You can define prices for different stores for this specific product, the system will let you know where it will be best to shop!"
+      },
+      "alerts": {
+        "confirmRemove": "Are you sure you want to remove this Shopping list?",
+        "removeSuccess": "Shopping ךist removed successfully",
+        "savedSuccess": "Shopping ךist saved successfully"
+      }
     }
   },
   "he": {
-    "shoppingList": "רשימת קניות",
-    "shoppingLists": "רשימות קניות",
-    "products": "מוצרים",
-    "addProduct": "הוסף מוצר",
-    "prices": "מחירים",
-    "addPrice": "הוסף מחיר",
-    "count": "כמות",
-    "category": "קטגוריה",
-    "minCount": "מינימום",
-    "maxCount": "מקסימום",
-    "healthRate": "מדד בריאות",
-    "settleUp": "בצע רכישה",
-    "shoppinglistTooltip": {
-      "count": "כמה יחידות מהמוצר הזה כבר יש לך בבית?",
-      "minCount": "מה היא הכמות המינימלמית של המוצר הזה כדי להוסיף אותו לרשימת הקניות? ",
-      "maxCount": "מה הכמות המקסימלית של המוצר הזה שתרצו להחזיק בבית?",
-      "healthRate": "כמה בריא המוצר מ1 עד 10? (כאשר 10 הוא הבריא ביותר)",
-      "prices": "אפשר להגדיר מחירים שונים למוצר לפי חנויות שונות, המערכת תדע להגיד לך איפה הכי משתלם לעשות קניות!"
+    "shoppingList": {
+      "shoppingList": "רשימת קניות",
+      "shoppingLists": "רשימות קניות",
+      "products": "מוצרים",
+      "addProduct": "הוסף מוצר",
+      "prices": "מחירים",
+      "addPrice": "הוסף מחיר",
+      "count": "כמות",
+      "category": "קטגוריה",
+      "minCount": "מינימום",
+      "maxCount": "מקסימום",
+      "healthRate": "מדד בריאות",
+      "settleUp": "בצע רכישה",
+      "createNewShoppingList": "צור רשימת קניות חדשה",
+      "tooltip": {
+        "count": "כמה יחידות מהמוצר הזה כבר יש לך בבית?",
+        "minCount": "מה היא הכמות המינימלמית של המוצר הזה כדי להוסיף אותו לרשימת הקניות? ",
+        "maxCount": "מה הכמות המקסימלית של המוצר הזה שתרצו להחזיק בבית?",
+        "healthRate": "כמה בריא המוצר מ1 עד 10? (כאשר 10 הוא הבריא ביותר)",
+        "prices": "אפשר להגדיר מחירים שונים למוצר לפי חנויות שונות, המערכת תדע להגיד לך איפה הכי משתלם לעשות קניות!"
+      },
+      "alerts": {
+        "confirmRemove": "האם אתה בטוח שאתה מעוניין למחוק את רשימת הקניות",
+        "removeSuccess": "רשימה נמחקה בהצלחה",
+        "savedSuccess": "רשימה עודכנה בהצלחה"
+      }
     }
   }
 }

@@ -13,10 +13,10 @@
       <h2>{{organization.name}}</h2>
       <div class="flex align-center gap10"><span>{{$t('createdBy')}}:</span><MiniAccountPreview :reverse="true" :account="organization.createdBy"/></div>
       <div class="flex column gap10">
-        <p>{{$t('yourRoles')}}: {{organization.loggedAccountData.roles.map(c => $t(c)).join(', ')}}</p>
+        <p>{{$t('organization.yourRoles')}}: {{organization.loggedAccountData.roles.map(c => $t(c)).join(', ')}}</p>
       </div>
       <div class="flex column gap10">
-        <p>{{$t('members')}}:</p>
+        <p>{{$t('organization.members')}}:</p>
         <ul class="flex column gap5">
           <li class="flex align-center gap5" v-for="member in organization.members" :key="member._id">
             <MiniAccountPreview :account="member"/> - {{member.roles.map(c => $t(c)).join(', ')}}
@@ -26,7 +26,7 @@
     </section>
 
     <div v-if="organization?.loggedAccountData?.status === 'approved'">
-      <button @click="updateStatus('declined')" class="danger">{{$t('Leave')}}</button>
+      <button @click="leaveOrg()" class="danger">{{$t('leave')}}</button>
     </div>
   </div>
 </template>
@@ -34,6 +34,7 @@
 <script>
 import Loader from '@/modules/common/cmps/Loader.vue';
 import MiniAccountPreview from '../../account/cmps/MiniAccountPreview.vue';
+import { alertService } from '@/modules/common/services/alert.service';
 
 export default {
   name: 'OrganizationDetails',
@@ -47,6 +48,10 @@ export default {
     },
     async updateStatus(newStatus) {
       await this.$store.dispatch({ type: 'organization/updateAccountStatus', organizationId: this.$route.params.id, accountId: this.loggedUser._id, newStatus });
+    },
+    async leaveOrg() {
+      if (!await alertService.Confirm(this.$t('organization.alerts.confirmLeave'))) return;
+      this.updateStatus('declined')
     }
   },
   computed: {

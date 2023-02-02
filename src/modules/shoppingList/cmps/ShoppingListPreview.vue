@@ -10,7 +10,7 @@
       </div>
     </div>
     <div v-if="itemsView" class="flex column gap20">
-      <p>{{$t('products')}}</p>
+      <p>{{$t('shoppingList.products')}}</p>
       <ul class="width-all flex column gap5">
         <li v-for="item in shoppingListToEdit.products" :key="item.id" class="flex gap5 space-between">
           <div class="flex align-center gap5">
@@ -34,35 +34,35 @@
       <div class="new-product-section flex column gap15">
         <div class="flex align-center space-between">
           <button @click="toggleAddProductSection(!showAddProductSection)">
-            {{$t(showAddProductSection? 'close' : 'addProduct')}}
+            {{$t(showAddProductSection? 'close' : 'shoppingList.addProduct')}}
           </button>
           <button v-if="showAddProductSection" @click="saveNewProduct()" class="btn icon"><img :src="require('@/assets/images/save.png')"/></button>
         </div>
         <div v-if="showAddProductSection" class="new-product-section flex column gap10">
           <div class="flex column gap5">
             <FormInput type="text" placeholder="title" v-model="productToEdit.name"/>
-            <FormInput type="autocomplete" :items="allCategories" placeholder="category" v-model="productToEdit.category"/>
+            <FormInput type="autocomplete" :items="allCategories" placeholder="shoppingList.category" v-model="productToEdit.category"/>
             <div class="flex align-center width-all space-between gap10">
-              <FormInput class="flex-1" type="number" placeholder="count" label="count" v-model="productToEdit.count"/>
-              <Tooltip attachToElement=".shoppingList-preview" msg="shoppinglistTooltip.count"/>
+              <FormInput class="flex-1" type="number" placeholder="shoppingList.count" label="shoppingList.count" v-model="productToEdit.count"/>
+              <Tooltip attachToElement=".shoppingList-preview" msg="shoppingList.tooltip.count"/>
             </div>
             <div class="flex align-center width-all space-between gap10">
-              <FormInput class="flex-1" type="number" :min="0" placeholder="minCount" label="minCount" v-model="productToEdit.minCount"/>
-              <Tooltip attachToElement=".shoppingList-preview" msg="shoppinglistTooltip.minCount"/>
+              <FormInput class="flex-1" type="number" :min="0" placeholder="shoppingList.minCount" label="shoppingList.minCount" v-model="productToEdit.minCount"/>
+              <Tooltip attachToElement=".shoppingList-preview" msg="shoppingList.tooltip.minCount"/>
             </div>
             <div class="flex align-center width-all space-between gap10">
-              <FormInput class="flex-1" type="number" :min="0" placeholder="maxCount" label="maxCount" v-model="productToEdit.maxCount"/>
-              <Tooltip attachToElement=".shoppingList-preview" msg="shoppinglistTooltip.maxCount"/>
+              <FormInput class="flex-1" type="number" :min="0" placeholder="shoppingList.maxCount" label="shoppingList.maxCount" v-model="productToEdit.maxCount"/>
+              <Tooltip attachToElement=".shoppingList-preview" msg="shoppingList.tooltip.maxCount"/>
             </div>
             <div class="flex align-center width-all space-between gap10">
-              <FormInput class="flex-1" type="number" :min="1" :max="10" placeholder="healthRate" label="healthRate" v-model="productToEdit.healthRate"/>
-              <Tooltip attachToElement=".shoppingList-preview" msg="shoppinglistTooltip.healthRate"/>
+              <FormInput class="flex-1" type="number" :min="1" :max="10" placeholder="shoppingList.healthRate" label="shoppingList.healthRate" v-model="productToEdit.healthRate"/>
+              <Tooltip attachToElement=".shoppingList-preview" msg="shoppingList.tooltip.healthRate"/>
             </div>
           </div>
           <div class="flex column gap10">
             <p class="flex align-center gap5">
-              <span>{{$t('prices')}}</span>
-              <Tooltip attachToElement=".shoppingList-preview" msg="shoppinglistTooltip.prices"/>
+              <span>{{$t('shoppingList.prices')}}</span>
+              <Tooltip attachToElement=".shoppingList-preview" msg="shoppingList.tooltip.prices"/>
             </p>
             <ul class="flex column gap10">
               <li v-for="(price, i) in productToEdit.prices" :key="price.id" class="flex space-between align-end">
@@ -72,7 +72,7 @@
               </li>
               <li>
                 <button @click="addPrice">
-                  {{$t('addPrice')}}
+                  {{$t('shoppingList.addPrice')}}
                 </button>
               </li>
             </ul>
@@ -96,10 +96,10 @@
           </ul>
           <p class="flex space-between"><span>{{$t('total')}}:</span> <span>{{totalPrice}}</span></p>
         </div>
-        <button @click="settleUpCatr">{{$t('settleUp')}}</button>
+        <button @click="settleUpCatr">{{$t('shoppingList.settleUp')}}</button>
       </template>
       <template v-else>
-        <p>{{$t('allSettledUp')}}!</p>
+        <p>{{$t('shoppingList.allSettledUp')}}!</p>
       </template>
     </div>
   </li>

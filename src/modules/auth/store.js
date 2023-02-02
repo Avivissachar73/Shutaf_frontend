@@ -2,6 +2,8 @@ import { authService } from './services/auth.service';
 import { alertService } from '@/modules/common/services/alert.service';
 import { basicStoreService } from '@/modules/common/services/basic-store.service';
 
+import { $t } from '@/plugins/i18n';
+
 const initState = () => ({
   loggedUser: null,
   isLoading: false
@@ -39,7 +41,7 @@ export const _authStore = {
         do: async () => authService.login(cred),
         onSuccess: (res) => {
           commit({ type: 'setLoggedUser', user: res.user });
-          alertService.toast({type: 'safe', msg: `Welcome back, ${res.user.username}!`});
+          alertService.toast({type: 'safe', msg: `${$t('auth.alerts.welcomeBack')}, ${res.user.username}!`});
         }
       });
     },
@@ -57,7 +59,7 @@ export const _authStore = {
         do: async () => authService.logout(),
         onSuccess: (res) => {
           commit({ type: 'setLoggedUser', user: null });
-          alertService.toast({type: 'safe', msg: `Goodby`});
+          alertService.toast({type: 'safe', msg: $t(`auth.alerts.goodby`)});
           dispatch('resetState', {}, { root: true });
         }
       });
@@ -68,7 +70,7 @@ export const _authStore = {
         do: async () => authService.signup(cred),
         onSuccess: (res) => {
           commit({ type: 'setLoggedUser', user: res.user });
-          alertService.toast({type: 'safe', msg: `Welcome, ${res.user.username}!`});
+          alertService.toast({type: 'safe', msg: `${$t(`auth.alerts.welcome`)}, ${res.user.username}!`});
         }
       });
     },

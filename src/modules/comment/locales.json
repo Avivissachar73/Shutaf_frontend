@@ -1,16 +1,30 @@
 {
   "en": {
-    "comment": "Comment",
-    "comments": "Comments",
-    "showComments": "Show comments",
-    "hideComments": "Hide comments",
-    "noMoreComments": "No more comments"
+    "comment": {
+      "comment": "Comment",
+      "comments": "Comments",
+      "showComments": "Show comments",
+      "hideComments": "Hide comments",
+      "noMoreComments": "No more comments",
+      "alerts": {
+        "confirmRemove": "Are you sure you want to remove this comment?",
+        "removedSuccess": "Comment removed successfully",
+        "savedSuccess": "Comment saved successfully"
+      }
+    }
   },
   "he": {
-    "comment": "תגובה",
-    "comments": "תגובות",
-    "showComments": "הצג תגובות",
-    "hideComments": "הסתר תגובות",
-    "noMoreComments": "אין תגובות נוספות"
+    "comment": {
+      "comment": "תגובה",
+      "comments": "תגובות",
+      "showComments": "הצג תגובות",
+      "hideComments": "הסתר תגובות",
+      "noMoreComments": "אין תגובות נוספות",
+      "alerts": {
+        "confirmRemove": "האם אתה בטוח שאתה מעוניין למחוק את התגובה?",
+        "removedSuccess": "תגובה נמחקה בהצלחה",
+        "savedSuccess": "תגובה נשמרה בהצלחה"
+      }
+    }
   }
 }

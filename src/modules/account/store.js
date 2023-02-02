@@ -2,6 +2,8 @@ import { accountService } from './services/account.service';
 import { alertService } from '@/modules/common/services/alert.service';
 import { basicStoreService } from '@/modules/common/services/basic-store.service';
 
+import { $t } from '@/plugins/i18n';
+
 const initState = () => ({
   ...basicStoreService.initState()
 });
@@ -61,18 +63,18 @@ export const _accountStore = {
       });
     },
     async removeAccount({ commit, dispatch }, { id }) {
-      if (!await alertService.Confirm('Are you sure you want to remove this account?')) return;
+      if (!await alertService.Confirm($t('account.alerts.confirmRemove'))) return;
       return dispatch({
         type: '_Ajax',
         do: async () => accountService.remove(id),
-        onSuccess: () => alertService.toast({type: 'safe', msg: `Account removed successfully! id: ${id}`})
+        onSuccess: () => alertService.toast({type: 'safe', msg: `${$t('account.alerts.removeSuccess')} id: ${id}`})
       });
     },
     async saveAccount({ commit, dispatch }, { item }) {
       return dispatch({
         type: '_Ajax',
         do: async () => accountService.save(item),
-        onSuccess: () => alertService.toast({type: 'safe', msg: `Account saved successfully! id: ${item._id}`})
+        onSuccess: () => alertService.toast({type: 'safe', msg: `${$t('account.alerts.savedAccountSuccess')} id: ${item._id}`})
       });
     }
   }

@@ -1,10 +1,16 @@
 {
   "en": {
-    "activity": "Activity",
-    "activities": "Activities"
+    "activity": {
+      "activity": "Activity",
+      "activities": "Activities",
+      "noMoreActivities": "No more activities"
+    }
   },
   "he": {
-    "activity": "פעילות",
-    "activities": "פעילויות"
+    "activity": {
+      "activity": "פעילות",
+      "activities": "פעילויות",
+      "noMoreActivities": "אין פעילויות נוספות"
+    }
   }
 }

@@ -5,6 +5,7 @@ import { he as activityHe } from '@/modules/activity/locales.json';
 import { he as shoppingListHe } from '@/modules/shoppingList/locales.json';
 import { he as accountHe } from '@/modules/account/locales.json';
 import { he as settingsHe } from '@/modules/settings/locales.json';
+import { he as authHe } from '@/modules/auth/locales.json';
 
 export default {
   ...organizationHe,
@@ -14,6 +15,7 @@ export default {
   ...activityHe,
   ...accountHe,
   ...settingsHe,
+  ...authHe,
   "hello": "שלום",
   "filter": "לפלטר",
   "edit": "ערוך",
@@ -22,10 +24,10 @@ export default {
   "login": "התחבר",
   "about": "אודות",
   "admin": "אדמין",
+  "creator": "יוצר",
   "logout": "התנתק",
   "delete": "מחק",
   "addNew": "הוסף חדש",
-  "darkMode": "מצב חשוך",
   "approve": "אשר",
   "decline": "דחה",
   "systemRoles": "תפקידי מערכת",
@@ -39,5 +41,6 @@ export default {
   "createdBy": "יוצר על ידי",
   "search": "חפש",
   "noMatches": "אין התאמות",
-  "noItemsFound": "לא נמצאו תוצאות"
+  "noItemsFound": "לא נמצאו תוצאות",
+  "leave": "עזוב"
 }
