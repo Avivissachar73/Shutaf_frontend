@@ -1,8 +1,9 @@
 <template>
-  <div class="shoppingList-edit">
+  <div class="shoppingList-edit flex column gap20">
     <h2>{{$t('shoppingList.createNewShoppingList')}}</h2>
-    <form v-if="shoppingListToEdit" @submit.prevent="saveShoppingList">
+    <form v-if="shoppingListToEdit" @submit.prevent="saveShoppingList" class="simple-form">
       <FormInput placeholder="name" type="text" v-model="shoppingListToEdit.title"/>
+      <FormInput placeholder="type" type="select" :items="['smart', 'simple']" v-model="shoppingListToEdit.type"/>
       <button :disabled="!isItemValid">{{$t('submit')}}</button>
     </form>
   </div>

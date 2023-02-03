@@ -1,7 +1,8 @@
 <template>
-  <div class="post-edit">
-    <form v-if="postToEdit" @submit.prevent="savePost">
-      <FormInput type="textarea" v-model="postToEdit.content"/>
+  <div v-if="postToEdit" class="post-edit flex column gap20">
+    <h2>{{$t( postToEdit._id? 'post.editPost' : 'post.createNewPost')}}</h2>
+    <form @submit.prevent="savePost" class="simple-form">
+      <FormInput type="textarea" placeholder="post.saySomething" v-model="postToEdit.content"/>
       <button :disabled="!isItemValid">{{$t('submit')}}</button>
     </form>
   </div>

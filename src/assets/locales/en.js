@@ -23,7 +23,6 @@ export default {
   "signup": "Signup",
   "login": "Login",
   "about": "About",
-  "settings": "Settings",
   "example": "Example",
   "admin": "Admin",
   "creator": "Creator",

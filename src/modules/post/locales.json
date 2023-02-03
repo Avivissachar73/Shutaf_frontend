@@ -3,6 +3,9 @@
     "post": {
       "post": "Post",
       "posts": "Posts",
+      "createNewPost": "Create new post",
+      "editPost": "Edit post",
+      "saySomething": "Say something",
       "alerts": {
         "confirmRemove": "Are you sure you want to remove this post?",
         "removeSuccess": "post removed successfully",
@@ -14,6 +17,9 @@
     "post": {
       "post": "פוסט",
       "posts": "פוסטים",
+      "createNewPost": "צור פוסט חדש",
+      "editPost": "ערוך פוסט",
+      "saySomething": "כתוב משהו",
       "alerts": {
         "confirmRemove": "האם אתה בטוח שאתה מעוניין למחוק את הפוסט?",
         "removeSuccess": "פוסט נמחק בהצלחה",

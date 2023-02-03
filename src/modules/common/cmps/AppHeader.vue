@@ -1,7 +1,7 @@
 <template>
   <header class="app-header flex align-center">
     <div class="container width-all flex align-center space-between">
-      <router-link :to="{name: 'HomePage'}"><CreditLogo/></router-link>
+      <router-link :to="{name: 'HomePage'}"><AppLogo/></router-link>
 
       <!-- <button @click="mobileShow = !mobileShow" class="nav-burger">☰</button> -->
       <button @click="mobileShow = !mobileShow" class="nav-burger"><img :src="require('@/assets/images/mine/navBurger.png')"/></button>
@@ -28,7 +28,7 @@
 
 <script>
 import Avatar from './Avatar.vue';
-import CreditLogo from './CreditLogo.vue'
+import AppLogo from './AppLogo.vue'
 export default {
   name: 'AppHeader',
   data() {
@@ -62,7 +62,7 @@ export default {
       this.mobileShow = false;
     }
   },
-  components: { CreditLogo, Avatar },
+  components: { AppLogo, Avatar },
 }
 </script>
 
