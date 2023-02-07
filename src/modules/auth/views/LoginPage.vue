@@ -4,7 +4,7 @@
     <form @submit.prevent="login" class="simple-form">
       <FormInput type="text" placeholder="username" label="username" v-model="userCred.username"/>
       <FormInput type="password" placeholder="password" label="password" v-model="userCred.password"/>
-      <button :disabled="!isUserValid">{{$t('submit')}}</button>
+      <button class="btn primary" :disabled="!isUserValid">{{$t('submit')}}</button>
     </form>
   </div>
 </template>

@@ -10,7 +10,7 @@
         <Loader/>
       </li>
       <li v-else-if="isLoadable">
-        <button @click="loadChunk">{{$t('loadMore')}}</button>
+        <button class="btn" @click="loadChunk">{{$t('loadMore')}}</button>
       </li>
       <li v-else>
         {{$t('activities.noMoreActivities')}}

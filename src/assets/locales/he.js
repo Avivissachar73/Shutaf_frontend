@@ -42,6 +42,8 @@ export default {
   "search": "חפש",
   "noMatches": "אין התאמות",
   "noItemsFound": "לא נמצאו תוצאות",
+  "createYourFirstOne": "צור את הראשון",
+  "createNew": "צור חדש",
   "leave": "עזוב",
 
   "internalServerError": "תקלת שרת",

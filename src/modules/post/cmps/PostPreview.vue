@@ -4,15 +4,15 @@
       <pre>{{item}}</pre>
     </router-link> -->
     <div v-if="isCreator" class="flex gap10">
-      <router-link v-if="post" :to="{name: 'PostEdit', params: { id: post._id } }"><button>{{$t('edit')}}</button></router-link>
-      <button @click="removePost">{{$t('delete')}}</button>
+      <router-link v-if="post" :to="{name: 'PostEdit', params: { id: post._id } }"><button class="btn secondary">{{$t('edit')}}</button></router-link>
+      <button class="btn danger" @click="removePost">{{$t('delete')}}</button>
     </div>
     <div v-if="post" class="flex column gap10 flex-1 space-between">
       <div>
         <p>{{post.createdBy.username}}</p>
         <p>{{post.content}}</p>
       </div>
-      <button @click="showComments = !showComments">{{$t(showComments? 'comment.hideComments' : 'comment.showComments')}}</button>
+      <button class="btn" @click="showComments = !showComments">{{$t(showComments? 'comment.hideComments' : 'comment.showComments')}}</button>
       <CommentList v-show="showComments" :attachedId="post._id"/>
     </div>
   </li>

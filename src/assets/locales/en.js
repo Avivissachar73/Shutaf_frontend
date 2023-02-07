@@ -43,6 +43,8 @@ export default {
   "search": "Search",
   "noMatches": "No matches",
   "noItemsFound": "No items found",
+  "createYourFirstOne": "Create your first one",
+  "createNew": "Create new",
   "leave": "Leave",
 
   "internalServerError": "Internal server error",

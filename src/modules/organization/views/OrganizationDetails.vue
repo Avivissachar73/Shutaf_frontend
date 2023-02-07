@@ -1,13 +1,13 @@
 <template>
   <div class="organization-details flex column gap20">
     <div v-if="organization?.loggedAccountData?.status === 'pending'">
-      <button @click="updateStatus('approved')">{{$t('approve')}}</button>
-      <button @click="updateStatus('declined')">{{$t('decline')}}</button>
+      <button class="btn mid primary" @click="updateStatus('approved')">{{$t('approve')}}</button>
+      <button class="btn mid danger" @click="updateStatus('declined')">{{$t('decline')}}</button>
     </div>
     
     <div class="flex gap5">
       <router-link v-if="organization" :to="{ name: 'OrganizationEdit', params: {id: organization._id} }"><button>{{$t('edit')}}</button></router-link>
-      <button @click="removeOrganization">{{$t('delete')}}</button>
+      <button class="btn danger" @click="removeOrganization">{{$t('delete')}}</button>
     </div>
     <section v-if="organization" class="flex column gap10">
       <h2>{{organization.name}}</h2>
@@ -26,7 +26,7 @@
     </section>
 
     <div v-if="organization?.loggedAccountData?.status === 'approved'">
-      <button @click="leaveOrg()" class="danger">{{$t('leave')}}</button>
+      <button @click="leaveOrg()" class="btn danger">{{$t('leave')}}</button>
     </div>
   </div>
 </template>

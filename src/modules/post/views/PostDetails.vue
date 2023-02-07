@@ -1,8 +1,8 @@
 <template>
   <div class="post-details">
     <div>
-      <router-link v-if="post" :to="{name: 'PostEdit', params: {id: post._id}}"><button>{{$t('edit')}}</button></router-link>
-      <button @click="removePost">{{$t('delete')}}</button>
+      <router-link v-if="post" :to="{name: 'PostEdit', params: {id: post._id}}"><button class="btn secondary">{{$t('edit')}}</button></router-link>
+      <button class="btn danger" @click="removePost">{{$t('delete')}}</button>
     </div>
     <div v-if="post">
       <div>

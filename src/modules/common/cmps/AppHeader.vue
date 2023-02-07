@@ -4,7 +4,7 @@
       <router-link :to="{name: 'HomePage'}"><AppLogo/></router-link>
 
       <!-- <button @click="mobileShow = !mobileShow" class="nav-burger">☰</button> -->
-      <button @click="mobileShow = !mobileShow" class="nav-burger"><img :src="require('@/assets/images/mine/navBurger.png')"/></button>
+      <button @click="mobileShow = !mobileShow" class="btn nav-burger"><img :src="require('@/assets/images/mine/navBurger.png')"/></button>
       <div class="blure" v-if="mobileShow" @click="mobileShow = false"></div>
       <nav :class="{show: mobileShow}">
         <router-link :to="{name: 'AboutPage'}">{{$t('about')}}</router-link> 
@@ -18,7 +18,7 @@
             <router-link v-if="isAdmin" :to="{name: 'AccountPage'}">{{$t('admin')}}</router-link>
             <router-link :to="{name: 'OrganizationPage'}">{{$t('organization.organizations')}}</router-link>
             <router-link :to="{name: 'AccountDetails', params: {id: loggedUser._id} }"><Avatar :account="loggedUser"/></router-link>
-            <button @click="logout">{{$t('logout')}}</button>
+            <button class="btn" @click="logout">{{$t('logout')}}</button>
           </template>
         </template>
       </nav>

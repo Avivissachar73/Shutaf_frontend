@@ -7,14 +7,14 @@
             <p>{{comment.createdBy.username}}:</p>
             <p> {{comment.content}}</p>
           </div>
-          <button v-if="isCommentCreator(comment)" @click="removeComment(comment._id)">X</button>
+          <button  class="btn" v-if="isCommentCreator(comment)" @click="removeComment(comment._id)">X</button>
         </li>
 
       <li v-if="isLoading">
         <Loader/>
       </li>
       <li v-else-if="isLoadable">
-        <button @click="loadChunk">{{$t('loadMore')}}</button>
+        <button class="btn" @click="loadChunk">{{$t('loadMore')}}</button>
       </li>
       <li v-else>
         {{$t('comment.noMoreComments')}}

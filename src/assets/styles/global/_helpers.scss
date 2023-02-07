@@ -47,6 +47,9 @@
 .flex-1 {
   flex: 1;
 }
+.stretch-self {
+  align-self: stretch;
+}
 
 .column-layout {
   display: flex;

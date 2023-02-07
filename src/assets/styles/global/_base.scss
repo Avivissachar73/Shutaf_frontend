@@ -1,16 +1,17 @@
-button, .button-like {
-  border: unset;
-  background: unset;
-  padding: 0 5px;
-  outline: none;
-  border: 1px solid black;
-  color: black;
-  border-radius: 5px;
-} button:hover, .button-like:hover {cursor: pointer;}
-button:active, .button-like:active {
-    color: white;
-    border-color: white;
-  }
+// button, .button-like {
+//   border: unset;
+//   background: unset;
+//   outline: none;
+//   // padding: 0 5px;
+//   // border: 1px solid black;
+//   // box-shadow: $light-shadow;
+//   // color: black;
+//   // border-radius: 5px;
+// } button:hover, .button-like:hover {cursor: pointer;}
+// button:active, .button-like:active {
+//     color: white;
+//     border-color: white;
+//   }
 
 input[type="text"], input[type="password"], select, textarea {
   // width: 200px;
@@ -60,6 +61,12 @@ img {
 
 .btn {
   // height: 20px;
+  background-color: #ffffff;
+  box-shadow: $light-shadow;
+  color: black !important;
+  border-radius: 5px;
+  padding: 0 5px;
+
   &.icon {
     height: 20px;
     width: 20px;
@@ -79,12 +86,34 @@ img {
     font-size: 11px;
   }
 
+  &.big {
+    padding: 10px 20px;
+  }
+  &.mid {
+    padding: 7px 15px;
+  }
+
+  &.primary {
+    background-color: $clr-light-green;
+  }
+  &.secondary {
+    background-color: $clr-light-blue;
+  }
+  &.danger {
+    background-color: $clr-light-red;
+  }
+
   // &.safe {
   //   background-color: green;
   // }
   // &.danger {
   //   background-color: red;
   // }
+
+  &:active {
+    color: white;
+    border-color: white;
+  }
 }
 
 

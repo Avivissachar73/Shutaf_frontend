@@ -4,7 +4,7 @@
     <form v-if="shoppingListToEdit" @submit.prevent="saveShoppingList" class="simple-form">
       <FormInput placeholder="name" type="text" v-model="shoppingListToEdit.title"/>
       <FormInput placeholder="type" type="select" :items="['smart', 'simple']" v-model="shoppingListToEdit.type"/>
-      <button :disabled="!isItemValid">{{$t('submit')}}</button>
+      <button class="btn big primary" :disabled="!isItemValid">{{$t('submit')}}</button>
     </form>
   </div>
 </template>

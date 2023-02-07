@@ -9,7 +9,7 @@
       <FormInput type="text" label="account.newPassword" placeholder="account.newPassword" v-model="accountToEdit.password"/>
       <FormInput type="text" label="account.confirmPassword" placeholder="account.confirmPassword" v-model="confirmPassword"/>
       <!-- <FormInput type="text" placeholder="role" v-model="accountToEdit.roles[0]"/> -->
-      <button :disabled="!isAccountValid">{{$t('submit')}}</button>
+      <button class="btn primary" :disabled="!isAccountValid">{{$t('submit')}}</button>
     </form>
   </div>
 </template>
@@ -54,7 +54,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-
-</style>

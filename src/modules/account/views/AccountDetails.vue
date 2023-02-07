@@ -1,6 +1,6 @@
 <template>
   <div class="account-details flex column gap10" v-if="account">
-    <router-link :to="{name: 'AccountEdit', params: {id: account._id}}"><button>{{$t('edit')}}</button></router-link>
+    <router-link :to="{name: 'AccountEdit', params: {id: account._id}}"><button class="btn">{{$t('edit')}}</button></router-link>
     <MiniAccountPreview :account="account"/>
     <p>{{account.firstname}} {{account.lastname}}</p>
     <p>{{account.email}}</p>
@@ -10,7 +10,7 @@
       <ul class="flex column gap5">
         <li v-for="org in account.organizations" :key="org._id">
           <router-link :to="{ name: 'OrganizationDetails', params: { id: org._id } }">
-            <button>{{org.name}}</button>
+            <button class="btn">{{org.name}}</button>
           </router-link>
         </li>
       </ul>

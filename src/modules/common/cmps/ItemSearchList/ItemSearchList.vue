@@ -1,14 +1,19 @@
 <template>
-  <div class="item-page flex gap20 column flex-1">
-    <div class="width-all flex align-center space-between">
+  <div class="item-page flex align-center gap20 column flex-1">
+    <div class="width-all flex align-center space-between wrap gap10">
       <ItemFilter :initFilter="filterBy.filter" @filtered="setFilter"/>
-      <router-link v-if="newItemPageName" :to="{name: newItemPageName}"><button>{{$t('addNew')}}</button></router-link>
+      <router-link v-if="newItemPageName" :to="{name: newItemPageName}"><button class="btn secondary mid">{{$t('addNew')}}</button></router-link>
     </div>
     <template v-if="items?.length">
-      <ItemList :items="items" v-if="items" :singlePreviewCmp="singlePreviewCmp" :itemDetailesPageName="itemDetailesPageName"/>
+      <ItemList class="stretch-self" :items="items" v-if="items" :singlePreviewCmp="singlePreviewCmp" :itemDetailesPageName="itemDetailesPageName"/>
       <PaginationBtns v-if="filterBy" :total="totalItems" :perPage="filterBy.pagination.limit" v-model="filterBy.pagination.page"/>
     </template>
-    <h3 v-else-if="!isLoading">{{$t('noItemsFound')}}...</h3>
+    <template v-else-if="!isLoading">
+      <h3>{{$t('noItemsFound')}}...</h3>
+      <router-link v-if="newItemPageName" :to="{name: newItemPageName}">
+        <button v-if="isFilterEmpty || true" class="btn big primary">{{$t('createNew')}}!</button>  
+      </router-link>
+    </template>
     <Loader v-if="isLoading"/>
   </div>
 </template>
@@ -19,6 +24,8 @@ import ItemList from './ItemList.vue';
 import PaginationBtns from '../PaginationBtns.vue';
 import { setDeepVal, deepIterateWithObj } from '../../services/util.service';
 import Loader from '../Loader.vue';
+
+import { basicStoreService } from '@/modules/common/services/basic-store.service';
 
 export default {
   name: 'ItemSearchList',
@@ -62,6 +69,9 @@ export default {
     },
     totalItems() {
       return this.itemsData.total;
+    },
+    isFilterEmpty() {
+      return JSON.stringify(this.filterBy) === JSON.stringify(basicStoreService.initFilterBy())
     }
   },
   created() {

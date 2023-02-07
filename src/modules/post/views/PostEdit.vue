@@ -3,7 +3,7 @@
     <h2>{{$t( postToEdit._id? 'post.editPost' : 'post.createNewPost')}}</h2>
     <form @submit.prevent="savePost" class="simple-form">
       <FormInput type="textarea" placeholder="post.saySomething" v-model="postToEdit.content"/>
-      <button :disabled="!isItemValid">{{$t('submit')}}</button>
+      <button class="btn big primary" :disabled="!isItemValid">{{$t('submit')}}</button>
     </form>
   </div>
 </template>

@@ -7,7 +7,7 @@
       <FormInput type="text" placeholder="lastname" label="lastname" v-model="user.lastname"/>
       <FormInput type="text" placeholder="email" label="email" v-model="user.email"/>
       <FormInput type="password" placeholder="password" label="password" v-model="user.password"/>
-      <button :disabled="!isUserValid">{{$t('submit')}}</button>
+      <button class="btn primary" :disabled="!isUserValid">{{$t('submit')}}</button>
     </form>
   </div>
 </template>
