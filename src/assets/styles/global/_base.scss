@@ -113,6 +113,7 @@ img {
   //   background-color: red;
   // }
 
+  &:hover {cursor: pointer;}
   &:active {
     color: white;
     border-color: white;

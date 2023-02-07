@@ -382,6 +382,7 @@ export default {
     &.selected {
       border-width: 2px;
       font-weight: bold;
+      transform: scale(1.05);
     }
   }
 }

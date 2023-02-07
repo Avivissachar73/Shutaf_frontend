@@ -1,9 +1,9 @@
 <template>
   <div class="organization-app container inner-app flex column gap20">
-    <nav v-if="orgId" class="flex align-center gap10">
+    <!-- <nav v-if="orgId" class="flex align-center gap10">
       <router-link :to="{name: 'PostPage', params: {organizationId: orgId} }">{{$t('post.posts')}}</router-link>
       <router-link :to="{name: 'ShoppingListPage', params: {organizationId: orgId} }">{{$t('shoppingList.shoppingLists')}}</router-link>
-    </nav>
+    </nav> -->
     <router-view class="inner-app-content"/>
     <Loader v-if="isLoading"/>
   </div>

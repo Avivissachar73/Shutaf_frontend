@@ -1,5 +1,5 @@
 <template>
-  <div class="item-page flex align-center gap10 column flex-1">
+  <div class="item-page flex align-center gap15 column flex-1">
     <div class="width-all flex align-center space-between wrap gap10">
       <ItemFilter :initFilter="filterBy.filter" @filtered="setFilter"/>
       <router-link v-if="newItemPageName" :to="{name: newItemPageName}"><button class="btn secondary mid">{{$t('addNew')}}</button></router-link>

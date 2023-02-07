@@ -20,7 +20,7 @@
         </ul>
         <p v-else-if="!searchPristin">{{$t('noMatches')}}...</p>
       </div>
-      <button class="btn big promary" :disabled="!isOrganizationValid">{{$t('save')}}</button>
+      <button class="btn big primary" :disabled="!isOrganizationValid">{{$t('save')}}</button>
     </form>
   </div>
 </template>

@@ -5,10 +5,11 @@
       <button class="btn mid danger" @click="updateStatus('declined')">{{$t('decline')}}</button>
     </div>
     
-    <div class="flex gap5">
-      <router-link v-if="organization" :to="{ name: 'OrganizationEdit', params: {id: organization._id} }"><button>{{$t('edit')}}</button></router-link>
-      <button class="btn danger" @click="removeOrganization">{{$t('delete')}}</button>
-    </div>
+    <nav v-if="orgId" class="flex align-center gap10">
+      <router-link :to="{name: 'PostPage', params: {organizationId: orgId} }">{{$t('post.posts')}}</router-link>
+      <router-link :to="{name: 'ShoppingListPage', params: {organizationId: orgId} }">{{$t('shoppingList.shoppingLists')}}</router-link>
+    </nav>
+    
     <section v-if="organization" class="flex column gap10">
       <h2>{{organization.name}}</h2>
       <div class="flex align-center gap10"><span>{{$t('createdBy')}}:</span><MiniAccountPreview :reverse="true" :account="organization.createdBy"/></div>
@@ -25,6 +26,11 @@
       </div>
     </section>
 
+    <div class="flex gap5">
+      <router-link  class="btn secondary" v-if="organization" :to="{ name: 'OrganizationEdit', params: {id: orgId} }">{{$t('edit')}}</router-link>
+      <button class="btn danger" @click="removeOrganization">{{$t('delete')}}</button>
+    </div>
+
     <div v-if="organization?.loggedAccountData?.status === 'approved'">
       <button @click="leaveOrg()" class="btn danger">{{$t('leave')}}</button>
     </div>
@@ -40,21 +46,24 @@ export default {
   name: 'OrganizationDetails',
   methods: {
     getOrganization() {
-      this.$store.dispatch({ type: 'organization/loadOrganization', id: this.$route.params.id });
+      this.$store.dispatch({ type: 'organization/loadOrganization', id: this.orgId });
     },
     async removeOrganization() {
-      await this.$store.dispatch({ type: 'organization/removeOrganization', id: this.organization._id });
+      await this.$store.dispatch({ type: 'organization/removeOrganization', id: this.orgId });
       this.$router.push({name: 'ExamplePage'});
     },
     async updateStatus(newStatus) {
-      await this.$store.dispatch({ type: 'organization/updateAccountStatus', organizationId: this.$route.params.id, accountId: this.loggedUser._id, newStatus });
+      await this.$store.dispatch({ type: 'organization/updateAccountStatus', organizationId: this.orgId, accountId: this.loggedUser._id, newStatus });
     },
     async leaveOrg() {
       if (!await alertService.Confirm(this.$t('organization.alerts.confirmLeave'))) return;
-      this.updateStatus('declined')
+      this.updateStatus('left')
     }
   },
   computed: {
+    orgId() {
+      return this.$route.params.id;
+    },
     loggedUser() {
       return this.$store.getters['auth/loggedUser'];
     },
@@ -64,10 +73,10 @@ export default {
   },
   created() {
     this.getOrganization();
-    localStorage.logged_organization_id = this.$route.params.id;
+    localStorage.logged_organization_id = this.orgId;
   },
   watch: {
-    '$route.params.id'() {
+    'orgId'() {
       this.getOrganization();
     }
   },
