@@ -1,11 +1,11 @@
 <template>
-  <div class="item-page flex align-center gap20 column flex-1">
+  <div class="item-page flex align-center gap10 column flex-1">
     <div class="width-all flex align-center space-between wrap gap10">
       <ItemFilter :initFilter="filterBy.filter" @filtered="setFilter"/>
       <router-link v-if="newItemPageName" :to="{name: newItemPageName}"><button class="btn secondary mid">{{$t('addNew')}}</button></router-link>
     </div>
     <template v-if="items?.length">
-      <ItemList class="stretch-self" :items="items" v-if="items" :singlePreviewCmp="singlePreviewCmp" :itemDetailesPageName="itemDetailesPageName"/>
+      <ItemList class="width-all" :items="items" v-if="items" :singlePreviewCmp="singlePreviewCmp" :itemDetailesPageName="itemDetailesPageName"/>
       <PaginationBtns v-if="filterBy" :total="totalItems" :perPage="filterBy.pagination.limit" v-model="filterBy.pagination.page"/>
     </template>
     <template v-else-if="!isLoading">
@@ -100,7 +100,7 @@ export default {
     overflow-y: auto;
     .item-preview {
       width: 300px;
-      max-width: 85vw;
+      max-width: 98%;
       height: 200px;
       border-radius: 5px;
       background-color: #fff;
@@ -108,6 +108,12 @@ export default {
       padding: 20px;
       overflow-y: auto;
       overflow-x: hidden;
+
+      @media (max-width: 370px) {
+        width: 98%;
+        // max-width: unset;
+        // border-radius: 0;
+      }
     }
   }
 

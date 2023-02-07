@@ -224,6 +224,11 @@ export default {
       width: 100%;
       margin: 0;
       resize: none;
+
+      &[type="checkbox"] {
+        width: 15px;
+        height: 15px;
+      }
     }
   }
 }

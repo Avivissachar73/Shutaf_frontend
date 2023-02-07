@@ -26,7 +26,8 @@
       "alerts": {
         "confirmRemove": "Are you sure you want to remove this Shopping list?",
         "removeSuccess": "Shopping ךist removed successfully",
-        "savedSuccess": "Shopping ךist saved successfully"
+        "savedSuccess": "Shopping ךist saved successfully",
+        "confirmRemoveProduct": "Are you sure you want to remove this product?"
       }
     }
   },
@@ -57,7 +58,8 @@
       "alerts": {
         "confirmRemove": "האם אתה בטוח שאתה מעוניין למחוק את רשימת הקניות?",
         "removeSuccess": "רשימה נמחקה בהצלחה",
-        "savedSuccess": "רשימה עודכנה בהצלחה"
+        "savedSuccess": "רשימה עודכנה בהצלחה",
+        "confirmRemoveProduct": "האם את בטוחה שאת רוצה למחוק את המוצר?"
       }
     }
   }

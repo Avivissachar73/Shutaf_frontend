@@ -15,7 +15,7 @@
         <li v-for="item in shoppingListToEdit.products" :key="item.id" class="flex gap5 space-between">
           <div class="flex align-center gap5">
             <button @click="updateProductIdx(item.id, -1)" class="btn small icon"><img :src="require('@/assets/images/small-arrow-head-up.png')"/></button>
-            <button @click="updateProductIdx(item.id, 11)" class="btn small icon"><img :src="require('@/assets/images/small-arrow-head-down.png')"/></button>
+            <button @click="updateProductIdx(item.id, 1)" class="btn small icon"><img :src="require('@/assets/images/small-arrow-head-down.png')"/></button>
             <p class="flex-1">{{item.name}}:</p>
           </div>
           <div class="flex align-center gap5">
@@ -39,8 +39,8 @@
           </button>
           <button v-if="showAddProductSection" @click="saveNewProduct()" class="btn icon"><img :src="require('@/assets/images/save.png')"/></button>
         </div>
-        <div v-if="showAddProductSection" class="new-product-section flex column gap10">
-          <div class="flex column gap5">
+        <div v-if="showAddProductSection" class="new-product-section flex column align-center gap10">
+          <div class="flex column width-all gap5">
             <FormInput type="text" placeholder="title" v-model="productToEdit.name"/>
             <FormInput type="autocomplete" :items="allCategories" placeholder="shoppingList.category" v-model="productToEdit.category"/>
             <div class="flex align-center width-all space-between gap10">
@@ -60,7 +60,7 @@
               <Tooltip :attachToElement="$el" msg="shoppingList.tooltip.healthRate"/>
             </div>
           </div>
-          <div class="flex column gap10">
+          <div class="flex column width-all gap10">
             <p class="flex align-center gap5">
               <span>{{$t('shoppingList.prices')}}</span>
               <Tooltip :attachToElement="$el" msg="shoppingList.tooltip.prices"/>
@@ -72,21 +72,21 @@
                 <button @click="productToEdit.prices.splice(i, 1)" class="btn icon"><img :src="require('@/assets/images/garbage.png')"/></button>
               </li>
               <li>
-                <button @click="addPrice">
+                <button class="btn" @click="addPrice">
                   {{$t('shoppingList.addPrice')}}
                 </button>
               </li>
             </ul>
           </div>
-          <button @click="saveNewProduct()">{{$t('save')}}</button>
+          <button class="btn" @click="saveNewProduct()">{{$t('save')}}</button>
         </div>
       </div>
     </div>
-    <div v-else class="flex column gap10 space-between height-all">
+    <div v-else class="flex column gap10 space-between align-center height-all">
       <template v-if="shoppingItemsToRender.total">
-        <div class="flex column gap20">
+        <div class="flex column gap20 width-all">
           <nav class="flex space-between wrap gap3">
-            <button @click="viewdShop = shop" :class="{ selected: viewdShop === shop }" v-for="shop in shopViewData.shops" :key="shop">{{shop}} </button>
+            <button class="btn" @click="viewdShop = shop" :class="{ selected: viewdShop === shop }" v-for="shop in shopViewData.shops" :key="shop">{{shop}} </button>
           </nav>
           <ul  v-for="(items, key) in shoppingItemsToRender.data" :key="key" class="flex column gap10">
             <p>{{key}}:</p>
@@ -97,7 +97,7 @@
           </ul>
           <p class="flex space-between"><span>{{$t('total')}}:</span> <span>{{totalPrice}}</span></p>
         </div>
-        <button @click="settleUpCatr">{{$t('shoppingList.settleUp')}}</button>
+        <button class="btn" @click="settleUpCatr">{{$t('shoppingList.settleUp')}}</button>
       </template>
       <template v-else>
         <p>{{$t('shoppingList.allSettledUp')}}!</p>
@@ -209,7 +209,7 @@ export default {
       this.toggleAddProductSection(false);
     },
     async removeProduct(id) {
-      if (!await alertService.Confirm('Are you sure you want to remove this product?')) return;
+      if (!await alertService.Confirm(this.$t('shoppingList.alerts.confirmRemoveProduct'))) return;
       const idx = this.shoppingListToEdit.products.findIndex(c => c.id === id);
       this.shoppingListToEdit.products.splice(idx, 1);
     },
@@ -283,8 +283,10 @@ export default {
     updateProductIdx(id, diff) {
       const idx = this.shoppingListToEdit.products.findIndex(c => c.id === id);
       let newIdx = idx + diff;
-      if (newIdx < 0) newIdx = this.shoppingListToEdit.products.length-1-newIdx;
-      else if (newIdx >= this.shoppingListToEdit.products.length) newIdx = newIdx - this.shoppingListToEdit.products.length;
+      const len = this.shoppingListToEdit.products.length;
+      if (newIdx < 0) newIdx = len-newIdx;
+      else if (newIdx >= len) newIdx = newIdx - len;
+      console.log(newIdx)
       const item = this.shoppingListToEdit.products.splice(idx, 1)[0];
       this.shoppingListToEdit.products.splice(newIdx, 0, item);
     },
@@ -328,7 +330,6 @@ export default {
     }
   },
   created() {
-    console.log(this);
     this.setEditItem();
     socketService.on('update-shoppingList-' + this.shoppingList._id, this.onSocketUpdateShoppongList);
   },
