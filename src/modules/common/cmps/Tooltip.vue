@@ -1,6 +1,6 @@
 <template>
   <span class="tooltip">
-    <span ref="elPreview" class="tooltip-preview flex align-center justify-center" @click="toggleShow" @mouseleave="toggleHoverShow(false)" @mouseover="handleHover($event)">
+    <span ref="elPreview" class="tooltip-preview flex align-center justify-center" @click="toggleShow" @mouseleave="toggleHoverShow(false)" @mouseover="toggleHoverShow(true)">
       <img class="tooltip-img" v-if="!$slots.preview" :src="require('@/assets/images/tooltip.png')" alt="" />
       <!-- <span v-if="!$slots.preview">(?)</span> -->
       <slot v-else name="preview"/>
@@ -23,7 +23,7 @@ export default {
       default: ''
     },
     attachToElement: {
-      type: String,
+      type: [String, HTMLElement],
       required: false,
       default: 'body'
     }
@@ -43,7 +43,7 @@ export default {
     },
     toggleHoverShow(val) {
       this.hoverShow = typeof val === 'boolean'? val : !this.hoverShow;
-      if (this.show) this.viewMsg();
+      if (this.hoverShow) this.viewMsg();
     },
     handleHover(ev) {
       // this.toggleHoverShow(true);
@@ -51,14 +51,16 @@ export default {
       this.viewMsg(ev);
     }, 
     viewMsg(ev) {
+      // if (this.show || this.hoverShow) return;
+
       const { elPreview, elMsg } = this.$refs;
       const { offsetWidth: preWidth, offsetHeight: preHeight } = elPreview;
       let { offsetWidth: msgWidth, offsetHeight: msgHeight } = elMsg;
-      const { offsetWidth: parentWidth, offsetHeight: parentHeight } = document.querySelector(this.attachToElement);
+      const { offsetWidth: parentWidth, offsetHeight: parentHeight } = (this.attachToElement instanceof HTMLElement? this.attachToElement : document.querySelector(this.attachToElement));
 
       const elPreviewPos = getElPosInParent(elPreview, this.attachToElement);
 
-      const { clientX, clientY } = ev? ev : { clientX: elPreviewPos.x, clientY: elPreviewPos.y };
+      // const { clientX, clientY } = ev? ev : { clientX: elPreviewPos.x, clientY: elPreviewPos.y };
 
       const style = {};
       style.left = style.right = style.bottom = style.top = style.width = style.transform = '';
@@ -66,7 +68,8 @@ export default {
       let width = 270;
       const height = msgHeight || 100;
 
-      style.left = 0;
+      // style.left = 0;
+      style.left = preWidth/2;
       let diffXFromBorder;
       if ((parentWidth - elPreviewPos.x) < width) {
         style.left -= width
@@ -77,16 +80,21 @@ export default {
       else style.left += preWidth / 2;
       style.left += 'px';
       
-      style.top = 0;
-      let diffYFromBorder;
+      // style.top = 0;
+      style.top = preHeight/2;
+      // let diffYFromBorder;
       if ((parentHeight - elPreviewPos.y) < height) {
         // style.top -= preHeight
         style.top -= height;
-        diffYFromBorder = elPreviewPos.y - preHeight;
-      } else diffYFromBorder = elPreviewPos.y + preHeight;
-      if (diffYFromBorder < 0) style.top -= diffYFromBorder;
-      else if (diffYFromBorder > parentHeight) style.top += diffYFromBorder;
-      else style.top += preHeight / 2;
+        // console.log('WOWO', style.top);
+        // diffYFromBorder = elPreviewPos.y - preHeight;
+      // } else diffYFromBorder = elPreviewPos.y + preHeight;
+      }
+      // diffYFromBorder = parentHeight - elPreviewPos.y;
+
+      // if (diffYFromBorder < 0) style.top += diffYFromBorder;
+      // else style.top -= diffYFromBorder;
+      // else style.top += preHeight / 2;
       style.top += 'px';
 
       // const windowWidth = window.innerWidth;
@@ -99,6 +107,7 @@ export default {
         style.transform = 'translateX(-50%)';
       } else style.width = width + 'px';
 
+
       for (let key in style) elMsg.style[key] = style[key];
     }
   }
@@ -107,11 +116,16 @@ export default {
 
 <style lang="scss" scoped>
 .tooltip {
+  // position: relative;
+  // z-index: 1000;
   position: relative;
   display: inline-block;
   // widows: 15px;
   // height: 15px;
   .tooltip-preview {
+    display: inline-block;
+    width: fit-content;
+    height: fit-content;
     .tooltip-img {
       width: 17px;
       height: 17px;

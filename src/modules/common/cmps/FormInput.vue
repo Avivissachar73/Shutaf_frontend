@@ -23,7 +23,7 @@
         :min="min"
         :max="max"
         :placeholder="$t(placeholder)"
-        :type="type"
+        :type="componentType === 'autocomplete' ? 'text' : type"
         v-model="val"
         :step="step"
       />

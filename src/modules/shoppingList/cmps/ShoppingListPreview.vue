@@ -1,7 +1,7 @@
 <template>
   <li class="shoppingList-preview item-preview flex column gap10">
     <div class="header flex align-center space-between">
-      <p v-if="!showActions">{{shoppingListToEdit.title}}</p>
+      <h3 v-if="!showActions">{{shoppingListToEdit.title}}</h3>
       <FormInput v-else v-model="shoppingListToEdit.title" placeholder="title"/>
       <div class="flex gap5">
         <button @click="removeShoppingList" class="btn icon" v-if="showActions"><img :src="require('@/assets/images/garbage.png')"/></button>
@@ -10,8 +10,8 @@
       </div>
     </div>
     <div v-if="itemsView" class="flex column gap20">
-      <p>{{$t('shoppingList.products')}}</p>
-      <ul class="width-all flex column gap5">
+      <h4>{{$t('shoppingList.products')}}</h4>
+      <ul v-if="shoppingListToEdit.products.length" class="width-all flex column gap5">
         <li v-for="item in shoppingListToEdit.products" :key="item.id" class="flex gap5 space-between">
           <div class="flex align-center gap5">
             <button @click="updateProductIdx(item.id, -1)" class="btn small icon"><img :src="require('@/assets/images/small-arrow-head-up.png')"/></button>
@@ -31,9 +31,10 @@
           </div>
         </li>
       </ul>
+      <p v-else>{{$t('shoppingList.noProducts')}}..</p>
       <div class="new-product-section flex column gap15">
         <div class="flex align-center space-between">
-          <button @click="toggleAddProductSection(!showAddProductSection)">
+          <button class="btn" @click="toggleAddProductSection(!showAddProductSection)">
             {{$t(showAddProductSection? 'close' : 'shoppingList.addProduct')}}
           </button>
           <button v-if="showAddProductSection" @click="saveNewProduct()" class="btn icon"><img :src="require('@/assets/images/save.png')"/></button>
@@ -44,25 +45,25 @@
             <FormInput type="autocomplete" :items="allCategories" placeholder="shoppingList.category" v-model="productToEdit.category"/>
             <div class="flex align-center width-all space-between gap10">
               <FormInput class="flex-1" type="number" placeholder="shoppingList.count" label="shoppingList.count" v-model="productToEdit.count"/>
-              <Tooltip attachToElement=".shoppingList-preview" msg="shoppingList.tooltip.count"/>
+              <Tooltip :attachToElement="$el" msg="shoppingList.tooltip.count"/>
             </div>
             <div class="flex align-center width-all space-between gap10">
               <FormInput class="flex-1" type="number" :min="0" placeholder="shoppingList.minCount" label="shoppingList.minCount" v-model="productToEdit.minCount"/>
-              <Tooltip attachToElement=".shoppingList-preview" msg="shoppingList.tooltip.minCount"/>
+              <Tooltip :attachToElement="$el" msg="shoppingList.tooltip.minCount"/>
             </div>
             <div class="flex align-center width-all space-between gap10">
               <FormInput class="flex-1" type="number" :min="0" placeholder="shoppingList.maxCount" label="shoppingList.maxCount" v-model="productToEdit.maxCount"/>
-              <Tooltip attachToElement=".shoppingList-preview" msg="shoppingList.tooltip.maxCount"/>
+              <Tooltip :attachToElement="$el" msg="shoppingList.tooltip.maxCount"/>
             </div>
             <div class="flex align-center width-all space-between gap10">
               <FormInput class="flex-1" type="number" :min="1" :max="10" placeholder="shoppingList.healthRate" label="shoppingList.healthRate" v-model="productToEdit.healthRate"/>
-              <Tooltip attachToElement=".shoppingList-preview" msg="shoppingList.tooltip.healthRate"/>
+              <Tooltip :attachToElement="$el" msg="shoppingList.tooltip.healthRate"/>
             </div>
           </div>
           <div class="flex column gap10">
             <p class="flex align-center gap5">
               <span>{{$t('shoppingList.prices')}}</span>
-              <Tooltip attachToElement=".shoppingList-preview" msg="shoppingList.tooltip.prices"/>
+              <Tooltip :attachToElement="$el" msg="shoppingList.tooltip.prices"/>
             </p>
             <ul class="flex column gap10">
               <li v-for="(price, i) in productToEdit.prices" :key="price.id" class="flex space-between align-end">
@@ -327,6 +328,7 @@ export default {
     }
   },
   created() {
+    console.log(this);
     this.setEditItem();
     socketService.on('update-shoppingList-' + this.shoppingList._id, this.onSocketUpdateShoppongList);
   },

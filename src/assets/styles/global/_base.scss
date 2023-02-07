@@ -13,12 +13,15 @@
 //     border-color: white;
 //   }
 
-input[type="text"], input[type="password"], select, textarea {
+// input[type="text"], input[type="password"], select, textarea {
+input, select, textarea {
   // width: 200px;
+  border: 0;
   outline: none;
 }
 
-input[type="text"], input[type="password"], select {
+// input[type="text"], input[type="password"], select {
+input, select {
   padding: 5px;
   padding-left: none;
   border: unset;
@@ -127,5 +130,9 @@ h2 {
 }
 h3 {
   font-size: rem(18px);
+  font-weight: bold;
+}
+h4 {
+  font-size: rem(16px);
   font-weight: bold;
 }

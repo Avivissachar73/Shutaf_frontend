@@ -14,6 +14,8 @@
       "healthRate": "Health rate",
       "settleUp": "Settle up",
       "createNewShoppingList": "Create new Shopping list",
+      "allSettledUp": "All settled up",
+      "noProducts": "No products",
       "tooltip": {
         "count": "How many items of this product you already have?",
         "minCount": "What is the minimum capacety of this product in your appartment to add it to the shopping list?",
@@ -43,6 +45,8 @@
       "healthRate": "מדד בריאות",
       "settleUp": "בצע רכישה",
       "createNewShoppingList": "צור רשימת קניות חדשה",
+      "allSettledUp": "הרשימה נקייה",
+      "noProducts": "אין מוצרים",
       "tooltip": {
         "count": "כמה יחידות מהמוצר הזה כבר יש לך בבית?",
         "minCount": "מה היא הכמות המינימלמית של המוצר הזה כדי להוסיף אותו לרשימת הקניות? ",

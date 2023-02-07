@@ -263,7 +263,7 @@ export function getElPosInParent(el, parentSelector = 'body') {
     const pos = {y: 0, x: 0};
     if (!el) return pos;
 
-    const parent = document.querySelector(parentSelector);
+    const parent = parentSelector instanceof HTMLElement? parentSelector : document.querySelector(parentSelector);
     const clientRect = el.getBoundingClientRect();
     const parentClientRect = parent.getBoundingClientRect();
 
