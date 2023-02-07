@@ -11,7 +11,11 @@
         "removedSuccess": "Comment removed successfully",
         "savedSuccess": "Comment saved successfully"
       }
-    }
+    },
+    "noAuthToEditCommentError": "Unauthorized, cant edit comment",
+    "noAuthToRemoveCommentError": "Unauthorized, cant remove comment"
+
+
   },
   "he": {
     "comment": {
@@ -25,6 +29,8 @@
         "removedSuccess": "תגובה נמחקה בהצלחה",
         "savedSuccess": "תגובה נשמרה בהצלחה"
       }
-    }
+    },
+    "noAuthToEditCommentError": "לא מורשה, אין אפשרות לערוך תגובה",
+    "noAuthToRemoveCommentError": "לא מורשה, אין אפשרות למחוק תגובה"
   }
 }

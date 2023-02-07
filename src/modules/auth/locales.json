@@ -6,7 +6,9 @@
         "goodby": "Goodby",
         "welcome": "Welcome"
       }
-    }
+    },
+    "notLoggedInError": "Unauthorized, please login",
+    "userNotAllowedError": "User not allowed"
   },
   "he": {
     "auth": {
@@ -15,6 +17,8 @@
         "goodby": "להתראות",
         "welcome": "ברוך הבא"
       }
-    }
+    },
+    "notLoggedInError": "לא מורשה, יש להתחבר למערכת",
+    "userNotAllowedError": "אין הרשאה למשתמש"
   }
 }

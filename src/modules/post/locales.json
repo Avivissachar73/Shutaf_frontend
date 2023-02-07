@@ -11,7 +11,9 @@
         "removeSuccess": "post removed successfully",
         "savedSuccess": "post saved successfully"
       }
-    }
+    },
+    "noAuthToEditPostError": "Unauthorized, cant edit post",
+    "noAuthToRemovePostError": "Unauthorized, cant remove post"
   },
   "he": {
     "post": {
@@ -25,6 +27,8 @@
         "removeSuccess": "פוסט נמחק בהצלחה",
         "savedSuccess": "פוסט נשמר בהצלחה"
       }
-    }
+    },
+    "noAuthToEditPostError": "לא מורשה, אין אפשרות לערוך פוסט",
+    "noAuthToRemovePostError": "לא מורשה, אין אפשרות למחוק פוסט"
   }
 }

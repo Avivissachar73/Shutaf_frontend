@@ -42,5 +42,8 @@ export default {
   "search": "חפש",
   "noMatches": "אין התאמות",
   "noItemsFound": "לא נמצאו תוצאות",
-  "leave": "עזוב"
+  "leave": "עזוב",
+
+  "internalServerError": "תקלת שרת",
+  "internalError": "תקלה כללית"
 }

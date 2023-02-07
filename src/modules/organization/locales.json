@@ -16,7 +16,11 @@
         "invetationSentSuccess": "Invetation sent successfully",
         "confirmLeave": "Are you sure you want to leave this organization?"
       }
-    }
+    },
+    "noAuthToRemoveOrganizationError": "Unauthorized, cant remove organization",
+    "noAuthToEditOrganizationError": "Unauthorized, cant edit organization",
+    "noAuthToChangeAccountOrganizationStatusError": "Unauthorized, cant change account status in organization",
+    "userNotAllowdInOrganizationError": "Authorization error: user not allowd"
   },
   "he": {
     "organization": {
@@ -35,6 +39,10 @@
         "invetationSentSuccess": "הזמנה נשלחה בהצלחה",
         "confirmLeave": "האם אתה בטוח שאתה רוצה לעזובה את הארגון?"
       }
-    }
+    },
+    "noAuthToRemoveOrganizationError": "לא מורשה, אין אפשרות למחוק ארגון",
+    "noAuthToEditOrganizationError": "לא מורשה, אין אפשרות לערוך ארגון",
+    "noAuthToChangeAccountOrganizationStatusError": "לא מורשה, אין אפשרות לעדכן סטטוס של משתמש בתוך ארגון",
+    "userNotAllowdInOrganizationError": "אין הרשאה"
   }
 }

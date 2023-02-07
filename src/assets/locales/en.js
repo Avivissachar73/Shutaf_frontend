@@ -43,5 +43,8 @@ export default {
   "search": "Search",
   "noMatches": "No matches",
   "noItemsFound": "No items found",
-  "leave": "Leave"
+  "leave": "Leave",
+
+  "internalServerError": "Internal server error",
+  "internalError": "Internal error"
 }
