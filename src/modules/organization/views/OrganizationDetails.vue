@@ -12,6 +12,7 @@
     
     <section v-if="organization" class="flex column gap10">
       <h2>{{organization.name}}</h2>
+      <p>{{organization.desc}}</p>
       <div class="flex align-center gap10"><span>{{$t('createdBy')}}:</span><MiniAccountPreview :reverse="true" :account="organization.createdBy"/></div>
       <div class="flex column gap10">
         <p>{{$t('organization.yourRoles')}}: {{organization.loggedAccountData.roles.map(c => $t(c)).join(', ')}}</p>
