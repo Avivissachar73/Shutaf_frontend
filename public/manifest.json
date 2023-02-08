@@ -3,7 +3,7 @@
   "short_name": "Shutaf",
   "icons": [
     {
-      "src": "favicon.png",
+      "src": "/favicon.png",
       "sizes": "16x16",
       "type": "image/png",
       "density": "1"
