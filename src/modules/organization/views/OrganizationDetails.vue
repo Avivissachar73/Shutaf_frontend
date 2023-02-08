@@ -27,7 +27,7 @@
       </div>
     </section>
 
-    <div class="flex gap5" v-if="organization.loggedAccountData.roles.includes('admin')">
+    <div class="flex gap5" v-if="organization?.loggedAccountData?.roles.includes('admin')">
       <router-link  class="btn secondary" v-if="organization" :to="{ name: 'OrganizationEdit', params: {id: orgId} }">{{$t('edit')}}</router-link>
       <button class="btn danger" @click="removeOrganization">{{$t('delete')}}</button>
     </div>
