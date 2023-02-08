@@ -6,14 +6,12 @@
     {
       "src": "favicon.png",
       "sizes": "35x35",
-      "type": "image/png",
-      "density": "1"
+      "type": "image/png"
     },
     {
       "src": "favicon-175x175.png",
       "sizes": "175x175",
       "type": "image/png",
-      "density": "1",
       "purpose": "any"
     }
   ],
