@@ -4,14 +4,14 @@
   "description": "Application to help orgenize your appartment",
   "icons": [
     {
-      "src": "favicon.png",
+      "src": "./favicon.png",
       "sizes": "35x35",
       "type": "image/png",
       "density": "1",
       "purpose": "any"
     },
     {
-      "src": "favicon-175x175.png",
+      "src": "./favicon-175x175.png",
       "sizes": "175x175",
       "type": "image/png",
       "density": "1",
