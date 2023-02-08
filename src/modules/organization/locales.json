@@ -1,9 +1,9 @@
 {
   "en": {
     "organization": {
-      "organization": "Appartment",
-      "organizations": "Appartments",
-      "newOrganization": "New Appartment",
+      "organization": "Apartment",
+      "organizations": "Apartments",
+      "newOrganization": "New Apartment",
       "editOrganization": "Edit organization",
       "createOrganization": "Create new organization",
       "yourRoles": "Your roles",
@@ -11,8 +11,8 @@
       "inviteMembers": "Invite members",
       "alerts": {
         "confirmRemoveOrg": "Are you sure you want to remove this organization?",
-        "removedSuccess": "Appartment removed successfully",
-        "savedSuccess": "Appartment saved successfully",
+        "removedSuccess": "Apartment removed successfully",
+        "savedSuccess": "Apartment saved successfully",
         "invetationSentSuccess": "Invetation sent successfully",
         "confirmLeave": "Are you sure you want to leave this organization?"
       }

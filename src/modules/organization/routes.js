@@ -6,7 +6,7 @@ import OrganizationEdit from './views/OrganizationEdit';
 export const organizationRoutes = [
   {
     name: 'OrganizationApp',
-    path: '/appartment',
+    path: '/apartment',
     component: OrganizationApp,
     children: [
       {

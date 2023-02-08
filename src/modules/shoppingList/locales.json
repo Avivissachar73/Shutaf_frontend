@@ -19,8 +19,8 @@
       "shopName": "Shop name",
       "tooltip": {
         "count": "How many items of this product you already have?",
-        "minCount": "What is the minimum capacety of this product in your appartment to add it to the shopping list?",
-        "maxCount": "What is the max capacity of this product you want to have in your appartment?",
+        "minCount": "What is the minimum capacety of this product in your apartment to add it to the shopping list?",
+        "maxCount": "What is the max capacity of this product you want to have in your apartment?",
         "healthRate": "How health is the product from 1 to 10? (while 10 is the best score)",
         "prices": "You can define prices for different stores for this specific product, the system will let you know where it will be best to shop!"
       },
