@@ -67,7 +67,7 @@
             </p>
             <ul class="flex column gap10">
               <li v-for="(price, i) in productToEdit.prices" :key="price.id" class="flex space-between align-end">
-                <FormInput type="autocomplete" :items="allShops" placeholder="shopName" v-model="price.shopName"/>
+                <FormInput type="autocomplete" :items="allShops" placeholder="shoppingList.shopName" v-model="price.shopName"/>
                 <FormInput type="number" :min="0" placeholder="price" v-model="price.value"/>
                 <button @click="productToEdit.prices.splice(i, 1)" class="btn icon"><img :src="require('@/assets/images/garbage.png')"/></button>
               </li>
@@ -156,9 +156,10 @@ export default {
       }
     },
     shoppingItemsToRender() {
+      const _products = this.calcShoppingItemsDataPerShop(this.viewdShop);
       return {
-        total: this.shopViewData.products.length,
-        data: this.calcShoppingItemsDataPerShop(this.viewdShop).reduce((acc, c) => {
+        total: _products.length,
+        data: _products.reduce((acc, c) => {
           if (!acc[c.category]) acc[c.category] = [];
           acc[c.category].push(c)
           return acc;
