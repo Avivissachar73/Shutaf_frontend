@@ -5,10 +5,10 @@
       <button @click.prevent.stop="updateStatus('approved')" class="btn safe">{{$t('approve')}}</button>
       <button @click.prevent.stop="updateStatus('declined')" class="btn danger">{{$t('decline')}}</button>
     </div>
-    <router-link :to="'/organization/' + organization._id" class="flex column gap10 flex-1">
+    <component :is="accountOrgStatus === 'approved'? 'router-link' : 'div'" :to="'/organization/' + organization._id" class="flex column gap10 flex-1">
       <h3>{{organization.name}}</h3>
       <p>{{organization.desc}}</p>
-    </router-link>
+    </component>
   </li>
 </template>
 

@@ -38,7 +38,7 @@ export default {
   "description": "תיאור",
   "name": "שם",
   "invite": "הזמן",
-  "createdBy": "יוצר על ידי",
+  "createdBy": "נוצר על ידי",
   "search": "חפש",
   "noMatches": "אין התאמות",
   "noItemsFound": "לא נמצאו תוצאות",

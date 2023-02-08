@@ -57,7 +57,8 @@ export default {
     },
     async leaveOrg() {
       if (!await alertService.Confirm(this.$t('organization.alerts.confirmLeave'))) return;
-      this.updateStatus('left')
+      await this.updateStatus('left');
+      this.$router.push({ name: 'HomePage' });
     }
   },
   computed: {
