@@ -11,8 +11,7 @@
     {
       "src": "favicon-175x175.png",
       "sizes": "175x175",
-      "type": "image/png",
-      "purpose": "any"
+      "type": "image/png"
     }
   ],
   "start_url": "/",
