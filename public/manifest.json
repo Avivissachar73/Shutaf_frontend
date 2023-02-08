@@ -9,7 +9,7 @@
       "density": "1"
     }
   ],
-  "start_url": "/",
+  "start_url": "/index.html",
   "display": "standalone",
   "theme_color": "#c4fad3",
   "background_color": "#ffffff"
