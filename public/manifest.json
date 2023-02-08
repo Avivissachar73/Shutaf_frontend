@@ -6,7 +6,15 @@
       "src": "/favicon.png",
       "sizes": "35x35",
       "type": "image/png",
-      "density": "1"
+      "density": "1",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "density": "1",
+      "purpose": "any"
     }
   ],
   "start_url": "/index.html",
