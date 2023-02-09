@@ -142,7 +142,6 @@ export default {
   },
   created() {
     if (this.componentType === 'select') {
-      console.log(this.val);
       if (!this.val) this.val = '';
       // if (!this.val || typeof this.val === 'string') this.val = { value: this.value || '', label: this.value || '' };  
       else this.val = this.val?.value || this.val;

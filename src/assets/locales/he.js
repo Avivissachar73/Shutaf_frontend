@@ -2,20 +2,22 @@ import { he as organizationHe } from '@/modules/organization/locales.json';
 import { he as postHe } from '@/modules/post/locales.json';
 import { he as commentHe } from '@/modules/comment/locales.json';
 import { he as activityHe } from '@/modules/activity/locales.json';
-import { he as shoppingListHe } from '@/modules/shoppingList/locales.json';
 import { he as accountHe } from '@/modules/account/locales.json';
 import { he as settingsHe } from '@/modules/settings/locales.json';
 import { he as authHe } from '@/modules/auth/locales.json';
+import { he as bugHe } from '@/modules/bug/locales.json';
+import { he as shoppingListHe } from '@/modules/shoppingList/locales.json';
 
 export default {
   ...organizationHe,
   ...postHe,
   ...commentHe,
-  ...shoppingListHe,
   ...activityHe,
   ...accountHe,
   ...settingsHe,
   ...authHe,
+  ...bugHe,
+  ...shoppingListHe,
   "hello": "שלום",
   "filter": "לפלטר",
   "edit": "ערוך",

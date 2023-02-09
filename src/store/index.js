@@ -10,6 +10,7 @@ import { postStore } from '@/modules/post/store'
 import { commentStore } from '@/modules/comment/store'
 import { activityStore } from '@/modules/activity/store'
 import { dashboardStore } from '../modules/dashboard/store'
+import { bugStore } from '../modules/bug/store'
 import { shoppingListStore } from '../modules/shoppingList/store'
 
 Vue.use(Vuex)
@@ -31,6 +32,7 @@ export default new Vuex.Store({
     ...commentStore,
     ...activityStore,
     ...dashboardStore,
+    ...bugStore,
     ...shoppingListStore,
   }
 })

@@ -8,6 +8,7 @@ import { settingsRoutes } from '@/modules/settings/routes';
 import { organizationRoutes } from '@/modules/organization/routes';
 import { postRoutes } from '@/modules/post/routes';
 import { dashboardRoutes } from '../modules/dashboard/routes';
+import { bugRoutes } from '../modules/bug/routes';
 import { shoppingListRoutes } from '../modules/shoppingList/routes';
 
 Vue.use(VueRouter)
@@ -20,6 +21,7 @@ const routes = [
   ...organizationRoutes,
   ...postRoutes,
   ...dashboardRoutes,
+  ...bugRoutes,
   
   ...shoppingListRoutes,
 ]

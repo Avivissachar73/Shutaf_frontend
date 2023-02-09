@@ -16,6 +16,8 @@
             <router-link :to="{name: 'PostPage', params: {organizationId: orgId} }">{{$t('post.posts')}}</router-link>
             <router-link :to="{name: 'ShoppingListPage', params: {organizationId: orgId} }">{{$t('shoppingList.shoppingLists')}}</router-link>
             <router-link :to="{name: 'OrganizationPage'}">{{$t('organization.organizations')}}</router-link>
+            <router-link :to="{name: 'BugEdit'}">{{$t('bug.reportABug')}}</router-link>
+            <router-link v-if="isAdmin" :to="{name: 'BugPage'}">{{$t('bug.bugs')}}</router-link>
             <router-link v-if="isAdmin" :to="{name: 'AccountPage'}">{{$t('admin')}}</router-link>
             <router-link :to="{name: 'AccountDetails', params: {id: loggedUser._id} }"><Avatar :account="loggedUser"/></router-link>
             <button class="btn" @click="logout">{{$t('logout')}}</button>

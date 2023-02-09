@@ -1,6 +1,6 @@
 <template>
   <li class="account-preview item-preview">
-    <router-link :to="'/account/' + item._id">
+    <router-link :to=" { name: 'AccountDetails', params: { id: item._id } }">
       <pre>{{item}}</pre>
     </router-link>
   </li>

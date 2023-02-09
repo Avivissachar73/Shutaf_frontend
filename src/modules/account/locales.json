@@ -20,13 +20,13 @@
   },
   "he": {
     "account": {
+      "account": "משתמש",
       "accounts": "משתמשים",
       "firstname": "שם פרטי",
       "lastname": "שם משפחה",
       "username": "שם משתמש",
       "email": "דואר אלקטרוני",
       "password": "סיסמה",
-      "account": "משתמש",
       "editAccount": "ערוך פרטי משתמש",
       "newPassword": "סיסמה חדשה",
       "confirmPassword": "הזן שוב סיסמה",
