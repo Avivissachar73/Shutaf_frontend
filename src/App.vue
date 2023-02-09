@@ -62,6 +62,8 @@ export default {
     evEmmiter.on('set_darkmode', (val) => {
       this.isDarkMode = val;
     });
+    
+    alertService.setConfig({ direction: this.isRtl? 'rtl' : 'ltr' });
     evEmmiter.on('set_locale', (locale) => {
       alertService.setConfig({ direction: this.isRtl? 'rtl' : 'ltr' });
     });

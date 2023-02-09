@@ -6,7 +6,7 @@ import scssVars from '@/assets/styles/global/_vars.scss';
 import { elementService } from './element.service';
 
 var config = {
-  direction: 'rtl'
+  direction: 'ltr'
 }
 function setConfig(newConf = {}) {
   config = {
