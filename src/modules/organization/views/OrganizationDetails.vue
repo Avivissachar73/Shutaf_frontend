@@ -10,15 +10,17 @@
       <router-link :to="{name: 'ShoppingListPage', params: {organizationId: orgId} }">{{$t('shoppingList.shoppingLists')}}</router-link>
     </nav>
     
-    <section v-if="organization" class="flex column gap10">
-      <h2>{{organization.name}}</h2>
-      <p>{{organization.desc}}</p>
-      <div class="flex align-center gap10"><span>{{$t('createdBy')}}:</span><MiniAccountPreview :reverse="true" :account="organization.createdBy"/></div>
+    <section v-if="organization" class="flex column gap20">
       <div class="flex column gap10">
-        <p>{{$t('organization.yourRoles')}}: {{organization.loggedAccountData.roles.map(c => $t(c)).join(', ')}}</p>
+        <h2>{{organization.name}}</h2>
+        <p>{{organization.desc}}</p>
       </div>
       <div class="flex column gap10">
-        <p>{{$t('organization.members')}}:</p>
+        <p>{{$t('organization.yourRoles')}}: {{organization.loggedAccountData.roles.map(c => $t(c)).join(', ')}}</p>
+        <div class="flex align-center gap10"><span>{{$t('createdBy')}}:</span><MiniAccountPreview :reverse="true" :account="organization.createdBy"/></div>
+      </div>
+      <div class="flex column gap10">
+        <h3>{{$t('organization.members')}}:</h3>
         <ul class="flex column gap5">
           <li class="flex align-center gap5" v-for="member in organization.members" :key="member._id">
             <MiniAccountPreview :account="member"/> - {{member.roles.map(c => $t(c)).join(', ')}}
@@ -27,14 +29,13 @@
       </div>
     </section>
 
-    <div class="flex gap5" v-if="organization?.loggedAccountData?.roles.includes('admin')">
-      <router-link  class="btn secondary" v-if="organization" :to="{ name: 'OrganizationEdit', params: {id: orgId} }">{{$t('edit')}}</router-link>
-      <button class="btn danger" @click="removeOrganization">{{$t('delete')}}</button>
-    </div>
-
-    <div v-if="organization?.loggedAccountData?.status === 'approved'">
-      <button @click="leaveOrg()" class="btn danger">{{$t('leave')}}</button>
-    </div>
+    <section class="flex column gap5 align-start">
+      <div class="flex gap5" v-if="organization?.loggedAccountData?.roles.includes('admin')">
+        <router-link  class="btn secondary" v-if="organization" :to="{ name: 'OrganizationEdit', params: {id: orgId} }">{{$t('edit')}}</router-link>
+        <button class="btn danger" @click="removeOrganization">{{$t('delete')}}</button>
+      </div>
+      <button v-if="organization?.loggedAccountData?.status === 'approved'" @click="leaveOrg()" class="btn danger">{{$t('leave')}}</button>
+    </section>
   </div>
 </template>
 

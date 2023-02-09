@@ -4,9 +4,12 @@ import { basicStoreService } from '@/modules/common/services/basic-store.service
 
 import { $t } from '@/plugins/i18n';
 
-const initState = () => ({
-  ...basicStoreService.initState()
-});
+const initState = () => {
+  const state = {
+    ...basicStoreService.initState()
+  }
+  state.filterBy.pagination.limit = 1;
+}
 
 export const _shoppingListStore = {
   namespaced: true,

@@ -8,12 +8,12 @@
       <ItemList class="width-all" :items="items" v-if="items" :singlePreviewCmp="singlePreviewCmp" :itemDetailesPageName="itemDetailesPageName"/>
       <PaginationBtns v-if="filterBy" :total="totalItems" :perPage="filterBy.pagination.limit" v-model="filterBy.pagination.page"/>
     </template>
-    <template v-else-if="!isLoading">
+    <div v-else-if="!isLoading" class="flex column space-between align-center no-results-preview">
       <h3>{{$t('noItemsFound')}}...</h3>
       <router-link v-if="newItemPageName" :to="{name: newItemPageName}">
         <button v-if="isFilterEmpty || true" class="btn big primary">{{$t('createNew')}}!</button>  
       </router-link>
-    </template>
+    </div>
     <Loader v-if="isLoading"/>
   </div>
 </template>
@@ -115,6 +115,11 @@ export default {
         // border-radius: 0;
       }
     }
+  }
+
+  .no-results-preview {
+    height: 35%;;
+    margin: 100px 0;
   }
 
   .pagination-btns {
