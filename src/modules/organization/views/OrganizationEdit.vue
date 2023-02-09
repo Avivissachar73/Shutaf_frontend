@@ -16,6 +16,7 @@
         <ul v-if="accounts.length" class="flex column gap5">
           <li v-for="account in accounts" :key="account._id" class="flex align-center gap5">
              <button class="btn secondary" @click.prevent="() => inviteAccount(account._id)">{{$t('invite')}}</button> <MiniAccountPreview :account="account"/>
+             <FormInput @keydown.native.enter.prevent.stop="" type="select" v-model="rolesToInvite[account._id]" :itemsMap="orgRoles"/>
           </li>
         </ul>
         <p v-else-if="!searchPristin">{{$t('noMatches')}}...</p>
@@ -34,7 +35,8 @@ export default {
     return {
       organization: null,
       searchAccountStr: '',
-      searchPristin: true
+      searchPristin: true,
+      rolesToInvite: {}
     }
   },
   computed: {
@@ -45,7 +47,15 @@ export default {
       return this.$store.getters['auth/loggedUser'];
     },
     accounts() {
-      return this.$store.getters['account/accounts'].filter(c => c._id !== this.loggedUser?._id);
+      // return this.$store.getters['account/accounts'].filter(c => c._id !== this.loggedUser?._id);
+      return this.$store.getters['account/accounts'].filter(c => !this.organization.members.find(_ => _._id === c._id));
+    },
+    orgRoles() {
+        const roles = {
+          ...this.$store.getters['settings/config'].organizationRoles
+        }
+        delete roles.creator
+        return roles;
     }
   },
   methods: {
@@ -53,16 +63,21 @@ export default {
       this.organization = await this.$store.dispatch({ type: 'organization/loadOrganization', id: this.$route.params.id });
     },
     async getAccounts() {
+      if (!this.searchAccountStr) return;
       this.searchPristin = false;
       this.$store.dispatch({ type: 'account/loadAccounts', filterBy: { filter: { search: this.searchAccountStr } } });
     },
     async saveOrganization() {
       if (!this.isOrganizationValid) return;
       await this.$store.dispatch({ type: 'organization/saveOrganization', organization: this.organization });
-      this.$router.push('/organization');
+      this.$router.push({ name: 'OrganizationPage' });
     },
     async inviteAccount(accountId) {
-      await this.$store.dispatch({ type: 'organization/inviteAccount', organizationId: this.$route.params.id, accountId });
+      await this.$store.dispatch({ type: 'organization/inviteAccount', organizationId: this.$route.params.id, accountId, role: this.rolesToInvite[accountId] });
+      this.rolesToInvite = this.accounts.reduce((acc, c) => {
+        acc[c._id] = this.rolesToInvite[c._id] || 'user';
+        return acc;
+      }, {});
     }
   },
   created() {

@@ -4,7 +4,8 @@ const ENDPOINT = 'settings';
 
 export const settingsService = {
   getSettings,
-  updateSettings
+  updateSettings,
+  getConfig
 }
 
 function getSettings() {
@@ -12,4 +13,7 @@ function getSettings() {
 }
 function updateSettings(settingsToUpdate) {
   return httpService.put(`${ENDPOINT}/`, settingsToUpdate);
+}
+function getConfig() {
+  return httpService.get(`${ENDPOINT}/config`);
 }

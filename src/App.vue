@@ -55,6 +55,7 @@ export default {
     try {
       await Promise.all([
         this.$store.dispatch('settings/loadSettings'),
+        this.$store.dispatch('settings/loadConfig'),
         this.$store.dispatch('auth/getUserInfo')
       ]);
     } catch(e) {}
@@ -62,7 +63,7 @@ export default {
     evEmmiter.on('set_darkmode', (val) => {
       this.isDarkMode = val;
     });
-    
+
     alertService.setConfig({ direction: this.isRtl? 'rtl' : 'ltr' });
     evEmmiter.on('set_locale', (locale) => {
       alertService.setConfig({ direction: this.isRtl? 'rtl' : 'ltr' });

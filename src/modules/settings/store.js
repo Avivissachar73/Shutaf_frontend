@@ -4,7 +4,8 @@ import { basicStoreService } from '@/modules/common/services/basic-store.service
 
 const initState = () => ({
   settings: null,
-  isLoading: false
+  isLoading: false,
+  config: null
 });
 
 export const _settingsStore = {
@@ -12,6 +13,7 @@ export const _settingsStore = {
   state: initState(),
   getters: {
     settings: (state) => state.settings,
+    config: (state) => state.config,
     isLoading: (state) => state.isLoading,
   },
   mutations: {
@@ -24,6 +26,9 @@ export const _settingsStore = {
     resetState(state) {
       const newState = initState();
       for (let key in state) state[key] = newState[key];
+    },
+    setConfig(state, { config }) {
+      state.config = config;
     }
   },
   actions: {
@@ -49,6 +54,19 @@ export const _settingsStore = {
         },
         onSuccess: (newSettings) => commit({ type: 'setSettings', settings: newSettings }),
         // onError: (err) => {} // NOOP;
+        dontDelay: true
+      });
+    },
+
+    async loadConfig({ commit, dispatch }) {
+      return dispatch({
+        type: '_Ajax',
+        do: async () => {
+          const configRes = await settingsService.getConfig();
+          return configRes;
+        },
+        onSuccess: (config) => commit({ type: 'setConfig', config }),
+        onError: (err) => {}, // NOOP;,
         dontDelay: true
       });
     }
