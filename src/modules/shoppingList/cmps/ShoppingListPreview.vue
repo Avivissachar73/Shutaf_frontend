@@ -21,7 +21,7 @@
           <div class="flex align-center gap5">
             <div class="flex align-center gap5">
               <button @click="updateItemCount(item, 1)" class="btn small">+</button>
-              <FormInput :min="0" type="number" placeholder="count" v-model="item.count"/>
+              <FormInput :min="0" type="number" placeholder="shoppingList.count" v-model="item.count"/>
               <button :disabled="(+item.count <= 0)" @click="updateItemCount(item, -1)" class="btn small">-</button>
             </div>
             <div v-if="showActions" class="flex align-center gap5">

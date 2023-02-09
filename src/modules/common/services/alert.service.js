@@ -5,9 +5,20 @@ import scssVars from '@/assets/styles/global/_vars.scss';
 
 import { elementService } from './element.service';
 
+var config = {
+  direction: 'rtl'
+}
+function setConfig(newConf = {}) {
+  config = {
+    ...config,
+    ...newConf
+  }
+}
+
 function toast({type = 'danger', msg = '', html = '', timeout = 7000} = {}, olCloseCb) {
   const styleStr =`<style>
     ${elementService.dataToCss('.toast-alert', {
+      ...config,
       position: 'fixed',
       zIndex: 20,
       top: '40px',
@@ -250,7 +261,8 @@ export const alertService = {
   A_Alert,
   Alert,
   Prompt,
-  Confirm
+  Confirm,
+  setConfig
 }
 
 
@@ -265,6 +277,7 @@ function _getDefaultAlertStyle() {
         template: `
             <style>
                 .A-Alert .alert-screen {
+                    direction: ${config.direction};
                     top: 0;
                     right: 0;
                     background-color: rgba(0, 0, 0, 0.01);

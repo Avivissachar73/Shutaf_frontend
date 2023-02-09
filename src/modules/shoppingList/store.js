@@ -9,6 +9,7 @@ const initState = () => {
     ...basicStoreService.initState()
   }
   state.filterBy.pagination.limit = 1;
+  return state;
 }
 
 export const _shoppingListStore = {

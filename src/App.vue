@@ -21,6 +21,8 @@ import AppAside from '@/modules/common/cmps/AppAside.vue';
 import { socketService } from '@/modules/common/services/socket.service';
 import evEmmiter from '@/modules/common/services/event-emmiter.service';
 import Loader from './modules/common/cmps/Loader.vue';
+import { alertService } from './modules/common/services/alert.service';
+
 export default {
   name: 'App',
   components: {
@@ -59,6 +61,9 @@ export default {
     this.isLoading = false;
     evEmmiter.on('set_darkmode', (val) => {
       this.isDarkMode = val;
+    });
+    evEmmiter.on('set_locale', (locale) => {
+      alertService.setConfig({ direction: this.isRtl? 'rtl' : 'ltr' });
     });
 
     if (['HomePage'].includes(this.$route.name) && this.loggedUser && localStorage.logged_organization_id) this.$router.push({ name: 'OrganizationDetails', params: {id: localStorage.logged_organization_id} })

@@ -1,13 +1,13 @@
 <template>
-  <div class="settings-page flex column gap10">
+  <div class="settings-page flex column gap15">
     <h2>{{$t('settings.settings')}}</h2>
     <!-- <pre>{{settings}}</pre>
     <form @submit.prevent="saveSettings">
       <FormInput label="Google API key" v-model="settings.GOOGLE_API_KEY"/>
       <button>{{$t('save')}}</button>
     </form> -->
-    <FormInput class="width-content" :label="$t('settings.locale')" placeholder="locale" :value="currLocale" type="select" :items="langs" @change="setLocale"/>
-    <FormInput class="width-content" :label="$t('settings.darkMode')" :value="isDarkMode" type="checkbox" @input="setDarkMode"/>
+    <FormInput class="width-content gap10" :label="$t('settings.locale')" placeholder="locale" :value="currLocale" type="select" :items="langs" @change="setLocale"/>
+    <FormInput class="width-content gap10" :label="$t('settings.darkMode')" :value="isDarkMode" type="checkbox" @input="setDarkMode"/>
   </div>
 </template>
 
@@ -31,6 +31,7 @@ export default {
   methods: {
     setLocale(locale) {
       this.$i18n.locale = localStorage.locale = locale;
+      evEmmiter.emit('set_locale', locale);
     },
     setDarkMode(val) {
       this.isDarkMode = val;

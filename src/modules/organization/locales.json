@@ -25,7 +25,7 @@
   "he": {
     "organization": {
       "organization": "דירה",
-      "organizations": "ארגונים",
+      "organizations": "דירות",
       "newOrganization": "דירה חדשה",
       "editOrganization": "ערוך דירה",
       "createOrganization": "צרי דירה חדשה",
@@ -33,11 +33,11 @@
       "members": "חברים",
       "inviteMembers": "הזמן משתמשים",
       "alerts": {
-        "confirmRemoveOrg": "האם אתה בטוח שאתה רוצה למחוק את הארגון?",
+        "confirmRemoveOrg": "האם אתה בטוח שאתה רוצה למחוק את הדירה?",
         "removedSuccess": "דירה נמחקה בהצלחה",
         "savedSuccess": "דירה נשמרה בהצלחה",
         "invetationSentSuccess": "הזמנה נשלחה בהצלחה",
-        "confirmLeave": "האם את בטוחה שאת רוצה לעזוב את הארגון?"
+        "confirmLeave": "האם את בטוחה שאת רוצה לעזוב את הדירה?"
       }
     },
     "noAuthToRemoveOrganizationError": "לא מורשה, אין אפשרות למחוק דירה",
