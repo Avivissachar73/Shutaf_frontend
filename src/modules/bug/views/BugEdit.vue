@@ -3,7 +3,7 @@
     <h2>{{$t('bug.reportABug')}}!</h2>
     <form v-if="bugToEdit" @submit.prevent="saveBug" class="flex column align-start gap10">
       <FormInput type="text" label="title" placeholder="title" v-model="bugToEdit.title"/>
-      <FormInput type="textarea" label="desc" placeholder="desc" v-model="bugToEdit.desc"/>
+      <FormInput type="textarea" label="description" placeholder="description" v-model="bugToEdit.desc"/>
       <button class="btn primary" :disabled="!isBugValid">{{$t('submit')}}</button>
     </form>
   </div>
