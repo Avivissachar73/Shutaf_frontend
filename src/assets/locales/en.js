@@ -26,6 +26,7 @@ export default {
   "example": "Example",
   "admin": "Admin",
   "creator": "Creator",
+  "user": "User",
   "logout": "Logout",
   "delete": "Delete",
   "addNew": "Add new",

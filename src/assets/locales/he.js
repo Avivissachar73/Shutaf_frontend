@@ -25,6 +25,7 @@ export default {
   "about": "אודות",
   "admin": "אדמין",
   "creator": "יוצר",
+  "user": "משתמש",
   "logout": "התנתק",
   "delete": "מחק",
   "addNew": "הוסף חדש",
