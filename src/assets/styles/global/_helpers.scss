@@ -114,6 +114,7 @@
   align-items: flex-start;
   gap: 10px;
   .form-input {
+    align-items: flex-start;
     width: 300px;
     &.width-content {
       width: fit-content;

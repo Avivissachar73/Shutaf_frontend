@@ -234,6 +234,9 @@ export default {
         height: 15px;
       }
     }
+    textarea {
+      height: 100px;
+    }
   }
 }
 
