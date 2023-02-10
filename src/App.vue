@@ -1,5 +1,5 @@
 <template>
-  <div class="app" id="app" v-if="settings" :class="{ rtl: isRtl, dark: isDarkMode }">
+  <div class="app" id="app" v-if="settings && config" :class="{ rtl: isRtl, dark: isDarkMode }">
     <div class="app-content">
       <AppAside/>
       <div class="right">
@@ -40,6 +40,9 @@ export default {
   computed: {
     settings() {
       return this.$store.getters['settings/settings'];
+    },
+    config() {
+      return this.$store.getters['settings/config'];
     },
     isRtl() {
       const locale = this.$i18n.locale;
