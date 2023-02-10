@@ -6,6 +6,7 @@
       <FormInput type="text" label="account.lastname" placeholder="account.lastname" v-model="accountToEdit.lastname"/>
       <FormInput type="text" label="account.username" placeholder="account.username" v-model="accountToEdit.username"/>
       <FormInput type="text" label="account.email" placeholder="account.email" v-model="accountToEdit.email"/>
+      <FormInput type="select" label="account.gender" placeholder="account.gender" v-model="accountToEdit.gender" :itemsMap="userGenders"/>
       <FormInput type="text" label="account.newPassword" placeholder="account.newPassword" v-model="accountToEdit.password"/>
       <FormInput type="text" label="account.confirmPassword" placeholder="account.confirmPassword" v-model="confirmPassword"/>
       <!-- <FormInput type="text" placeholder="role" v-model="accountToEdit.roles[0]"/> -->
@@ -29,6 +30,9 @@ export default {
       const user = this.accountToEdit;
       return user && user.username && user.firstname && user.lastname && user.email &&
              (user.password? this.confirmPassword === user.password : true);
+    },
+    userGenders() {
+      return this.$store.getters['settings/config'].userGenders;
     }
   },
   methods: {

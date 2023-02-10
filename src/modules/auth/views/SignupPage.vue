@@ -7,6 +7,7 @@
       <FormInput type="text" placeholder="lastname" label="lastname" v-model="user.lastname"/>
       <FormInput type="text" placeholder="email" label="email" v-model="user.email"/>
       <FormInput type="password" placeholder="password" label="password" v-model="user.password"/>
+      <FormInput type="select" label="account.gender" placeholder="account.gender" v-model="accountToEdit.gender" :itemsMap="userGenders"/>
       <button class="btn primary" :disabled="!isUserValid">{{$t('submit')}}</button>
     </form>
   </div>
@@ -26,6 +27,9 @@ export default {
     isUserValid() {
       const { user } = this;
       return user.username && user.password && user.firstname && user.lastname && user.email;
+    },
+    userGenders() {
+      return this.$store.getters['settings/config'].userGenders;
     }
   },
   methods: {

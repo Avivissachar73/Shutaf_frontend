@@ -11,6 +11,7 @@
       "editAccount": "Edit account",
       "newPassword": "New password",
       "confirmPassword": "Confirm password",
+      "gender": "Gender",
       "alerts": {
         "confirmRemove": "Are you sure you want to remove this account?",
         "removeSuccess": "Account removed successfully!",
@@ -30,6 +31,7 @@
       "editAccount": "ערוך פרטי משתמש",
       "newPassword": "סיסמה חדשה",
       "confirmPassword": "הזן שוב סיסמה",
+      "gender": "מגדר",
       "alerts": {
         "confirmRemove": "האם אתה בטוח שאתה רוצה למחוק את המשתמש?",
         "removeSuccess": "משתמש נמחק בהצלחה!",
