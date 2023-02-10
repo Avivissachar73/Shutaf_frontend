@@ -10,7 +10,7 @@ Vue.use(VueI18n);
 
 const i18n = new VueI18n({
   locale: localStorage.locale || 'en',
-  messages
+  messages: JSON.parse(JSON.stringify(messages))
   // messages: {
   //   en,
   //   he
