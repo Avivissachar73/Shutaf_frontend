@@ -318,16 +318,19 @@ export default {
     healthAlertToUser(item, diff) {
       if (diff >= 0) return;
       const msgsMap = {
-        safe: ['Sweet!', 'Kaboom!', 'Getting health!', 'Nice shape!', 'Looking good!', 'Warthy!'],
-        warning: ['Bon apatite!', 'Nice!'],
-        danger: ['The summer body wont shape itself..', 'NOT worthy!', 'WoopyDoo!', 'Getting Fatty!']
+        // safe: ['Sweet!', 'Kaboom!', 'Getting health!', 'Nice shape!', 'Looking good!', 'Warthy!'],
+        // warning: ['Bon apatite!', 'Nice!'],
+        // danger: ['The summer body wont shape itself..', 'NOT worthy!', 'WoopyDoo!', 'Getting Fatty!']
+        safe: ['safeAlert1', 'safeAlert2', 'safeAlert3', 'safeAlert4', 'safeAlert5', 'safeAlert6'],
+        warning: ['midAlert1', 'midAlert2'],
+        danger: ['dangerAlert1', 'dangerAlert2', 'dangerAlert3', 'dangerAlert4']
       }
       const { healthRate } = item;
       let type;
       if (healthRate > 7) type = 'safe';
       else if (healthRate > 3) type = 'warning';
       else type = 'danger';
-      alertService.toast({ type, msg: randItem(msgsMap[type]) });
+      alertService.toast({ type, msg: this.$t('shoppingList.alerts.eatAlerts.' + randItem(msgsMap[type])) });
     }
   },
   created() {

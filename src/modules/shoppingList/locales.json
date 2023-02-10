@@ -28,7 +28,21 @@
         "confirmRemove": "Are you sure you want to remove this Shopping list?",
         "removeSuccess": "Shopping ךist removed successfully",
         "savedSuccess": "Shopping ךist saved successfully",
-        "confirmRemoveProduct": "Are you sure you want to remove this product?"
+        "confirmRemoveProduct": "Are you sure you want to remove this product?",
+        "eatAlerts": {
+          "safeAlert1": "Sweet!",
+          "safeAlert2": "Kaboom!",
+          "safeAlert3": "Getting health!",
+          "safeAlert4": "Nice shape!",
+          "safeAlert5": "Looking good!",
+          "safeAlert6": "Warthy!",
+          "midAlert1": "Bon apatite!",
+          "midAlert2": "Nice!",
+          "dangerAlert1": "The summer body wont shape itself..",
+          "dangerAlert2": "NOT worthy!",
+          "dangerAlert3": "WoopyDoo!",
+          "dangerAlert4": "Getting Fatty!"
+        }
       }
     }
   },
@@ -61,7 +75,21 @@
         "confirmRemove": "האם אתה בטוח שאתה מעוניין למחוק את רשימת הקניות?",
         "removeSuccess": "רשימה נמחקה בהצלחה",
         "savedSuccess": "רשימה עודכנה בהצלחה",
-        "confirmRemoveProduct": "האם את בטוחה שאת רוצה למחוק את המוצר?"
+        "confirmRemoveProduct": "האם את בטוחה שאת רוצה למחוק את המוצר?",
+        "eatAlerts": {
+          "safeAlert1": "יאמי!",
+          "safeAlert2": "קאפיש!",
+          "safeAlert3": "כמה בריא!",
+          "safeAlert4": "אחלה גזרה!",
+          "safeAlert5": "נראה טוב!",
+          "safeAlert6": "ראויה!",
+          "midAlert1": "בתאבון!",
+          "midAlert2": "נחמד!",
+          "dangerAlert1": "גוף הקיץ לא יחטב את עצמו..",
+          "dangerAlert2": "לא ראוי!",
+          "dangerAlert3": "וופי-דו!",
+          "dangerAlert4": "משמין!"
+        }
       }
     }
   }
