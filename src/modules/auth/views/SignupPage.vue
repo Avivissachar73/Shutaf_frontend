@@ -1,6 +1,6 @@
 <template>
   <div class="signup-page flex column gap20">
-    <router-link :to="{name: 'LoginPage'}"><button>{{$t('login')}}</button></router-link>
+    <router-link class="btn width-content" :to="{name: 'LoginPage'}">{{$t('login')}}</router-link>
     <form @submit.prevent="signup" class="simple-form">
       <FormInput type="text" placeholder="account.username" label="account.username" v-model="user.username"/>
       <FormInput type="text" placeholder="account.firstname" label="account.firstname" v-model="user.firstname"/>
