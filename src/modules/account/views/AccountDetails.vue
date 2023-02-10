@@ -1,8 +1,7 @@
 <template>
-  <div class="account-details flex column gap10" v-if="account">
-    <router-link :to="{name: 'AccountEdit', params: {id: account._id}}"><button class="btn">{{$t('edit')}}</button></router-link>
+  <div class="account-details flex column gap15" v-if="account">
+    <h2>{{account.firstname}} {{account.lastname}}</h2>
     <MiniAccountPreview :account="account"/>
-    <p>{{account.firstname}} {{account.lastname}}</p>
     <p>{{account.email}}</p>
     <p>{{$t('systemRoles')}}: {{account.roles.map(c => $t(c)).join(', ')}}</p>
     <div class="flex column gap5">
@@ -15,6 +14,7 @@
         </li>
       </ul>
     </div>
+    <router-link v-if="isLoggedUser" :to="{name: 'AccountEdit', params: {id: account._id}}"><button class="btn">{{$t('edit')}}</button></router-link>
   </div>
 </template>
 
@@ -31,6 +31,9 @@ export default {
   computed: {
     account() {
       return this.$store.getters['account/selectedAccount'];
+    },
+    isLoggedUser() {
+      return this.$route.params.id === this.$store.getters['auth/loggedUser']?._id;
     }
   },
   created() {
