@@ -238,7 +238,7 @@ export default {
       height: 100px;
     }
 
-    [type="checkbox"], select {
+    [type="checkbox"], select, option {
       &:hover {
         cursor: pointer;
       }
