@@ -237,6 +237,12 @@ export default {
     textarea {
       height: 100px;
     }
+
+    [type="checkbox"], select {
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 }
 

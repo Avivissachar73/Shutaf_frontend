@@ -41,7 +41,7 @@ export default {
     },
     async saveAccount() {
       if (!this.isAccountValid) return;
-      await this.$store.dispatch({ type: 'account/saveAccount', item: this.accountToEdit });
+      await this.$store.dispatch({ type: 'account/saveAccount', account: this.accountToEdit });
       this.$router.push({ name: 'HomePage' })
     }
   },

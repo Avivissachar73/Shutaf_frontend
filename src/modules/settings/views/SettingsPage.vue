@@ -28,8 +28,14 @@ export default {
       settings: null
     }
   },
+  computed: {
+    loggedUser() {
+      return this.$store.getters['auth/loggedUser'];
+    }
+  },
   methods: {
     setLocale(locale) {
+      if ((locale === 'he') && (this.loggedUser?.gender !== 'male')) locale = 'heF';
       this.$i18n.locale = localStorage.locale = locale;
       evEmmiter.emit('set_locale', locale);
     },

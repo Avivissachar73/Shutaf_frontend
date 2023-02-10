@@ -18,14 +18,14 @@ function get(id) {
   // if (!id) return getEmptyAccount();
   return httpService.get(`${ENDPOINT}/${id}`);
 }
-function add(user) {
-  return httpService.post(ENDPOINT, user);
+function add(account) {
+  return httpService.post(ENDPOINT, account);
 }
-function update(user) {
-  return httpService.put(ENDPOINT, user);
+function update(account) {
+  return httpService.put(ENDPOINT, account);
 }
-function save(user) {
-  return user._id? update(user) : add(user);
+function save(account) {
+  return account._id? update(account) : add(account);
 }
 
 

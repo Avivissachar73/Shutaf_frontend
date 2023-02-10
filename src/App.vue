@@ -43,7 +43,7 @@ export default {
     },
     isRtl() {
       const locale = this.$i18n.locale;
-      return ['he'].includes(locale);
+      return ['he', 'heF'].includes(locale);
     },
     loggedUser() {
       return this.$store.getters['auth/loggedUser'];

@@ -26,8 +26,8 @@ export const _accountStore = {
     setAccountData(state, { data }) {
       state.data = data;
     },
-    setSelectedAccount(state, { item }) {
-      state.selectedItem = item;
+    setSelectedAccount(state, { account }) {
+      state.selectedItem = account;
     },
     removeAccount(state, { id }) {
     },
@@ -59,7 +59,7 @@ export const _accountStore = {
       return dispatch({
         type: '_Ajax',
         do: async () => accountService.get(id),
-        onSuccess: (item) => commit({ type: 'setSelectedAccount', item })
+        onSuccess: (account) => commit({ type: 'setSelectedAccount', account })
       });
     },
     async removeAccount({ commit, dispatch }, { id }) {
@@ -70,11 +70,15 @@ export const _accountStore = {
         onSuccess: () => alertService.toast({type: 'safe', msg: `${$t('account.alerts.removeSuccess')} id: ${id}`})
       });
     },
-    async saveAccount({ commit, dispatch }, { item }) {
+    async saveAccount({ commit, dispatch, getters }, { account }) {
       return dispatch({
         type: '_Ajax',
-        do: async () => accountService.save(item),
-        onSuccess: () => alertService.toast({type: 'safe', msg: `${$t('account.alerts.savedAccountSuccess')} id: ${item._id}`})
+        do: async () => accountService.save(account),
+        onSuccess: (savedAccount) => {
+          alertService.toast({type: 'safe', msg: `${$t('account.alerts.savedAccountSuccess')} id: ${account._id}`});
+          const loggedUser = this.getters['auth/loggedUser'];
+          if (account._id === loggedUser?._id) this.commit({ type: 'auth/setLoggedUser', user: savedAccount });
+        }
       });
     }
   }
