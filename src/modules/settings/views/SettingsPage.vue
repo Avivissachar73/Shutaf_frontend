@@ -35,6 +35,7 @@ export default {
   },
   methods: {
     setLocale(locale) {
+      if (!locale) return;
       this.$i18n.locale = localStorage.locale = locale;
       if ((locale === 'he') && (this.loggedUser?.gender !== 'male')) this.$i18n.locale = 'heF';
       evEmmiter.emit('set_locale', locale);
