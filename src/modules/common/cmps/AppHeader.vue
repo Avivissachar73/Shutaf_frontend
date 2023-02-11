@@ -13,9 +13,9 @@
         <template>
           <router-link v-if="!loggedUser" :to="{name: 'LoginPage'}">{{$t('login')}}</router-link>
           <template v-else>
-            <router-link :to="{name: 'PostPage', params: {organizationId: orgId} }">{{$t('post.posts')}}</router-link>
-            <router-link :to="{name: 'ShoppingListPage', params: {organizationId: orgId} }">{{$t('shoppingList.shoppingLists')}}</router-link>
-            <router-link :to="{name: 'DashboardPage', params: {organizationId: orgId} }">{{$t('dashboard.dashboard')}}</router-link>
+            <router-link v-if="orgId" :to="{name: 'PostPage', params: {organizationId: orgId} }">{{$t('post.posts')}}</router-link>
+            <router-link v-if="orgId" :to="{name: 'ShoppingListPage', params: {organizationId: orgId} }">{{$t('shoppingList.shoppingLists')}}</router-link>
+            <router-link v-if="orgId" :to="{name: 'DashboardPage', params: {organizationId: orgId} }">{{$t('dashboard.dashboard')}}</router-link>
             <router-link :to="{name: 'OrganizationPage'}">{{$t('organization.organizations')}}</router-link>
             <router-link :to="{name: 'BugEdit'}">{{$t('bug.reportABug')}}</router-link>
             <router-link v-if="isAdmin" :to="{name: 'BugPage'}">{{$t('bug.bugs')}}</router-link>
@@ -47,7 +47,8 @@ export default {
       return this.$store.getters['auth/isAdmin'];
     },
     orgId() {
-      return localStorage.logged_organization_id || this.$store.getters['organization/selectedOrganization']?._id || 'public';
+      // return localStorage.logged_organization_id || this.$store.getters['organization/selectedOrganization']?._id || 'public';
+      return localStorage.logged_organization_id || this.$store.getters['organization/selectedOrganization']?._id;
     }
   },
   methods: {
