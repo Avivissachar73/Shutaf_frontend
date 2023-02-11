@@ -55,105 +55,48 @@ export default {
           return res;
         }
         const color = JSON.parse(localStorage.isDarkMode) ? 'white' : 'black';
+        const timeLabels = Object.keys(this.dashboardData.stats.timeline.eat).sort();
         this.charts = [
           new BarChart({ 
             data: Object.keys(this.dashboardData.stats.users.eatData).map(key => ({ tag: key, vals: [this.dashboardData.stats.users.eatData[key].healthAvg]})),
             labels: [''],
             legend: {
-              tag: this.$t('dashboard.healthAvgPerUser')
+              tag: this.$t('dashboard.healthAvgPerUser'),
+              // align: 'end'
             },
-            style: { strokeStyle: color }
+            style: { fillStyle: color }
           }, '.healthAvg-container'),
 
           new LineChart({
             data: [
-              { tag: 'healthy',   vals: Object.keys(this.dashboardData.stats.timeline.eat).map(key => sumHealthRate(this.dashboardData.stats.timeline.eat[key].healthMap, 8, 10)), style: { color: 'green'  } },
-              { tag: 'mid',       vals: Object.keys(this.dashboardData.stats.timeline.eat).map(key => sumHealthRate(this.dashboardData.stats.timeline.eat[key].healthMap, 4, 7)) , style: { color: 'orange' } },
-              { tag: 'notHealty', vals: Object.keys(this.dashboardData.stats.timeline.eat).map(key => sumHealthRate(this.dashboardData.stats.timeline.eat[key].healthMap, 0, 3)) , style: { color: 'red'    } }
+              { tag: 'healthy',   vals: timeLabels.map(key => sumHealthRate(this.dashboardData.stats.timeline.eat[key].healthMap, 8, 10)), style: { color: 'green'  } },
+              { tag: 'mid',       vals: timeLabels.map(key => sumHealthRate(this.dashboardData.stats.timeline.eat[key].healthMap, 4, 7)) , style: { color: 'orange' } },
+              { tag: 'notHealty', vals: timeLabels.map(key => sumHealthRate(this.dashboardData.stats.timeline.eat[key].healthMap, 0, 3)) , style: { color: 'red'    } }
             ],
-            labels: Object.keys(this.dashboardData.stats.timeline.eat),
+            // labels: timeLabels.map(c => new Date(+c).getDate()),
+            labels: timeLabels.map(c => ''),
             legend: {
-              tag: this.$t('dashboard.eatCountInTime')
+              tag: this.$t('dashboard.eatCountInTime'),
+              // align: 'end'
             },
-            style: { strokeStyle: color }
+            style: { fillStyle: color }
           }, '.timeEat-container'),
 
           new PiChart({ 
-            data: Object.keys(this.dashboardData.stats.users.eatData).map(key => ({ tag: key, val: this.dashboardData.stats.users.eatData[key].total})),
+            data: Object.keys(this.dashboardData.stats.users.eatData).map(key => ({ tag: `${key} - ${this.dashboardData.stats.users.eatData[key].total}`, val: this.dashboardData.stats.users.eatData[key].total})),
             legend: {
               tag: this.$t('dashboard.totalEat'),
-              align: 'start'
+              // align: 'end'
             },
-            style: { strokeStyle: color }
+            style: { fillStyle: color }
           }, '.totalEat-container')
         ];
-
-        return;
-
-
-        const randInt = (min = -infinity, max) => Math.floor(Math.random() * (max - min) + min);
-
-        const labels = ['Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb'];
-        const randData = (min = false) => range(labels.length).map(c => randInt(min? -50 : 0, 100));
-
-        const baseOptions = () => ({ 
-          // width: 1500,
-          // height: 1000,
-          data: [
-            {tag: 'Data sample 1', vals: randData(), style: {color: '#abcdeb'}},
-            {tag: 'Data sample 2', vals: randData(), style: {color: '#fdaaaa'}},
-            {tag: 'Data sample 3', vals: randData(), style: {color: '#b4ffd9'}},
-            {tag: 'Data sample 4', vals: randData(), style: {color: '#fcfdcd'}},
-            {tag: 'Data sample 5', vals: randData(), style: {color: '#f2ddff'}},
-          ], 
-          labels,
-          horizontal: false,
-          labelsNegative: true,
-          dataNegative: false,
-          // width: 1000, height: 1000,
-          info: {
-            disable: true,
-            size: 40,
-            position: 'right',
-            align: 'middle'
-          },
-          // legend: { tag: 'Chart test', align: 'start' }
-        });
-
-
-        this.charts = [
-          new DonatChart(baseOptions(), '.donat-container'),
-      
-          new BarChart(baseOptions(), '.bar-container'),
-          
-          new BarChart({
-            ...baseOptions(),
-            data: [
-              {tag: 'Data sample 1', vals: randData(true), style: {color: '#abcdeb'}},
-              {tag: 'Data sample 2', vals: randData(true), style: {color: '#fdaaaa'}},
-              {tag: 'Data sample 3', vals: randData(true), style: {color: '#b4ffd9'}},
-              {tag: 'Data sample 4', vals: randData(true), style: {color: '#fcfdcd'}},
-              {tag: 'Data sample 5', vals: randData(true), style: {color: '#f2ddff'}},
-            ],
-          }, '.bar2-container'),
-          
-          new BarChart({...baseOptions(), horizontal: true}, '.bar3-container'),
-        
-          new LineChart(baseOptions(), '.line-container'),
-        
-          new DiscChart(baseOptions(), '.disc-container'),
-        
-          new PiChart(baseOptions(), '.pi-container'),
-        
-          new FrameDiscChart({...baseOptions(), info: { disable: false }}, '.frame-container')
-        ]
       },
       getData() {
         return this.$store.dispatch({ type: 'dashboard/loadOrganizationStatsData', organizationId: this.$route.params.organizationId });
       },
       async init() {
         await this.getData();
-        console.log(this.dashboardData);
         this.mountCharts();
       }
     }

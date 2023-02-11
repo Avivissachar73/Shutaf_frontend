@@ -343,7 +343,11 @@ export class CanvasService {
     get cellSizeByboardToCanvasRatio() {
         const { w: canvasWidth, h: canvasHeight } = this.canvasSize;
         const { w: boardWidth, h: boardHeight } = this.boardSize;
-    
+        
+        // const scale = window.devicePixelRatio || 1;
+        // let h = canvasHeight / boardHeight * scale;
+        // let w = canvasWidth / boardWidth * scale;
+
         let h = canvasHeight / boardHeight;
         let w = canvasWidth / boardWidth;
     
@@ -440,6 +444,7 @@ export class CanvasService {
                 shadowColor: shape.style.shadowColor,
                 shadowOffsetX: shape.style.shadowOffsetX,
                 shadowOffsetY: shape.style.shadowOffsetY,
+                fontWeight: shape.style.fontWeight // normal/ bold / bolder / lighter
             } || {},
             grid: shape.grid && {
                 style: shape.grid.style,
@@ -637,7 +642,8 @@ export class CanvasService {
                 context.ellipse(centerPos.x, centerPos.y, renderW/2, renderH/2, 0, startAngle, endAngle, style.circleCounterClockWise);
                 // if (opts.closeCircle) context.lineTo(centerPos.x, centerPos.y);
             } else if (opts.text) {
-                if (context.font) context.font = renderW + 'px ' + style.font || 'Ariel';
+                // if (context.font) context.font = renderW + 'px ' + style.font || 'Ariel';
+                context.font = style.fontWeight || 'normal' + renderW + 'px ' + style.font || 'Ariel';
                 if (style.textAlign) context.textAlign = style.textAlign;
                 if (style.textBaseline) context.textBaseline = style.textBaseline;
                 if (style.fillStyle || style.gradientBgc) context.fillText(opts.text, 0, 0);

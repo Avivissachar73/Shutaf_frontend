@@ -128,11 +128,11 @@ export class BaseDataChart extends BaseChart {
 
 
   static defaultColors = [
-    '#abcdeb',
     '#fdaaaa',
     '#b4ffd9',
     '#fcfdcd',
-    '#f2ddff'
+    '#f2ddff',
+    '#abcdeb',
   ];
   static defClrByIdx(idx) {
     return this.defaultColors[idx] || this.defaultColors[0];
@@ -142,7 +142,7 @@ export class BaseDataChart extends BaseChart {
   }
 
   get textStyle() {
-    return { strokeStyle: 'black', fillStyle: 'black', font: 'sans-serif', size: 40, ...(this.chartData.style || {}) };
+    return { strokeStylee: 'black', fillStyle: 'black', fontWeight: '600', font: 'sans-serif', size: 40, ...(this.chartData.style || {}) };
   }
 
   
@@ -212,11 +212,11 @@ export class BaseDataChart extends BaseChart {
 
 
   get initPad() {
-    return { top: 0, bottom: 50, right: 0, left: 50 };
+    return { top: 0, bottom: 50, right: 0, left: 100 };
   } 
   get padding() {
     const updatePad = (pad, item, padKey) => {
-      const sectionsGap = 10;
+      const sectionsGap = 25;
       const { main: sizeKey } = this.constructor.sizeKeyByAlignOrAxis(padKey);
       pad[padKey] = Math.max(pad[padKey], item[sizeKey] + sectionsGap);
     }
@@ -227,7 +227,7 @@ export class BaseDataChart extends BaseChart {
   }
 
   get extraPadForData() {
-    return { top: 30, bottom: 30, right: 30, left: 30 };
+    return { top: 50, bottom: 50, right: 50, left: 50 };
   }
 
   get totalPad() {
@@ -484,8 +484,8 @@ export class BaseDataChart extends BaseChart {
 
   get animationSteps() { 
     let steps = '0'.repeat(100).split('').map((_, i) => (i+1)/100);
-    steps = steps.filter(c => (c*100)%2 === 0);
-    return steps;
+    // steps = steps.filter(c => (c*100)%2 === 0);
+    // return steps;
 
     const res = [];
     const stepGroups = [];
@@ -577,10 +577,10 @@ export class PiChart extends BaseDataChart {
     }
   }
   get initPad() {
-    return { top: 0, bottom: 0, right: 0, left: 0 };
+    return { top: 10, bottom: 10, right: 10, left: 10 };
   }
   get extraPadForData() {
-    return { top: 0, bottom: 0, right: 0, left: 0 };
+    return { top: 10, bottom: 10, right: 10, left: 10 };
   }
   init() {
     this.chartData.info.position = 'left';
@@ -624,7 +624,7 @@ export class PiChart extends BaseDataChart {
           ...this.baseCircleItem,
           circleDegries: [startDeg, endDeg],
           closeCircle: true,
-          style: { ...this.baseCircleItem.style, fillStyle: this.constructor.getClrFromStyle(curr.style) },
+          style: { ...this.baseCircleItem.style, fillStyle: this.constructor.getClrFromStyle(curr.style, idx) },
           hoveredData: { item: curr, val }
         }
       })
