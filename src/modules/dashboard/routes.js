@@ -9,7 +9,7 @@ export const dashboardRoutes = [
     children: [
       {
         name: 'DashboardPage',
-        path: '/',
+        path: ':organizationId?',
         component: DashboardPage
       }
     ]

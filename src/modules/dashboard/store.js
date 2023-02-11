@@ -36,7 +36,13 @@ export const _dashboardStore = {
           return dashboardRes;
         },
         onSuccess: (data) => commit({ type: 'setData', data }),
-        onError: (err) => {} // NOOP;
+      });
+    },
+    async loadOrganizationStatsData({ commit, dispatch }, { organizationId }) {
+      return dispatch({
+        type: '_Ajax',
+        do: () => dashboardService.getOrganizationStats(organizationId),
+        onSuccess: (data) => commit({ type: 'setData', data }),
       });
     }
   }

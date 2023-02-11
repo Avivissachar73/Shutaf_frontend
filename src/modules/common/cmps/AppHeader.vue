@@ -15,6 +15,7 @@
           <template v-else>
             <router-link :to="{name: 'PostPage', params: {organizationId: orgId} }">{{$t('post.posts')}}</router-link>
             <router-link :to="{name: 'ShoppingListPage', params: {organizationId: orgId} }">{{$t('shoppingList.shoppingLists')}}</router-link>
+            <router-link :to="{name: 'DashboardPage', params: {organizationId: orgId} }">{{$t('dashboard.dashboard')}}</router-link>
             <router-link :to="{name: 'OrganizationPage'}">{{$t('organization.organizations')}}</router-link>
             <router-link :to="{name: 'BugEdit'}">{{$t('bug.reportABug')}}</router-link>
             <router-link v-if="isAdmin" :to="{name: 'BugPage'}">{{$t('bug.bugs')}}</router-link>

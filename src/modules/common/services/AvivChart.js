@@ -66,7 +66,7 @@ export class BaseChart {
   }
 
   onClick(ev, pos) {
-    console.log(pos);
+    // console.log(pos);
   }
 
   findRenderedItemPosMatch(pos, edge = false) {
@@ -86,7 +86,7 @@ export class BaseChart {
     let msg = hoveredData.item.tag
     if (hoveredData.label) msg += '\n' + hoveredData.label;
     if (hoveredData.val) msg +=  '\n' + hoveredData.val;
-    console.log(msg)
+    // console.log(msg)
   }
 }
 
@@ -108,13 +108,14 @@ const defaultChartData = {
     disable: false,
     position: 'right',
     align: 'middle',
-    size: 30
+    size: 40
   },
   legend: {
     tag: 'This is a legend',
     position: 'top',
     align: 'center'
-  }
+  },
+  style: {}
 }
 
 
@@ -141,7 +142,7 @@ export class BaseDataChart extends BaseChart {
   }
 
   get textStyle() {
-    return { fillStyle: 'black', font: 'sans-serif', size: 40 };
+    return { strokeStyle: 'black', fillStyle: 'black', font: 'sans-serif', size: 40, ...(this.chartData.style || {}) };
   }
 
   
@@ -156,8 +157,8 @@ export class BaseDataChart extends BaseChart {
     const start = { x: pad.left, y: pad.top };
     const end = { x: start.x+dataAreaSize.w, y: start.y+dataAreaSize.h };
     const { min, max } = chartData.data.reduce((acc, c) => ({
-      min: Math.min(acc.min, ...c.vals),
-      max: Math.max(acc.max, ...c.vals),
+      min: Math.min(acc.min, ...(c.vals || [c.val || 0])),
+      max: Math.max(acc.max, ...(c.vals || [c.val || 0])),
     }), { min: strictItemSize? 0 : Infinity, max: -Infinity });
     const dataRangeSize = max - min;
     const yByVal = (val) => dataNegative? end.y - dataAreaSize.h*((max-val)/dataRangeSize) : start.y + dataAreaSize.h*((max-val)/dataRangeSize);
@@ -408,14 +409,15 @@ export class BaseDataChart extends BaseChart {
       { style: gridStyle, geoShape: [ { x: start.x-exPad.left/2, y: start.y-exPad.top }, { x: start.x-exPad.left/2, y: end.y+exPad.bottom } ] },
       { style: gridStyle, geoShape: [ { x: start.x-exPad.left, y: end.y+exPad.bottom/2 }, { x: end.x+exPad.left/2, y: end.y+exPad.bottom/2 } ] }
     );
-
+      
     const textBaseStyle = this.textStyle;
 
     const valLabels = [parseInt(minVal), parseInt(maxVal)];
     if (minVal < 0 && maxVal > 0) valLabels.push(0);
     const dataValRange = maxVal-minVal;
     const valLabelsStep = parseInt(dataValRange/8);
-    for (let i = 0; i < dataValRange/valLabelsStep; i++) {
+    const iterates = valLabelsStep? dataValRange/valLabelsStep : 0;
+    for (let i = 0; i < iterates; i++) {
       const curr = parseInt(minVal+valLabelsStep*i);
       if (
           Math.abs(maxVal - curr) < valLabelsStep || 
@@ -424,6 +426,7 @@ export class BaseDataChart extends BaseChart {
       ) continue
       valLabels.push(curr);
     }
+    
 
     // sec axis labels and grid;
     const secAxisLabels = secAxis === 'y' ? valLabels : chartData.labels;
@@ -501,7 +504,7 @@ export class BaseDataChart extends BaseChart {
     const { animationSteps } = this;
     for (let step of animationSteps) {
       frames.push(this.getCahrtDataToRender(data.map(c => ({
-        c,
+        ...c,
         vals: c.vals?.map(c => c*step),
         val : c.val*step
       }))))

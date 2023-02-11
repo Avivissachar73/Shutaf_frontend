@@ -8,6 +8,7 @@ import { settingsLocales } from '@/modules/settings/locales';
 import { authLocales } from '@/modules/auth/locales';
 import { bugLocales } from '@/modules/bug/locales';
 import { shoppingListLocales } from '@/modules/shoppingList/locales';
+import { dashboardLocales } from '../../modules/dashboard/locales';
 
 export default {
   en: {
@@ -20,7 +21,8 @@ export default {
     ...settingsLocales.en,
     ...authLocales.en,
     ...bugLocales.en,
-    ...shoppingListLocales.en
+    ...shoppingListLocales.en,
+    ...dashboardLocales.en
   },
   he: {
     ...commonLocales.he,
@@ -32,7 +34,8 @@ export default {
     ...settingsLocales.he,
     ...authLocales.he,
     ...bugLocales.he,
-    ...shoppingListLocales.he
+    ...shoppingListLocales.he,
+    ...dashboardLocales.he
   },
   heF: {
     ...commonLocales.heF,
@@ -44,6 +47,7 @@ export default {
     ...settingsLocales.heF,
     ...authLocales.heF,
     ...bugLocales.heF,
-    ...shoppingListLocales.heF
+    ...shoppingListLocales.heF,
+    ...dashboardLocales.heF
   },
 }
