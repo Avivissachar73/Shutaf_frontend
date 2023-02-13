@@ -1,5 +1,5 @@
 <template>
-  <div class="organization-edit flex column gap30">
+  <div v-if="organization" class="organization-edit flex column gap30">
     <h2>{{$t($route.params.id? 'organization.editOrganization' : 'organization.createOrganization')}}</h2>
     <form v-if="organization" @submit.prevent="saveOrganization" class="simple-form gap50">
       <FormInput type="text" placeholder="name" label="name" v-model="organization.name"/>

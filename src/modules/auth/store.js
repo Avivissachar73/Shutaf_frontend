@@ -58,7 +58,9 @@ export const _authStore = {
         type: '_Ajax',
         do: async () => authService.getUserInfo(),
         onSuccess: (user) => {commit({ type: 'setLoggedUser', user })},
-        onError: () => {}
+        onError: () => {
+          localStorage.logged_organization_id = '';
+        }
       });
     },
     async logout({ commit, dispatch }) {
@@ -68,6 +70,7 @@ export const _authStore = {
         onSuccess: (res) => {
           commit({ type: 'setLoggedUser', user: null });
           alertService.toast({type: 'safe', msg: $t(`auth.alerts.goodby`)});
+          localStorage.logged_organization_id = '';
           dispatch('resetState', {}, { root: true });
         }
       });

@@ -375,6 +375,9 @@ export default {
     .input.number {
       width: 40px;
     }
+    input {
+      color: black;
+    }
   }
   .new-product-section {
     .form-input {

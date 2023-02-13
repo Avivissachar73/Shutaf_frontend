@@ -3,7 +3,7 @@ const en = {
   dashboard: {
     dashboard: "Dashboard",
     healthAvgPerUser: "Health average per user",
-    eatCountInTime: "Eath count in time",
+    eatCountInTime: "Eat count in time",
     totalEat: "Total eat"
   }
 }

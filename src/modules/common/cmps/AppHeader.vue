@@ -13,13 +13,12 @@
           <router-link v-if="orgId" :to="{name: 'ShoppingListPage', params: {organizationId: orgId} }">{{$t('shoppingList.shoppingLists')}}</router-link>
           <router-link v-if="orgId" :to="{name: 'DashboardPage', params: {organizationId: orgId} }">{{$t('dashboard.dashboard')}}</router-link>
           <router-link :to="{name: 'OrganizationPage'}">{{$t('organization.organizations')}}</router-link>
-          <router-link :to="{name: 'BugEdit'}">{{$t('bug.reportABug')}}</router-link>
-          <router-link v-if="isAdmin" :to="{name: 'BugPage'}">{{$t('bug.bugs')}}</router-link>
-          <router-link v-if="isAdmin" :to="{name: 'AccountPage'}">{{$t('admin')}}</router-link>
+          <router-link v-if="isAdmin" :to="{name: 'AdminPage'}">{{$t('admin')}}</router-link>
         </template>
         <router-link :to="{name: 'AboutPage'}">{{$t('about')}}</router-link> 
         <!-- <router-link :to="{name: 'SettingsPage'}">{{$t('settings')}}</router-link> -->
         <router-link :to="{name: 'SettingsPage'}">{{$t('settings.settings')}}</router-link>
+          <router-link :to="{name: 'BugEdit'}">{{$t('bug.reportABug')}}</router-link>
         <router-link v-if="!loggedUser" :to="{name: 'LoginPage'}">{{$t('login')}}</router-link>
         <template v-else>
           <router-link :to="{name: 'AccountDetails', params: {id: loggedUser._id} }"><Avatar :account="loggedUser"/></router-link>
@@ -49,7 +48,8 @@ export default {
     },
     orgId() {
       // return localStorage.logged_organization_id || this.$store.getters['organization/selectedOrganization']?._id || 'public';
-      return localStorage.logged_organization_id || this.$store.getters['organization/selectedOrganization']?._id;
+      // return localStorage.logged_organization_id || this.$store.getters['organization/selectedOrganization']?._id;
+      return this.$store.getters['organization/selectedOrganization']?._id;
     }
   },
   methods: {

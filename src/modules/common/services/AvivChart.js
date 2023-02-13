@@ -826,6 +826,7 @@ const UTILS = {
     return `${key}.${endPoint}`;
   },
   fillData: function(data, fillBy, avoid = [], deepKey = '') {
+    if (fillBy && typeof fillBy === 'object') fillBy = JSON.parse(JSON.stringify(fillBy));
     if (avoid.includes(deepKey) && !data) return data;
     if ((typeof data) !== 'object') return data;
     if (Array.isArray(data)) return data.map((c,i) => UTILS.fillData(c, fillBy[i], avoid, UTILS.getDeepKey(deepKey, i, true)))
