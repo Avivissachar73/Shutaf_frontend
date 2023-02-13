@@ -1,5 +1,5 @@
 <template>
-  <div class="organization-details flex column gap20">
+  <div class="organization-details flex column gap20" v-if="organization">
     <div v-if="organization?.loggedAccountData?.status === 'pending'">
       <button class="btn mid primary" @click="updateStatus('approved')">{{$t('approve')}}</button>
       <button class="btn mid danger" @click="updateStatus('declined')">{{$t('decline')}}</button>
@@ -10,14 +10,14 @@
       <router-link :to="{name: 'ShoppingListPage', params: {organizationId: orgId} }">{{$t('shoppingList.shoppingLists')}}</router-link>
     </nav>
     
-    <section v-if="organization" class="flex column gap20">
+    <section class="flex column gap20">
       <div class="flex column gap10">
         <h2>{{organization.name}}</h2>
         <p>{{organization.desc}}</p>
       </div>
       <div class="flex column gap10">
-        <p>{{$t('organization.yourRoles')}}: {{organization.loggedAccountData.roles.map(c => $t(c)).join(', ')}}</p>
-        <div class="flex align-center gap10"><span>{{$t('createdBy')}}:</span><MiniAccountPreview :reverse="true" :account="organization.createdBy"/></div>
+        <p>{{$t('organization.yourRoles')}}: {{organization?.loggedAccountData?.roles.map(c => $t(c)).join(', ')}}</p>
+        <div class="flex align-center gap10"><span>{{$t('createdBy')}}:</span><MiniAccountPreview v-if="organization.createdBy" :reverse="true" :account="organization.createdBy"/></div>
       </div>
       <div class="flex column gap10">
         <h3>{{$t('organization.members')}}:</h3>

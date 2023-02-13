@@ -39,6 +39,12 @@ export const _authStore = {
     },
     updateOrgStatus(state, { organizationId, newStatus }) {
       state.loggedUser.organizations.find(c => c._id === organizationId).status = newStatus;
+    },
+    addOrg(state, { organization }) {
+      // const idx = state.loggedUser.organizations.find(c => c._id === organization._id);
+      const { _id, name, status = 'approved', roles = ['creator', 'admin'], approverId = state.loggedUser._id } = organization
+      const itemToPush = {_id, name, status, roles, approverId};
+      state.loggedUser.organizations.push(itemToPush);
     }
   },
   actions: {

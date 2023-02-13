@@ -85,7 +85,12 @@ const _organizationStore = {
       return dispatch({
         type: '_Ajax',
         do: async () => organizationService.save(organization),
-        onSuccess: (data) => alertService.toast({type: 'safe', msg: `${$t('organization.alerts.savedSuccess')}! id: ${data._id}`})
+        onSuccess: (data) => {
+          alertService.toast({type: 'safe', msg: `${$t('organization.alerts.savedSuccess')}! id: ${data._id}`});
+          if (!organization._id) {
+            commit('auth/addOrg', { organization: { ...data, roles: ['creator', 'admin'] } }, { root: true });
+          }
+        }
       });
     },
 
