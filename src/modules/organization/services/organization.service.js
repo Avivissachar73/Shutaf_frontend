@@ -11,7 +11,8 @@ export const organizationService = {
   remove,
   getEmptyOrganization,
   inviteAccount,
-  updateAccountStatus
+  updateAccountStatus,
+  updateAccountRole
 }
 
 function query(filterBy) {
@@ -37,10 +38,13 @@ function save(item) {
 
 
 function inviteAccount(organizationId, accountId) {
-  return httpService.post(`${ENDPOINT}/${organizationId}/invite/${accountId}`);
+  return httpService.post(`${ENDPOINT}/${organizationId}/invite/${accountId}`, { accountId });
 }
-function updateAccountStatus(organizationId, accountId, newStatus) {
-  return httpService.post(`${ENDPOINT}/${organizationId}/update-status/${accountId}`, { newStatus });
+function updateAccountStatus(organizationId, accountId, status) {
+  return httpService.post(`${ENDPOINT}/${organizationId}/update-status`, { accountId, status });
+}
+function updateAccountRole(organizationId, accountId, roles) {
+  return httpService.post(`${ENDPOINT}/${organizationId}/update-roles`, { accountId, roles });
 }
 
 

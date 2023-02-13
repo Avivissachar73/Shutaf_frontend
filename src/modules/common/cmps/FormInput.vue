@@ -243,6 +243,9 @@ export default {
         cursor: pointer;
       }
     }
+    option {
+      color: black;
+    }
   }
 }
 

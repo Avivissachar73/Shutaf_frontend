@@ -1,28 +1,33 @@
 <template>
-  <div class="organization-edit flex column gap20">
+  <div class="organization-edit flex column gap30">
     <h2>{{$t($route.params.id? 'organization.editOrganization' : 'organization.createOrganization')}}</h2>
-    <form v-if="organization" @submit.prevent="saveOrganization" class="simple-form gap30">
-      <div class="flex column gap5">
-        <FormInput type="text" placeholder="name" label="name" v-model="organization.name"/>
-        <FormInput type="text" placeholder="description" label="description" v-model="organization.desc"/>
-      </div>
-
-      <div v-if="organization._id" class="flex column gap10">
-        <p>{{$t('organization.inviteMembers')}}</p>
-        <div class="flex align-center gap10">
-          <FormInput class="width-content" type="text" placeholder="search" v-model="searchAccountStr"/>
-          <div class="btn" @click.prevent.stop="getAccounts">{{$t('search')}}</div>
-        </div>
-        <ul v-if="accounts.length" class="flex column gap5">
-          <li v-for="account in accounts" :key="account._id" class="flex align-center gap5">
-             <button class="btn secondary" @click.prevent="() => inviteAccount(account._id)">{{$t('invite')}}</button> <MiniAccountPreview :account="account"/>
-             <FormInput @keydown.native.enter.prevent.stop="" type="select" v-model="rolesToInvite[account._id]" :itemsMap="orgRoles"/>
-          </li>
-        </ul>
-        <p v-else-if="!searchPristin">{{$t('noMatches')}}...</p>
-      </div>
+    <form v-if="organization" @submit.prevent="saveOrganization" class="simple-form gap50">
+      <FormInput type="text" placeholder="name" label="name" v-model="organization.name"/>
+      <FormInput type="textarea" placeholder="description" label="description" v-model="organization.desc"/>
       <button class="btn big primary" :disabled="!isOrganizationValid">{{$t('save')}}</button>
     </form>
+    <div v-if="organization._id" class="flex column gap10">
+      <h3>{{$t('organization.inviteMembers')}}</h3>
+      <div class="flex align-center search-input">
+        <FormInput class="width-content" type="text" placeholder="search" v-model="searchAccountStr"/>
+        <button class="btn secondary" @click.prevent.stop="getAccounts">{{$t('search')}}</button>
+      </div>
+      <ul v-if="accounts.length" class="flex column gap5">
+        <li v-for="account in accounts" :key="account._id" class="user-preview">
+            <MiniAccountPreview :account="account"/>
+            <button class="btn secondary height-all" @click.prevent="() => inviteAccount(account)">{{$t('invite')}}</button> 
+            <!-- <FormInput @keydown.native.enter.prevent.stop="" type="select" v-model="rolesToInvite[account._id]" :itemsMap="orgRoles"/> -->
+        </li>
+      </ul>
+      <p v-else-if="!searchPristin">{{$t('noMatches')}}...</p>
+    </div>
+    <div class="flex column gap10">
+      <h3>{{$t('organization.members')}}:</h3>
+      <li v-for="account in organization.members" :key="account._id" class="user-preview">
+          <MiniAccountPreview :account="account"/>
+          <FormInput @keydown.native.enter.prevent.stop="" type="select" @input="role => updateUserRole(account, role)" :value="account.roles[0]" :itemsMap="orgRoles"/>
+      </li>
+    </div>
   </div>
 </template>
 
@@ -65,19 +70,29 @@ export default {
     async getAccounts() {
       if (!this.searchAccountStr) return;
       this.searchPristin = false;
-      this.$store.dispatch({ type: 'account/loadAccounts', filterBy: { filter: { search: this.searchAccountStr } } });
+      await this.$store.dispatch({ type: 'account/loadAccounts', filterBy: { filter: { search: this.searchAccountStr } } });
+      this.rolesToInvite = this.accounts.reduce((acc, c) => {
+        acc[c._id] = this.rolesToInvite[c._id] || 'user';
+        return acc;
+      }, {});
     },
     async saveOrganization() {
       if (!this.isOrganizationValid) return;
       await this.$store.dispatch({ type: 'organization/saveOrganization', organization: this.organization });
       this.$router.push({ name: 'OrganizationPage' });
     },
-    async inviteAccount(accountId) {
+    async inviteAccount(account) {
+      const accountId = account._id
       await this.$store.dispatch({ type: 'organization/inviteAccount', organizationId: this.$route.params.id, accountId, role: this.rolesToInvite[accountId] });
-      this.rolesToInvite = this.accounts.reduce((acc, c) => {
-        acc[c._id] = this.rolesToInvite[c._id] || 'user';
-        return acc;
-      }, {});
+      this.organization.members.push({
+        ...acount,
+        roles: [role]
+      })
+    },
+    async updateUserRole(account, role) {
+      const roles = [role];
+      if (account.roles.includes('creator')) roles.push('creator')
+      await this.$store.dispatch({ type: 'organization/updateAccountRole', organizationId: this.$route.params.id, accountId: account._id, roles });
     }
   },
   created() {
@@ -96,3 +111,37 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.organization-edit {
+  .search-input {
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px solid rgb(114, 114, 114);
+    width: fit-content;
+    input {
+      border: unset;
+      // background-color: rgba(0, 0, 0, 0.1);
+    }
+    .btn {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      // border-start-start-radius: 0;
+      // border-end-start-radius: 0;
+      border-radius: unset;
+      // background-color: #fff;
+    }
+  }
+  .user-preview {
+    width: 170px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .form-input {
+      width: unset;
+    }
+  }
+}
+</style>

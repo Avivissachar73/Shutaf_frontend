@@ -47,6 +47,10 @@ const _organizationStore = {
       if (state.selectedItem?._id === organizationId) doUpdateSttatus(state.selectedItem);
       // const idxIdList = state.data.items.find(c => c._id === organizationId);
       // if (idxIdList !== -1) doUpdateSttatus(state.data.items[idxIdList]);
+    },
+    updateOrgRoles(state, { organizationId, accountId, roles }) {
+      const doUpdateSttatus = (org) => org.members.find(c => c._id === accountId).roles = roles;
+      if (state.selectedItem?._id === organizationId) doUpdateSttatus(state.selectedItem);
     }
   },
   actions: {
@@ -100,6 +104,15 @@ const _organizationStore = {
         onSuccess: (data) => {
           commit({ type: 'updateOrgStatus', organizationId, newStatus });
           commit('auth/updateOrgStatus', { organizationId, newStatus }, { root: true });
+        }
+      });
+    },
+    async updateAccountRole({ commit, dispatch, getters }, { organizationId, accountId, roles }) {
+      return dispatch({
+        type: '_Ajax',
+        do: async () => organizationService.updateAccountRole(organizationId, accountId, roles),
+        onSuccess: (data) => {
+          commit({ type: 'updateOrgRoles', organizationId, accountId, roles });
         }
       });
     },

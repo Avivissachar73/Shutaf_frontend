@@ -21,12 +21,17 @@ input, select, textarea {
 }
 
 // input[type="text"], input[type="password"], select {
-input, select {
+input, select, textarea {
   padding: 5px;
   padding-left: none;
   border: unset;
   background: unset;
-  border-bottom: 1px solid black;
+  // border-bottom: 1px solid black;
+
+  border-radius: 5px;
+  border: 0.5px solid rgba(114, 114, 114, 0.5);
+  background-color: rgba(0, 0, 0, 0.01);
+  color: black;
 }
 
 a, .router-link {
@@ -43,6 +48,7 @@ img {
 .dark {
   button, .button-like, input, select, textarea {
     background-color: rgba(255, 255, 255, 0.2);
+    color: white;
   }
 
   input {

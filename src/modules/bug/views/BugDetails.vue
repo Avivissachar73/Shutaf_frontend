@@ -2,7 +2,7 @@
   <div class="bug-details flex column gap10" v-if="bug">
     <!-- <router-link :to="{name: 'BugEdit', params: {id: bug._id}}"><button class="btn">{{$t('edit')}}</button></router-link> -->
     <div>
-      <p>{{$t(createdBy)}}:</p>
+      <p>{{$t('createdBy')}}:</p>
       <MiniAccountPreview :account="bug.createdBy"/>
     </div>
     <h2>{{bug.title}}</h2>
