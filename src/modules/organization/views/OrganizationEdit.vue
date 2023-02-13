@@ -25,7 +25,7 @@
       <h3>{{$t('organization.members')}}:</h3>
       <li v-for="account in organization.members" :key="account._id" class="user-preview">
           <MiniAccountPreview :account="account"/>
-          <FormInput @keydown.native.enter.prevent.stop="" type="select" @input="role => updateUserRole(account, role)" :value="account.roles[0]" :itemsMap="orgRoles"/>
+          <FormInput :disabled="account._id === loggedUser._id" @keydown.native.enter.prevent.stop="" type="select" @input="role => updateUserRole(account, role)" :value="account.roles[0]" :itemsMap="orgRoles"/>
       </li>
     </div>
   </div>
@@ -85,7 +85,7 @@ export default {
       const accountId = account._id
       await this.$store.dispatch({ type: 'organization/inviteAccount', organizationId: this.$route.params.id, accountId, role: this.rolesToInvite[accountId] });
       this.organization.members.push({
-        ...acount,
+        ...account,
         roles: [role]
       })
     },

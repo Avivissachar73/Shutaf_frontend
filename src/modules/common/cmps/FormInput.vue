@@ -239,7 +239,7 @@ export default {
     }
 
     [type="checkbox"], select, option {
-      &:hover {
+      &:hover:not(:disabled) {
         cursor: pointer;
       }
     }

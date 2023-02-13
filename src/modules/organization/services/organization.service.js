@@ -38,7 +38,7 @@ function save(item) {
 
 
 function inviteAccount(organizationId, accountId) {
-  return httpService.post(`${ENDPOINT}/${organizationId}/invite/${accountId}`, { accountId });
+  return httpService.post(`${ENDPOINT}/${organizationId}/invite`, { accountId });
 }
 function updateAccountStatus(organizationId, accountId, status) {
   return httpService.post(`${ENDPOINT}/${organizationId}/update-status`, { accountId, status });
