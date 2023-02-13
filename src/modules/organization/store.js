@@ -121,6 +121,13 @@ const _organizationStore = {
         }
       });
     },
+    async removeAccount({ commit, dispatch, getters }, { organizationId, accountId }) {
+      return dispatch({
+        type: '_Ajax',
+        do: async () => organizationService.removeAccount(organizationId, accountId),
+        onSuccess: (data) => {}
+      });
+    },
   }
 }
 

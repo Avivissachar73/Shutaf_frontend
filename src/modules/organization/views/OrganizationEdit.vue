@@ -23,9 +23,12 @@
     </div>
     <div class="flex column gap10">
       <h3>{{$t('organization.members')}}:</h3>
-      <li v-for="account in organization.members" :key="account._id" class="user-preview">
+      <li v-for="account in organization.members" :key="account._id" class="flex align-center gap10">
+        <div class="user-preview">
           <MiniAccountPreview :account="account"/>
-          <FormInput :disabled="account._id === loggedUser._id" @keydown.native.enter.prevent.stop="" type="select" @input="role => updateUserRole(account, role)" :value="account.roles[0]" :itemsMap="orgRoles"/>
+          <FormInput :disabled="account._id === loggedUser?._id" @keydown.native.enter.prevent.stop="" type="select" @input="role => updateUserRole(account, role)" :value="account.roles[0]" :itemsMap="orgRoles"/>
+        </div>
+        <button class="btn small" v-if="!account.roles.includes('admin')" @click="removeAccountFromOrg(account)">X</button> 
       </li>
     </div>
   </div>
@@ -34,6 +37,7 @@
 <script>
 import MiniAccountPreview from '../../account/cmps/MiniAccountPreview.vue'
 import FormInput from '../../common/cmps/FormInput.vue'
+import { alertService } from '../../common/services/alert.service'
 export default {
   name: 'OrganizationEdit',
   data() {
@@ -86,13 +90,20 @@ export default {
       await this.$store.dispatch({ type: 'organization/inviteAccount', organizationId: this.$route.params.id, accountId, role: this.rolesToInvite[accountId] });
       this.organization.members.push({
         ...account,
-        roles: [role]
-      })
+        roles: [this.rolesToInvite[accountId]]
+      });
     },
     async updateUserRole(account, role) {
       const roles = [role];
       if (account.roles.includes('creator')) roles.push('creator')
       await this.$store.dispatch({ type: 'organization/updateAccountRole', organizationId: this.$route.params.id, accountId: account._id, roles });
+    },
+    async removeAccountFromOrg(account) {
+      if (!await alertService.Confirm(this.$t('organization.alerts.confirmRemoveAccount'))) return;
+      const accountId = account._id
+      await this.$store.dispatch({ type: 'organization/removeAccount', organizationId: this.$route.params.id, accountId });
+      const idx = this.organization.members.findIndex(c => c._id === accountId);
+      if (idx !== -1) this.organization.members.splice(idx, 1);
     }
   },
   created() {
