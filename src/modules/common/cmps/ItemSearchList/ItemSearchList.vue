@@ -118,8 +118,13 @@ export default {
   }
 
   .no-results-preview {
-    height: 35%;;
-    margin: 100px 0;
+    // height: 35%;;
+    // margin: 100px 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
   }
 
   .pagination-btns {
