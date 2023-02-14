@@ -1,16 +1,16 @@
 <template>
-  <div class="app" id="app" v-if="settings && config" :class="{ rtl: isRtl, dark: isDarkMode }">
+  <div class="app" id="app" :class="{ rtl: isRtl, dark: isDarkMode }">
     <div class="app-content">
       <AppAside/>
       <div class="right">
         <AppHeader @action="isLoading = true" @endAction="isLoading=false"/>
         <main class="app-main">
-          <router-view class="main-content"/>
+          <router-view class="main-content" v-if="settings && config"/>
         </main>
       </div>
     </div>
     <AppFooter/>
-    <!-- <Loader v-if="isLoading"/> -->
+    <Loader v-if="isLoading"/>
   </div>
 </template>
 
