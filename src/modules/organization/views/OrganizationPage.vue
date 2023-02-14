@@ -8,6 +8,8 @@
       itemDetailesPageName="OrganizationDetails"
       newItemPageName="OrganizationEdit"
       :singlePreviewCmp="OrganizationPreview"
+      :isLoading="isLoading"
+      :showLoader="false"
     />
     <Loader v-if="isLoading"/>
   </section>

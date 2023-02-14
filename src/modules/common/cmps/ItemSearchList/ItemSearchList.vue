@@ -4,7 +4,7 @@
       <ItemFilter :initFilter="filterBy.filter" @filtered="setFilter"/>
       <router-link v-if="newItemPageName" :to="{name: newItemPageName}"><button class="btn secondary mid">{{$t('addNew')}}</button></router-link>
     </div>
-    <template v-if="items?.length">
+    <template v-if="!isLoading && items?.length">
       <ItemList class="width-all" :items="items" v-if="items" :singlePreviewCmp="singlePreviewCmp" :itemDetailesPageName="itemDetailesPageName"/>
       <PaginationBtns v-if="filterBy" :total="totalItems" :perPage="filterBy.pagination.limit" v-model="filterBy.pagination.page"/>
     </template>
@@ -14,7 +14,7 @@
         <button v-if="isFilterEmpty || true" class="btn big primary">{{$t('createNew')}}!</button>  
       </router-link>
     </div>
-    <Loader v-if="isLoading"/>
+    <Loader v-if="showLoader && isLoading"/>
   </div>
 </template>
 
@@ -38,7 +38,11 @@ export default {
     itemDetailesPageName: [String],
     newItemPageName: [String],
     singlePreviewCmp: [Object],
-    isLoading: [Boolean]
+    isLoading: [Boolean],
+    showLoader: {
+      type: Boolean,
+      default: true
+    },
   },
   data() {
     return {

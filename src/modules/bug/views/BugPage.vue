@@ -8,6 +8,8 @@
       itemDetailesPageName="BugDetails"
       newItemPageName="BugEdit"
       :singlePreviewCmp="BugPreview"
+      :isLoading="isLoading"
+      :showLoader="false"
     />
     <Loader v-if="isLoading" />
   </section>

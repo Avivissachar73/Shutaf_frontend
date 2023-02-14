@@ -8,8 +8,10 @@
       itemDetailesPageName="PostDetails"
       newItemPageName="PostEdit"
       :singlePreviewCmp="PostPreview"
+      :isLoading="isLoading"
+      :showLoader="false"
     />
-    <!-- <Loader v-if="isLoading" /> -->
+    <Loader v-if="isLoading" />
   </section>
 </template>
 

@@ -8,6 +8,8 @@
       itemDetailesPageName="ShoppingListDetails"
       newItemPageName="ShoppingListEdit"
       :singlePreviewCmp="ShoppingListPreview"
+      :isLoading="isLoading"
+      :showLoader="false"
     />
     <Loader v-if="isLoading" />
   </section>

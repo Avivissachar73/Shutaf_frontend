@@ -8,7 +8,10 @@
       itemDetailesPageName="AccountDetails"
       newItemPageName="AccountEdit"
       :singlePreviewCmp="$options.AccountPreview"
+      :isLoading="isLoading"
+      :showLoader="false"
     />
+    <Loader v-if="isLoading" />
   </section>
 </template>
 
