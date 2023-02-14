@@ -1,13 +1,13 @@
 <template>
   <section class="account-page height-all width-all flex column gap10">
-    <h2>{{$t('account.accounts')}}</h2>
+    <h2>{{$t('account.account')}}</h2>
     <ItemSearchList
-      :itemsData="accountData"
+      :itemsData="bugData"
       :initFilterBy="filterBy"
-      @filter="setFilter"
+      @filter="getAccounts"
       itemDetailesPageName="AccountDetails"
       newItemPageName="AccountEdit"
-      :singlePreviewCmp="$options.AccountPreview"
+      :singlePreviewCmp="AccountPreview"
       :isLoading="isLoading"
       :showLoader="false"
     />
@@ -17,40 +17,36 @@
 
 <script>
 import AccountPreview from '../cmps/AccountPreview.vue';
-import PaginationBtns from '@/modules/common/cmps/PaginationBtns.vue';
 import ItemSearchList from '@/modules/common/cmps/ItemSearchList/ItemSearchList.vue';
 import Loader from '@/modules/common/cmps/Loader.vue';
 export default {
-  name: 'AccountPage',
+  name: 'BugPage',
   data() {
     return {
-      filterBy: null
-    }
-  },
-  watch: {
-    filterBy: {
-      deep: true,
-      handler(val) {
-        this.getAccounts();
-      }
+      AccountPreview
     }
   },
   methods: {
-    getAccounts() {
-      this.$store.dispatch({ type: 'account/loadAccounts', filterBy: this.filterBy });
-    },
-    setFilter(filter) {
-      this.filterBy = JSON.parse(JSON.stringify(filter));
+    getAccounts(filterBy) {
+      this.$store.dispatch({ type: 'account/loadAccounts', filterBy });
     }
   },
   computed: {
-    accountData() {
+    bugData() {
       return this.$store.getters['account/data'];
+    },
+    filterBy() {
+      return this.$store.getters['account/filterBy'];
+    },
+    isLoading() {
+      return this.$store.getters['account/isLoading'];
     }
   },
-  created() {
-    this.setFilter(this.$store.getters['account/filterBy']);
+  watch: {
+    '$route.params.id'() {
+      this.getAccounts();
+    }
   },
-  components: { AccountPreview, PaginationBtns, ItemSearchList, Loader }
+  components: { AccountPreview, ItemSearchList, Loader }
 }
 </script>

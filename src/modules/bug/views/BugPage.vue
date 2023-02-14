@@ -43,7 +43,7 @@ export default {
     }
   },
   watch: {
-    '$route.params.organizationId'() {
+    '$route.params.id'() {
       this.getBugs();
     }
   },
