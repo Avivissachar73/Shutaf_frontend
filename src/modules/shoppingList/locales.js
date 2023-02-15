@@ -16,6 +16,7 @@ const  en = {
     "allSettledUp": "All settled up",
     "noProducts": "No products",
     "shopName": "Shop name",
+    "newProduct": "New product",
     "tooltip": {
       "count": "How many items of this product you already have?",
       "minCount": "What is the minimum capacety of this product in your apartment to add it to the shopping list?",
@@ -63,6 +64,7 @@ const he = {
     "allSettledUp": "הרשימה נקייה",
     "noProducts": "אין מוצרים",
     "shopName": "שם החנות",
+    "newProduct": "מוצר חדש",
     "tooltip": {
       "count": "כמה יחידות מהמוצר הזה כבר יש לך בבית?",
       "minCount": "מה היא הכמות המינימלמית של המוצר הזה כדי להוסיף אותו לרשימת הקניות? ",

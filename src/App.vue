@@ -10,7 +10,7 @@
       </div>
     </div>
     <AppFooter/>
-    <Loader v-if="isLoading"/>
+    <Loader v-if="isLoading" :msg="showSleepMsg? $t('serverSleepsMsg') : ''"/>
   </div>
 </template>
 
@@ -34,6 +34,7 @@ export default {
   data() {
     return {
       isLoading: false,
+      showSleepMsg: false,
       isDarkMode: localStorage.isDarkMode === 'true'
     }
   },
@@ -54,6 +55,9 @@ export default {
   },
   async created() {
     this.isLoading = true;
+    setTimeout(() => {
+      if (this.isLoading) this.showSleepMsg = true;
+    }, 5000);
     await socketService.connect();
     try {
       await Promise.all([
@@ -62,6 +66,7 @@ export default {
         this.$store.dispatch('auth/getUserInfo')
       ]);
     } catch(e) {}
+    this.showSleepMsg = false;
     this.isLoading = false;
     evEmmiter.on('set_darkmode', (val) => {
       this.isDarkMode = val;

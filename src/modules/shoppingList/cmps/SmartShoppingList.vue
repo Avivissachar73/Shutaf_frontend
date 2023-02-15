@@ -1,5 +1,5 @@
 <template>
-  <li class="smart-shoppingList item-preview flex column gap10">
+  <div class="smart-shoppingList flex column gap10">
     <div class="header flex align-center space-between">
       <h3 v-if="!showActions">{{shoppingListToEdit.title}}</h3>
       <FormInput v-else v-model="shoppingListToEdit.title" placeholder="title"/>
@@ -103,10 +103,12 @@
         <p>{{$t('shoppingList.allSettledUp')}}!</p>
       </template>
     </div>
-  </li>
+  </div>
 </template>
 
 <script>
+import BasicShoppingListCmp from './BasicShopingListCmp';
+
 import FormInput from '@/modules/common/cmps/FormInput.vue';
 import { shoppingListService } from '../services/shoppingList.service';
 import { alertService } from '@/modules/common/services/alert.service';
@@ -114,6 +116,7 @@ import { randItem } from '@/modules/common/services/util.service';
 import Tooltip from '../../common/cmps/Tooltip.vue';
 
 export default {
+  extends: BasicShoppingListCmp,
   name: 'SmartShoppingList',
   props: {
     shoppingList: {
@@ -123,12 +126,12 @@ export default {
   },
   data() {
     return {
+      // shoppingListToEdit: null,
+      // dontEmit: false,
       showAddProductSection: false,
       showActions: false,
       itemsView: true,
-      shoppingListToEdit: null,
       productToEdit: shoppingListService.getEmptyShoppingProduct(),
-      dontEmit: false,
       
       viewdShop: '',
     }
@@ -312,33 +315,33 @@ export default {
     },
 
 
-    removeShoppingList() {
-      this.$emit('remove');
-    },
+    // removeShoppingList() {
+    //   this.$emit('remove');
+    // },
     
-    setEditItem() {
-      this.dontEmit = true;
-      this.shoppingListToEdit = JSON.parse(JSON.stringify(this.shoppingList));
-      this.dontEmit = false;
-    },
+    // setEditItem() {
+    //   this.dontEmit = true;
+    //   this.shoppingListToEdit = JSON.parse(JSON.stringify(this.shoppingList));
+    //   this.dontEmit = false;
+    // },
   },
-  created() {
-    this.setEditItem();
-  },
-  watch: {
-    shoppingListToEdit: {
-      deep: true,
-      async handler(curr, prev) {
-        this.$emit('updateData', this.shoppingListToEdit);
-      }
-    },
-    shoppingList: {
-      deep: true,
-      async handler() {
-        this.setEditItem();
-      }
-    }
-  },
+  // created() {
+  //   this.setEditItem();
+  // },
+  // watch: {
+  //   shoppingListToEdit: {
+  //     deep: true,
+  //     async handler(curr, prev) {
+  //       this.$emit('updateData', this.shoppingListToEdit);
+  //     }
+  //   },
+  //   shoppingList: {
+  //     deep: true,
+  //     async handler() {
+  //       this.setEditItem();
+  //     }
+  //   }
+  // },
   components: { FormInput, Tooltip }
 }
 </script>

@@ -31,12 +31,15 @@ const en = {
   "createYourFirstOne": "Create your first one",
   "createNew": "Create new",
   "leave": "Leave",
+  "add": "Add",
 
   "hebrew": "Hebrew",
   "english": "English",
 
   "internalServerError": "Internal server error",
-  "internalError": "Internal error"
+  "internalError": "Internal error",
+
+  "serverSleepsMsg": "Seems like the server fell asleep..\nHang in there,\nFew more seconds and we'r Waking it up!"
 }
 const he = {
   "hello": "שלום",
@@ -69,12 +72,15 @@ const he = {
   "createYourFirstOne": "צור את הראשון",
   "createNew": "צור חדש",
   "leave": "עזוב",
+  "add": "הוסף",
 
   "hebrew": "עברית",
   "english": "אנגלית",
 
   "internalServerError": "תקלת שרת",
-  "internalError": "תקלה כללית"
+  "internalError": "תקלה כללית",
+  
+  "serverSleepsMsg": "נראה שהשרת הלך לישון..\nהחזיקו מעמד,\n כמה רגעים והוא מתעורר!"
 }
 const heF = {
   ...he,
@@ -94,6 +100,7 @@ const heF = {
   "createYourFirstOne": "צרי את הראשון",
   "createNew": "צרי חדש",
   "leave": "עזבי",
+  "add": "הוסיפי",
 }
 
 export const commonLocales = {

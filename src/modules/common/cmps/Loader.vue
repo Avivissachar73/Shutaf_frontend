@@ -2,7 +2,8 @@
   <div class="loader">
     <div class="blure"></div>
     <!-- <img class="preview" :src="require('@/assets/images/loader.gif')"> -->
-    <AnimationLoader class="preview" />
+    <h3 v-if="msg" class="preview width-all"><pre>{{msg}}</pre></h3>
+    <AnimationLoader v-else class="preview" />
   </div>
 </template>
 
@@ -10,6 +11,12 @@
 import AnimationLoader from './AnimationLoader.vue'
 export default {
   name: 'Loader',
+  props: {
+    msg: {
+      type: String,
+      default: ''
+    }
+  },
   components: { AnimationLoader }
 }
 </script>
@@ -30,12 +37,17 @@ export default {
     z-index: 9;
   }
   .preview {
+    text-align: center;
     position: absolute;
     top: 50%;
     left: 50%;
     width: 150px;
     height: 150px;
     transform: translate(-50%, -50%);
+    &.width-all {
+      width: 100%;
+      line-height: 2rem;
+    }
   }
 }
 </style>

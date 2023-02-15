@@ -49,7 +49,7 @@ export default {
     orgId() {
       // return localStorage.logged_organization_id || this.$store.getters['organization/selectedOrganization']?._id || 'public';
       // return localStorage.logged_organization_id || this.$store.getters['organization/selectedOrganization']?._id;
-      return this.$store.getters['organization/selectedOrganization']?._id;
+      return this.$store.getters['organization/selectedOrganization']?._id || this.$route.params.organizationId;
     }
   },
   methods: {

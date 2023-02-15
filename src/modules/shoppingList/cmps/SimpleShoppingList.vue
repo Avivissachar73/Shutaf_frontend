@@ -1,33 +1,77 @@
 <template>
-  <li class="simple-shoppingList item-preview flex column gap10">
+  <div class="simple-shoppingList flex column space-between gap15">
     <button class="btn small remove-btn" @click="remove">X</button>
-    <pre>{{shoppingList}}</pre>
-  </li>
+    <h3>{{shoppingListToEdit.title}}</h3>
+    <ul class="flex column gap10 flex-1">
+      <li class="flex space-between" v-for="product in shoppingListToEdit.products" :key="product.id">
+        <p :class="{checked: product.checked}" @click="togleCheckProduct(product)">{{product.name}}</p>
+        <button @click="removeProduct(product.id)" class="btn small">X</button>
+      </li>
+    </ul>
+    <form @submit.prevent="addNewProduct" class="flex space-between">
+      <FormInput v-model="newProductName" type="text" placeholder="shoppingList.newProduct"/>
+      <button class="btn">{{$t('add')}}</button>
+    </form>
+  </div>
 </template>
 
 <script>
+import BasicShoppingListCmp from './BasicShopingListCmp';
+import FormInput from '@/modules/common/cmps/FormInput.vue';
+import { getRandomId } from '@/modules/common/services/util.service';
+
+
 export default {
+  extends: BasicShoppingListCmp,
   name: 'SimpleShoppingList',
+  components: { FormInput },
   props: {
     shoppingList: {
       type: Object,
       required: true,
     }
   },
+  data() {
+    return {
+      newProductName: ''
+    }
+  },
   methods: {
-    remove() {
-      this.$emit('remove');
+    togleCheckProduct(product) {
+      product.checked = !product.checked;
     },
+    addNewProduct() {
+      const newProduct = {
+        name: this.newProductName,
+        checked: false,
+        id: getRandomId(),
+      }
+      this.shoppingListToEdit.products.push(newProduct);
+      this.newProductName = '';
+    },
+    removeProduct(id) {
+      const idx = this.shoppingListToEdit.products.findIndex(c => c.id === id);
+      if (idx === -1) return;
+      this.shoppingListToEdit.products.splice(idx, 1);
+    }
   }
 }
 </script>
 <style lang="scss">
 .simple-shoppingList {
+  overflow: unset !important;
+  height: unset !important;
   position: relative;
   .remove-btn {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: -5px;
+    left: -5px;
+  }
+  input {
+    color: black !important;
+  }
+  .checked {
+    text-decoration: line-through;
   }
 }
 </style>

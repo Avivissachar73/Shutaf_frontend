@@ -8,10 +8,10 @@
     </form>
     <div v-if="organization._id" class="flex column gap10">
       <h3>{{$t('organization.inviteMembers')}}</h3>
-      <div class="flex align-center search-input">
+      <form @submit.prevent="getAccounts" class="flex align-center search-input">
         <FormInput class="width-content" type="text" placeholder="search" v-model="searchAccountStr"/>
         <button class="btn secondary" @click.prevent.stop="getAccounts">{{$t('search')}}</button>
-      </div>
+      </form>
       <ul v-if="accounts.length" class="flex column gap5">
         <li v-for="account in accounts" :key="account._id" class="user-preview">
             <MiniAccountPreview :account="account"/>

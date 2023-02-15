@@ -1,6 +1,8 @@
 <template>
-  <SmartShoppingList v-if="shoppingList.type === 'smart'" :shoppingList="shoppingList" @updateData="onUpdate" @remove="removeShoppingList"/>
-  <SimpleShoppingList  v-else :shoppingList="shoppingList" @updateData="onUpdate" @remove="removeShoppingList"/>
+  <li class="shoppingList-preview item-preview">
+    <SmartShoppingList v-if="shoppingList.type === 'smart'" :shoppingList="shoppingList" @updateData="onUpdate" @remove="removeShoppingList"/>
+    <SimpleShoppingList v-else :shoppingList="shoppingList" @updateData="onUpdate" @remove="removeShoppingList"/>
+  </li>
 </template>
 
 <script>
@@ -79,3 +81,34 @@ export default {
   },
 }
 </script>
+
+<style lang="scss">
+.shoppingList-preview {
+  overflow: unset !important;
+  height: unset !important;
+  .header {
+    height: 30px;
+  }
+  .form-input {
+    .input.number {
+      width: 40px;
+    }
+    input {
+      color: black;
+    }
+  }
+  .new-product-section {
+    .form-input {
+      justify-content: space-between;
+    }
+  }
+
+  button {
+    &.selected {
+      border-width: 2px;
+      font-weight: bold;
+      transform: scale(1.05);
+    }
+  }
+}
+</style>
