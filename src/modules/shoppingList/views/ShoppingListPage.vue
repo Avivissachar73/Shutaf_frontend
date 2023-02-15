@@ -8,7 +8,7 @@
       itemDetailesPageName="ShoppingListDetails"
       newItemPageName="ShoppingListEdit"
       :singlePreviewCmp="ShoppingListPreview"
-      :isLoading="isLoading"
+      :isLoading="isLoading && !shoppingListsData?.items?.length"
       :showLoader="false"
     />
     <Loader v-if="isLoading" />

@@ -29,6 +29,9 @@ export default {
     },
     async saveShoppingList() {
       if (!this.isItemValid) return;
+      if (!this.shoppingListToEdit._id && this.shoppingListToEdit.type === 'simple') {
+        delete this.shoppingListToEdit.cart;
+      }
       await this.$store.dispatch({ type: 'shoppingList/saveShoppingList', shoppingList: this.shoppingListToEdit, organizationId: this.$route.params.organizationId });
       this.$router.push('/shopping-list/' + this.$route.params.organizationId);
     }
