@@ -39,7 +39,7 @@ export default {
     },
 
     removeShoppingList() {
-      this.$store.dispatch({type: 'shoppingList/removeShoppingList', id: this.shoppingList._id, organizationId: this.orgId });
+      this.$store.dispatch({type: 'shoppingList/removeShoppingList', id: this.shoppingList._id, organizationId: this.orgId, reload: true });
     },
     
     setEditItem() {

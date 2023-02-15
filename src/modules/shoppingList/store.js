@@ -77,7 +77,7 @@ export const _shoppingListStore = {
         onSuccess: (shoppingList) => commit({ type: 'setSelectedShoppingList', shoppingList })
       });
     },
-    async removeShoppingList({ commit, dispatch }, { id, organizationId }) {
+    async removeShoppingList({ commit, dispatch, getters }, { id, organizationId, reload = false }) {
       if (!await alertService.Confirm($t('shoppingList.alerts.confirmRemove'))) return;
       return dispatch({
         type: '_Ajax',
@@ -85,6 +85,7 @@ export const _shoppingListStore = {
         onSuccess: () => {
           commit({ type: 'removeShoppingList', id });
           alertService.toast({type: 'safe', msg: `${$t('shoppingList.alerts.removeSuccess')}! id: ${id}`});
+          if (reload) dispatch({ type: 'loadShoppingLists', organizationId, filterBy: getters.filterBy });
         }
       });
     },
