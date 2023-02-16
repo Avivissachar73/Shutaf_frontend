@@ -27,6 +27,11 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/styles/global/index';
 .loader {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
   &:hover {
     pointer-events: none;
   }
