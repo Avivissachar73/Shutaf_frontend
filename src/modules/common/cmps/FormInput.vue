@@ -1,7 +1,7 @@
 <template>
   <section class="form-input" :class="{ 'show-error': showError, ['form-input-' + type]: true }">
-    <label class="label" :for="inputId" v-if="label">
-      <p>{{ $t(label) }}</p>
+    <label class="label" :for="inputId" v-if="label || labelholder">
+      <p>{{ $t(label || labelholder) }}</p>
       <span class="require-span" v-if="required" :style="{ opacity: isEmpty ? 1 : 0 }">*</span>
     </label>
     <div
@@ -22,7 +22,7 @@
         :required="required"
         :min="min"
         :max="max"
-        :placeholder="$t(placeholder)"
+        :placeholder="$t(placeholder || labelholder)"
         :type="componentType === 'autocomplete' ? 'text' : type"
         v-model="val"
         :step="step"
@@ -33,7 +33,7 @@
         :disabled="disabled"
         :id="inputId"
         :required="required"
-        :placeholder="$t(placeholder)"
+        :placeholder="$t(placeholder || labelholder)"
         v-model="val"
       />
 
@@ -43,7 +43,7 @@
         :disabled="disabled"
         :id="inputId"
         :required="required"
-        :placeholder="$t(placeholder)"
+        :placeholder="$t(placeholder || labelholder)"
         v-model="val"
         @change="$emit('change', val)"
       >
@@ -66,7 +66,7 @@
         @blur="closeDropDown"
       >
         <div style="height:100%;display:flex;align-items:center" class="head" >
-          <span class="placeholder">{{ $t(placeholder) }}</span>
+          <span class="placeholder">{{ $t(placeholder || labelholder) }}</span>
           <div class="toggle-btn"></div>
           <div class="inner-square"></div>
         </div>
@@ -120,6 +120,7 @@ export default {
   props: {
     label: { required: false, default: '', type: String },
     placeholder: { required: false, type: String, default: '' },
+    labelholder: { required: false, type: String, default: '' },
     type: { required: false, type: String, default: 'text' },
     items: { required: false, type: Array, default: () => [] },
     itemsMap: { required: false, type: Object, default: () => {} },

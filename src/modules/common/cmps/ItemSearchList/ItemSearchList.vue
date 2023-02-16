@@ -65,6 +65,16 @@ export default {
   methods: {
     setFilter(filter) {
       this.filterBy.filter = JSON.parse(JSON.stringify(filter));
+    },
+    initFilter() {
+      const filterByToSet = JSON.parse(JSON.stringify(this.initFilterBy));
+      const queryParams = this.$route.query;
+      deepIterateWithObj(filterByToSet, (key, val) => {
+        let valToSet = +queryParams[key];
+        if (isNaN(valToSet)) valToSet = queryParams[key]
+        if (queryParams[key]) setDeepVal(filterByToSet, key, valToSet, '_');
+      }, '_');
+      this.filterBy = filterByToSet;
     }
   },
   computed: {
@@ -79,14 +89,7 @@ export default {
     }
   },
   created() {
-    const filterByToSet = JSON.parse(JSON.stringify(this.initFilterBy));
-    const queryParams = this.$route.query;
-    deepIterateWithObj(filterByToSet, (key, val) => {
-      let valToSet = +queryParams[key];
-      if (isNaN(valToSet)) valToSet = queryParams[key]
-      if (queryParams[key]) setDeepVal(filterByToSet, key, valToSet, '_');
-    }, '_');
-    this.filterBy = filterByToSet;
+    this.initFilter();
   },
   components: { ItemFilter, ItemList, PaginationBtns, Loader }
 }

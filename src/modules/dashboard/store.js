@@ -38,10 +38,10 @@ export const _dashboardStore = {
         onSuccess: (data) => commit({ type: 'setData', data }),
       });
     },
-    async loadOrganizationStatsData({ commit, dispatch }, { organizationId }) {
+    async loadOrganizationStatsData({ commit, dispatch }, { organizationId, filter }) {
       return dispatch({
         type: '_Ajax',
-        do: () => dashboardService.getOrganizationStats(organizationId),
+        do: () => dashboardService.getOrganizationStats(organizationId, filter),
         onSuccess: (data) => commit({ type: 'setData', data }),
       });
     }

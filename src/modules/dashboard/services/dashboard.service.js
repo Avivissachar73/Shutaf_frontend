@@ -12,6 +12,6 @@ function getDashboardData() {
 }
 
 
-function getOrganizationStats(organizationId) {
-  return httpService.get(`${ENDPOINT}/organization/${organizationId}/stats`);
+function getOrganizationStats(organizationId, filter) {
+  return httpService.get(`${ENDPOINT}/organization/${organizationId}/stats`, filter);
 }

@@ -1,7 +1,14 @@
 
 <template>
   <section class="dashboard-page flex column align-center space-around">
-      <h2>{{$t('dashboard.dashboard')}}</h2>
+      <div class="flex align-center space-between wrap gap10 width-all">
+        <h2>{{$t('dashboard.dashboard')}}</h2>
+        <!-- <div class="flex align-center space-between wrap gap5">
+          <FormInput type="date" labelholder="from" v-model="filter.from"/>
+          <FormInput type="date" labelholder="to" v-model="filter.to"/>
+          <FormInput type="select" labelholder="timeGroup" v-model="filter.timeGroup" :itemsMap="{day:'day', week:'week', month:'month'}"/>
+        </div> -->
+      </div>
       <!-- <pre>{{dashboardData}}</pre> -->
       <div class="charts-container flex flex-1 wrap align-center space-around gap10">
         <div class="chart totalEat-container"/>
@@ -23,11 +30,20 @@
 
 <script>
 import { LineChart, BarChart, PiChart, DonatChart, DiscChart, FrameDiscChart, Heatmap } from '@/modules/common/services/AvivChart.js';
+import { setDeepVal, deepIterateWithObj } from '@/modules/common/services/util.service';
+import FormInput from '../../common/cmps/FormInput.vue';
+
 export default {
+  components: { FormInput },
     name: 'DashboardPage',
     data() {
       return {
-        charts: []
+        charts: [],
+        filter: { 
+          from: Date.now() - (1000*60*60*24*7),
+          to: Date.now(),
+          timeGroup: 'day'
+        }
       }
     },
     // created() {
@@ -73,8 +89,8 @@ export default {
               { tag: 'mid',       vals: timeLabels.map(key => sumHealthRate(this.dashboardData.stats.timeline.eat[key].healthMap, 4, 7)) , style: { color: 'orange' } },
               { tag: 'notHealty', vals: timeLabels.map(key => sumHealthRate(this.dashboardData.stats.timeline.eat[key].healthMap, 0, 3)) , style: { color: 'red'    } }
             ],
-            // labels: timeLabels.map(c => new Date(+c).getDate()),
-            labels: timeLabels.map(c => ''),
+            labels: timeLabels.map(c => new Date(+c).getDate()),
+            // labels: timeLabels.map(c => ''),
             legend: {
               tag: this.$t('dashboard.eatCountInTime'),
               // align: 'end'
@@ -93,11 +109,42 @@ export default {
         ];
       },
       getData() {
-        return this.$store.dispatch({ type: 'dashboard/loadOrganizationStatsData', organizationId: this.$route.params.organizationId });
+        return this.$store.dispatch({ type: 'dashboard/loadOrganizationStatsData', organizationId: this.$route.params.organizationId, filter: this.filter });
       },
       async init() {
+        this.initFilter();
+        this.initData();
+      },
+
+      async initData() {
         await this.getData();
         this.mountCharts();
+      },
+
+
+      initFilter() {
+        const filterByToSet = JSON.parse(JSON.stringify(this.filter));
+        const queryParams = this.$route.query;
+        deepIterateWithObj(filterByToSet, (key, val) => {
+          let valToSet = +queryParams[key];
+          if (isNaN(valToSet)) valToSet = queryParams[key]
+          if (queryParams[key]) setDeepVal(filterByToSet, key, valToSet, '_');
+        }, '_');
+        this.filter = filterByToSet;
+      }
+    },
+    watch: {
+      filter: {
+        deep: true,
+        handler(filterVal) {
+          const query = {};
+          deepIterateWithObj(filterVal, (key, val) => {
+            if (this.$route.query[key] != val) query[key] = val;
+          }, '_');
+          if (Object.keys(query).length) this.$router.push({ query: { ...this.$route.query, ...query} });
+          
+          this.initData();
+        }
       }
     }
 }
