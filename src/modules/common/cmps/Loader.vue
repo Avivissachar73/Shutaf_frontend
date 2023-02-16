@@ -2,7 +2,10 @@
   <div class="loader">
     <div class="blure"></div>
     <!-- <img class="preview" :src="require('@/assets/images/loader.gif')"> -->
-    <h3 v-if="msg" class="preview width-all"><pre>{{msg}}</pre></h3>
+    <div v-if="msg" class="preview width-all flex column align-center">
+      <h3><pre>{{msg}}</pre></h3>
+      <AnimationLoader class="inner-loader"/>
+    </div>
     <AnimationLoader v-else class="preview" />
   </div>
 </template>
@@ -46,7 +49,12 @@ export default {
     transform: translate(-50%, -50%);
     &.width-all {
       width: 100%;
+      height: auto;
       line-height: 2rem;
+      .inner-loader {
+        width: 100px;
+        height: 100px;
+      }
     }
   }
 }

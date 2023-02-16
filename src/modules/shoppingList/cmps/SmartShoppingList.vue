@@ -4,7 +4,7 @@
       <h3 v-if="!showActions">{{shoppingListToEdit.title}}</h3>
       <FormInput v-else v-model="shoppingListToEdit.title" placeholder="title"/>
       <div class="flex gap5">
-        <button @click="removeShoppingList" class="btn icon" v-if="showActions"><img :src="require('@/assets/images/garbage.png')"/></button>
+        <button @click="remove" class="btn icon" v-if="showActions"><img :src="require('@/assets/images/garbage.png')"/></button>
         <button @click="toggleItemsView(!itemsView)" class="btn icon"><img :src="require(`@/assets/images/${itemsView? '' : 'check-'}list.png`)"/></button>
         <button @click="toggleShowActions(!showActions)" class="btn icon"><img :src="require('@/assets/images/pencil.png')"/></button>
       </div>
@@ -61,10 +61,10 @@
             </div>
           </div>
           <div class="flex column width-all gap10">
-            <p class="flex align-center gap5">
-              <span>{{$t('shoppingList.prices')}}</span>
+            <div class="flex align-center gap5">
+              <p>{{$t('shoppingList.prices')}}</p>
               <Tooltip :attachToElement="$el" msg="shoppingList.tooltip.prices"/>
-            </p>
+            </div>
             <ul class="flex column gap10">
               <li v-for="(price, i) in productToEdit.prices" :key="price.id" class="flex space-between align-end">
                 <FormInput type="autocomplete" :items="allShops" placeholder="shoppingList.shopName" v-model="price.shopName"/>
@@ -91,7 +91,10 @@
           <ul  v-for="(items, key) in shoppingItemsToRender.data" :key="key" class="flex column gap10">
             <p>{{key}}:</p>
             <li v-for="item in items" :key="item.id" class="flex space-between">
-              <p class="flex align-center gap5"><FormInput type="checkbox" @click.native="val => toggleItemToCart(item.id, val)" :value="isProdactInCart(item.id)"/> {{item.toBuyCount}} {{item.name}}</p>
+              <p class="flex align-center gap5">
+                <FormInput type="checkbox" @click.native="val => toggleItemToCart(item.id, val)" :value="isProdactInCart(item.id)"/>
+                <span :class="{ checked: isProdactInCart(item.id) }">{{item.toBuyCount}} {{item.name}}</span>
+              </p>
               <p>{{item.totalPrice}}</p>
             </li>
           </ul>
@@ -215,6 +218,7 @@ export default {
     },
     setProductToEdit(product) {
       this.productToEdit = JSON.parse(JSON.stringify(product));
+      console.log('WOWOW', this.productToEdit);
       this.toggleAddProductSection(true);
     },
 

@@ -110,5 +110,9 @@ export default {
       transform: scale(1.05);
     }
   }
+  
+  .checked {
+    text-decoration: line-through;
+  }
 }
 </style>

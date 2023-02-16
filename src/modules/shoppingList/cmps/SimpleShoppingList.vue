@@ -1,10 +1,15 @@
 <template>
   <div class="simple-shoppingList flex column space-between gap15">
-    <button class="btn small remove-btn" @click="remove">X</button>
-    <h3>{{shoppingListToEdit.title}}</h3>
+    <div class="flex align-center space-between">
+      <h3>{{shoppingListToEdit.title}}</h3>
+      <button class="btn remove-btn" @click="remove">X</button>
+    </div>
     <ul class="flex column gap10 flex-1">
       <li class="flex space-between" v-for="product in shoppingListToEdit.products" :key="product.id">
-        <p :class="{checked: product.checked}" @click="togleCheckProduct(product)">{{product.name}}</p>
+        <p class="flex align-center gap5">
+          <FormInput type="checkbox" @click.native="togleCheckProduct(product, !product.checked)" :value="product.checked"/>
+          <span @click="togleCheckProduct(product, !product.checked)" :class="{ checked: product.checked }">{{product.toBuyCount}} {{product.name}}</span>
+        </p>
         <button @click="removeProduct(product.id)" class="btn small">X</button>
       </li>
     </ul>
@@ -37,8 +42,9 @@ export default {
     }
   },
   methods: {
-    togleCheckProduct(product) {
-      product.checked = !product.checked;
+    togleCheckProduct(product, val) {
+      // product.checked = !product.checked;
+      product.checked = val;
     },
     addNewProduct() {
       const newProduct = {
@@ -62,16 +68,13 @@ export default {
   overflow: unset !important;
   height: unset !important;
   position: relative;
-  .remove-btn {
-    position: absolute;
-    top: -5px;
-    left: -5px;
-  }
+  // .remove-btn {
+  //   position: absolute;
+  //   top: -5px;
+  //   left: -5px;
+  // }
   input {
     color: black !important;
-  }
-  .checked {
-    text-decoration: line-through;
   }
 }
 </style>
