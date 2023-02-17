@@ -44,19 +44,19 @@
             <FormInput type="text" placeholder="title" v-model="productToEdit.name"/>
             <FormInput type="autocomplete" :items="allCategories" placeholder="shoppingList.category" v-model="productToEdit.category"/>
             <div class="flex align-center width-all space-between gap10">
-              <FormInput class="flex-1" type="number" placeholder="shoppingList.count" label="shoppingList.count" v-model="productToEdit.count"/>
+              <FormInput class="flex-1" type="number" labelholder="shoppingList.count" v-model="productToEdit.count"/>
               <Tooltip :attachToElement="$el" msg="shoppingList.tooltip.count"/>
             </div>
             <div class="flex align-center width-all space-between gap10">
-              <FormInput class="flex-1" type="number" :min="0" placeholder="shoppingList.minCount" label="shoppingList.minCount" v-model="productToEdit.minCount"/>
+              <FormInput class="flex-1" type="number" :min="0" labelholder="shoppingList.minCount" v-model="productToEdit.minCount"/>
               <Tooltip :attachToElement="$el" msg="shoppingList.tooltip.minCount"/>
             </div>
             <div class="flex align-center width-all space-between gap10">
-              <FormInput class="flex-1" type="number" :min="0" placeholder="shoppingList.maxCount" label="shoppingList.maxCount" v-model="productToEdit.maxCount"/>
+              <FormInput class="flex-1" type="number" :min="0" labelholder="shoppingList.maxCount" v-model="productToEdit.maxCount"/>
               <Tooltip :attachToElement="$el" msg="shoppingList.tooltip.maxCount"/>
             </div>
             <div class="flex align-center width-all space-between gap10">
-              <FormInput class="flex-1" type="number" :min="1" :max="10" placeholder="shoppingList.healthRate" label="shoppingList.healthRate" v-model="productToEdit.healthRate"/>
+              <FormInput class="flex-1" type="number" :min="1" :max="10" labelholder="shoppingList.healthRate" v-model="productToEdit.healthRate"/>
               <Tooltip :attachToElement="$el" msg="shoppingList.tooltip.healthRate"/>
             </div>
           </div>

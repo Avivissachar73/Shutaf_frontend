@@ -2,8 +2,8 @@
   <div class="login-page flex column gap20">
     <router-link class="btn width-content" :to="{name: 'SignupPage'}">{{$t('signup')}}</router-link>
     <form @submit.prevent="login" class="simple-form">
-      <FormInput type="text" placeholder="account.username" label="account.username" v-model="userCred.username"/>
-      <FormInput type="password" placeholder="account.password" label="account.password" v-model="userCred.password"/>
+      <FormInput type="text" labelholder="account.username" v-model="userCred.username"/>
+      <FormInput type="password" labelholder="account.password" v-model="userCred.password"/>
       <button class="btn primary" :disabled="!isUserValid">{{$t('submit')}}</button>
     </form>
   </div>

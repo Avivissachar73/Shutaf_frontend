@@ -2,12 +2,12 @@
   <div class="signup-page flex column gap20">
     <router-link class="btn width-content" :to="{name: 'LoginPage'}">{{$t('login')}}</router-link>
     <form @submit.prevent="signup" class="simple-form">
-      <FormInput type="text" placeholder="account.username" label="account.username" v-model="user.username"/>
-      <FormInput type="text" placeholder="account.firstname" label="account.firstname" v-model="user.firstname"/>
-      <FormInput type="text" placeholder="account.lastname" label="account.lastname" v-model="user.lastname"/>
-      <FormInput type="text" placeholder="account.email" label="account.email" v-model="user.email"/>
-      <FormInput type="password" placeholder="account.password" label="account.password" v-model="user.password"/>
-      <FormInput type="select" label="account.gender" placeholder="account.gender" v-model="user.gender" :itemsMap="userGenders"/>
+      <FormInput type="text" labelholder="account.username" v-model="user.username"/>
+      <FormInput type="text" labelholder="account.firstname" v-model="user.firstname"/>
+      <FormInput type="text" labelholder="account.lastname" v-model="user.lastname"/>
+      <FormInput type="text" labelholder="account.email" v-model="user.email"/>
+      <FormInput type="password" labelholder="account.password" v-model="user.password"/>
+      <FormInput type="select" labelholder="account.gender" v-model="user.gender" :itemsMap="userGenders"/>
       <button class="btn primary" :disabled="!isUserValid">{{$t('submit')}}</button>
     </form>
   </div>

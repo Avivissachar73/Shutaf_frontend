@@ -17,6 +17,7 @@
       <FormInput v-model="newProductName" type="text" placeholder="shoppingList.newProduct"/>
       <button class="btn">{{$t('add')}}</button>
     </form>
+    <!-- SEARCH INPUT? -->
   </div>
 </template>
 

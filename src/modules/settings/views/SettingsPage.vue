@@ -6,7 +6,7 @@
       <FormInput label="Google API key" v-model="settings.GOOGLE_API_KEY"/>
       <button>{{$t('save')}}</button>
     </form> -->
-    <FormInput class="width-content gap10" label="settings.locale" placeholder="settings.locale" :value="currLocale" type="select" :items="langs" @change="setLocale"/>
+    <FormInput class="width-content gap10" labelholder="settings.locale" :value="currLocale" type="select" :items="langs" @change="setLocale"/>
     <FormInput class="width-content gap10" label="settings.darkMode" :value="isDarkMode" type="checkbox" @input="setDarkMode"/>
   </div>
 </template>

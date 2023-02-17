@@ -1,14 +1,14 @@
 <template>
   <section class="comment-list-container flex column gap10">
-    <FormInput placeholder="comment.comment" v-model="commentToAdd.content" @keypress.native.enter="addComment"/>
+    <SearchInput placeholder="comment.comment" btn="send" v-model="commentToAdd.content" @change="addComment" />
     <ul class="comment-list flex column gap5">
-        <li v-for="comment in comments" :key="comment._id" class="width-all flex align-start space-between">
-          <div>
-            <p>{{comment.createdBy.username}}:</p>
-            <p> {{comment.content}}</p>
-          </div>
-          <button  class="btn" v-if="isCommentCreator(comment)" @click="removeComment(comment._id)">X</button>
-        </li>
+      <li v-for="comment in comments" :key="comment._id" class="width-all flex column gap5 comment-preview">
+        <div class="flex space-between width-all">
+          <MiniAccountPreview :account="comment.createdBy"/>
+          <button class="btn small" v-if="isCommentCreator(comment)" @click="removeComment(comment._id)">X</button>
+        </div>
+        <p> {{comment.content}}</p>
+      </li>
 
       <li v-if="isLoading">
         <Loader/>
@@ -29,6 +29,8 @@ import Loader from '@/modules/common/cmps/Loader.vue';
 import { commentService } from '@/modules/comment/services/comment.service';
 import FormInput from '@/modules/common/cmps/FormInput.vue';
 import { socketService } from '@/modules/common/services/socket.service';
+import SearchInput from '../../common/cmps/SearchInput.vue';
+import MiniAccountPreview from '../../account/cmps/MiniAccountPreview.vue';
 
 export default {
   name: 'CommentList',
@@ -123,10 +125,17 @@ export default {
       return this.loggedUser._id === comment.createdBy._id;
     }
   },
-  components: { Loader, FormInput }
+  components: { Loader, FormInput, SearchInput, MiniAccountPreview }
 }
 </script>
 
-<style>
-
+<style lang="scss">
+@import '@/assets/styles/global/index';
+.comment-list {
+  .comment-preview {
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: $light-shadow;
+  }
+}
 </style>

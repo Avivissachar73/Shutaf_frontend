@@ -111,6 +111,10 @@ export default {
       height: 200px;
       border-radius: 5px;
       background-color: #fff;
+      color: black;
+      input {
+        color: black;
+      }
       box-shadow: $light-shadow;
       padding: 20px;
       overflow-y: auto;
