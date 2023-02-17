@@ -10,6 +10,7 @@
       :singlePreviewCmp="AccountPreview"
       :isLoading="isLoading"
       :showLoader="false"
+      @remove="removeAccount"
     />
     <Loader v-if="isLoading" />
   </section>
@@ -29,7 +30,10 @@ export default {
   methods: {
     getAccounts(filterBy) {
       this.$store.dispatch({ type: 'account/loadAccounts', filterBy });
-    }
+    },
+    removeAccount(id) {
+      this.$store.dispatch({type: 'account/removeAccount', id });
+    },
   },
   computed: {
     bugData() {

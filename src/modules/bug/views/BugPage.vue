@@ -10,6 +10,7 @@
       :singlePreviewCmp="BugPreview"
       :isLoading="isLoading"
       :showLoader="false"
+      @remove="removeBug"
     />
     <Loader v-if="isLoading" />
   </section>
@@ -29,7 +30,10 @@ export default {
   methods: {
     getBugs(filterBy) {
       this.$store.dispatch({ type: 'bug/loadBugs', filterBy });
-    }
+    },
+    removeBug(id) {
+      this.$store.dispatch({type: 'bug/removeBug', id });
+    },
   },
   computed: {
     bugData() {

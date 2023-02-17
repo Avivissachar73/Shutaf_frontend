@@ -10,6 +10,7 @@
       :singlePreviewCmp="OrganizationPreview"
       :isLoading="isLoading"
       :showLoader="false"
+      @remove="removeOrganization"
     />
     <Loader v-if="isLoading"/>
   </section>
@@ -29,7 +30,10 @@ export default {
   methods: {
     getOrganization(filterBy) {
       this.$store.dispatch({ type: 'organization/loadOrganizations', filterBy });
-    }
+    },
+    removeOrganization(id) {
+      this.$store.dispatch({type: 'organization/removeOrganization', id });
+    },
   },
   computed: {
     organizationData() {

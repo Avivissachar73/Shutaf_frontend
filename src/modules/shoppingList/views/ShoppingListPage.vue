@@ -10,6 +10,7 @@
       :singlePreviewCmp="ShoppingListPreview"
       :isLoading="isLoading && !shoppingListsData?.items?.length"
       :showLoader="false"
+      @remove="removeShoppingList"
     />
     <Loader v-if="isLoading" />
   </section>
@@ -28,10 +29,16 @@ export default {
   },
   methods: {
     getShoppingList(filterBy) {
-      this.$store.dispatch({ type: 'shoppingList/loadShoppingLists', filterBy, organizationId: this.$route.params.organizationId });
-    }
+      this.$store.dispatch({ type: 'shoppingList/loadShoppingLists', filterBy, organizationId: this.orgId });
+    },
+    removeShoppingList(id) {
+      this.$store.dispatch({type: 'shoppingList/removeShoppingList', id, organizationId: this.orgId, reload: true });
+    },
   },
   computed: {
+    orgId() {
+      return this.$route.params.organizationId;
+    },
     shoppingListsData() {
       return this.$store.getters['shoppingList/shoppingListsData'];
     },
@@ -43,7 +50,7 @@ export default {
     }
   },
   watch: {
-    '$route.params.organizationId'() {
+    'orgId'() {
       this.getShoppingList();
     }
   },

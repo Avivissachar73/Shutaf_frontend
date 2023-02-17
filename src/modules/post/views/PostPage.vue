@@ -10,6 +10,7 @@
       :singlePreviewCmp="PostPreview"
       :isLoading="isLoading"
       :showLoader="false"
+      @remove="removePost"
     />
     <Loader v-if="isLoading" />
   </section>
@@ -28,10 +29,16 @@ export default {
   },
   methods: {
     getPosts(filterBy) {
-      this.$store.dispatch({ type: 'post/loadPosts', filterBy, organizationId: this.$route.params.organizationId });
-    }
+      this.$store.dispatch({ type: 'post/loadPosts', filterBy, organizationId: this.orgId });
+    },
+    removePost(id) {
+      this.$store.dispatch({type: 'post/removePost', id, organizationId: this.orgId });
+    },
   },
   computed: {
+    orgId() {
+      return this.$route.params.organizationId;
+    },
     postsData() {
       return this.$store.getters['post/postsData'];
     },
@@ -43,7 +50,7 @@ export default {
     }
   },
   watch: {
-    '$route.params.organizationId'() {
+    'orgId'() {
       this.getPosts();
     }
   },

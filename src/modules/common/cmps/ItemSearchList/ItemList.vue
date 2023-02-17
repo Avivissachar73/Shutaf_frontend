@@ -1,6 +1,6 @@
 <template>
   <ul class="item-list flex align-start space-around wrap gap20">
-    <component :is="componentToRender" :item="item" v-for="item in items" :itemDetailesPageName="itemDetailesPageName" :key="item._id"/>
+    <component @remove="id => $emit('remove', id)" :is="componentToRender" :item="item" v-for="item in items" :itemDetailesPageName="itemDetailesPageName" :key="item._id"/>
   </ul>
 </template>
 

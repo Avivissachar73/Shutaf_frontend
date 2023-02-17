@@ -52,7 +52,7 @@ export const _postStore = {
       state.selectedItem.comments.total++;
     },
     removeComment(state, { commentId }) {
-      const idx = state.selectedItem.comments.items.findIndex(c => c._id === commentId);
+      const idx = state.selectedItem?.comments.items.findIndex(c => c._id === commentId) || -1;
       if (idx === -1) return;
       state.selectedItem.comments.items.splice(idx, 1);
       state.selectedItem.comments.total--;

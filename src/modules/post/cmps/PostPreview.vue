@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     async removePost() {
-      await this.$store.dispatch({ type: 'post/removePost', id: this.post._id, organizationId: this.orgId });
+      this.$emit('remove', this.post._id);
       // this.$router.push({name: 'PostPage'});
     },
   },
