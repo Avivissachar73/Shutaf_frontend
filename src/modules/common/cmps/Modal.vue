@@ -1,6 +1,6 @@
 <template>
-  <div class="modal-container">
-    <div class="blure" @click.stop.prevent="$emit('close')"></div>
+  <div class="modal-container" @click.stop="">
+    <div class="blure" @click.stop="$emit('close')" @touchstart.stop="" @touchend.stop=""></div>
     <div class="modal" :class="{ 'modal-style': styling }">
       <slot/>
     </div>
@@ -23,14 +23,14 @@ export default {
 @import '@/assets/styles/global/index';
 .modal-container {
   position: absolute;
-  z-index: 10;
+  z-index: 30;
   height: 100%;
   width: 100%;
   top: 0;
   left: 0;
   .blure {
     position: absolute;
-    z-index: 10;
+    z-index: 30;
     top: 0;
     right: 0;
     width: 100%;
@@ -39,7 +39,7 @@ export default {
   }
   .modal {
     position: absolute;
-    z-index: 10;
+    z-index: 30;
     top: 50%;
     left: 50%;
     width: fit-content;

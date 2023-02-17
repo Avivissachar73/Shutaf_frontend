@@ -8,7 +8,7 @@
     </form>
     <div v-if="organization._id" class="flex column gap10">
       <h3>{{$t('organization.inviteMembers')}}</h3>
-      <SearchInput v-model="searchAccountStr" @change="getAccounts"/>
+      <SearchInput class="width-content" v-model="searchAccountStr" @change="getAccounts"/>
       <ul v-if="accounts.length" class="flex column gap5">
         <li v-for="account in accounts" :key="account._id" class="user-preview">
             <MiniAccountPreview :account="account"/>

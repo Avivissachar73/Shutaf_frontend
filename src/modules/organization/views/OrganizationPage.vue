@@ -12,7 +12,7 @@
       :showLoader="false"
       @remove="removeOrganization"
     />
-    <Loader v-if="isLoading"/>
+    <!-- <Loader v-if="isLoading"/> -->
   </section>
 </template>
 

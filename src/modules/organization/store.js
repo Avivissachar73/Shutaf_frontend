@@ -73,8 +73,10 @@ const _organizationStore = {
         onSuccess: (organization) => commit({ type: 'setSelectedOrganization', organization })
       });
     },
-    async removeOrganization({ commit, dispatch }, { id }) {
-      if (!await alertService.Confirm($t('organization.alerts.confirmRemoveOrg'))) return;
+    async removeOrganization({ commit, dispatch }, { id, toConfirm = true }) {
+      if (toConfirm) {
+        if (!await alertService.Confirm($t('organization.alerts.confirmRemoveOrg'))) return;
+      }
       return dispatch({
         type: '_Ajax',
         do: async () => organizationService.remove(id),

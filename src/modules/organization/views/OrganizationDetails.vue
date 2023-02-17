@@ -51,7 +51,8 @@ export default {
       this.$store.dispatch({ type: 'organization/loadOrganization', id: this.orgId });
     },
     async removeOrganization() {
-      await this.$store.dispatch({ type: 'organization/removeOrganization', id: this.orgId });
+      if (!await alertService.Confirm(this.$t('organization.alerts.confirmRemoveOrg'))) return;
+      await this.$store.dispatch({ type: 'organization/removeOrganization', id: this.orgId, toConfirm: false });
       this.$router.push({name: 'ExamplePage'});
     },
     async updateStatus(newStatus) {
