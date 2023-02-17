@@ -89,9 +89,10 @@ export const _shoppingListStore = {
         }
       });
     },
-    async saveShoppingList({ commit, dispatch }, { shoppingList, organizationId }) {
+    async saveShoppingList({ commit, dispatch }, { shoppingList, organizationId, loading }) {
       return dispatch({
         type: '_Ajax',
+        loading,
         do: async () => shoppingListService.save(shoppingList, organizationId),
         onSuccess: (shoppingList) => {
           // alertService.toast({type: 'safe', msg: `${$t('shoppingList.alerts.savedSuccess')}! id: ${data._id}`})

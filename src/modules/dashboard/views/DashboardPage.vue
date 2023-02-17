@@ -1,14 +1,18 @@
 
 <template>
   <section class="dashboard-page flex column align-center space-around">
-      <div class="flex align-center space-between wrap gap10 width-all">
+      <div class="width-all flex align-center space-between">
         <h2>{{$t('dashboard.dashboard')}}</h2>
-        <!-- <div class="flex align-center space-between wrap gap5">
-          <FormInput type="date" labelholder="from" v-model="filter.from"/>
-          <FormInput type="date" labelholder="to" v-model="filter.to"/>
-          <FormInput type="select" labelholder="timeGroup" v-model="filter.timeGroup" :itemsMap="{day:'day', week:'week', month:'month'}"/>
-        </div> -->
+        <button class="btn" @click="showFilterModal = !showFilterModal">::</button>
       </div>
+      <Modal @close="showFilterModal = false" v-if="showFilterModal">
+        <div class="filter-modal flex column align-center gap5">
+          <FormInput class="space-between width-all" type="date" labelholder="from" v-model="filterToEdit.from"/>
+          <FormInput class="space-between width-all" type="date" labelholder="to" v-model="filterToEdit.to"/>
+          <FormInput class="space-between width-all" type="select" labelholder="timeGroup" v-model="filterToEdit.timeGroup" :itemsMap="{day:'day', week:'week', month:'month'}"/>
+          <button @click="setFilter" class="btn secondary width-content">{{$t('submit')}}</button>
+        </div>
+      </Modal>
       <!-- <pre>{{dashboardData}}</pre> -->
       <div class="charts-container flex flex-1 wrap align-center space-around gap10">
         <div class="chart totalEat-container"/>
@@ -32,9 +36,10 @@
 import { LineChart, BarChart, PiChart, DonatChart, DiscChart, FrameDiscChart, Heatmap } from '@/modules/common/services/AvivChart.js';
 import { setDeepVal, deepIterateWithObj } from '@/modules/common/services/util.service';
 import FormInput from '../../common/cmps/FormInput.vue';
+import Modal from '../../common/cmps/Modal.vue';
 
 export default {
-  components: { FormInput },
+  components: { FormInput, Modal },
     name: 'DashboardPage',
     data() {
       return {
@@ -43,7 +48,9 @@ export default {
           from: Date.now() - (1000*60*60*24*7),
           to: Date.now(),
           timeGroup: 'day'
-        }
+        },
+        filterToEdit: null,
+        showFilterModal: false
       }
     },
     // created() {
@@ -121,7 +128,9 @@ export default {
         this.mountCharts();
       },
 
-
+      setFilter() {
+        this.filter = {...this.filterToEdit};
+      },
       initFilter() {
         const filterByToSet = JSON.parse(JSON.stringify(this.filter));
         const queryParams = this.$route.query;
@@ -130,6 +139,7 @@ export default {
           if (isNaN(valToSet)) valToSet = queryParams[key]
           if (queryParams[key]) setDeepVal(filterByToSet, key, valToSet, '_');
         }, '_');
+        if (JSON.stringify(this.filterByToSet) === JSON.stringify(this.filter)) return;
         this.filter = filterByToSet;
       }
     },
@@ -137,6 +147,8 @@ export default {
       filter: {
         deep: true,
         handler(filterVal) {
+          this.filterToEdit = {...this.filter};
+
           const query = {};
           deepIterateWithObj(filterVal, (key, val) => {
             if (this.$route.query[key] != val) query[key] = val;
@@ -167,6 +179,9 @@ export default {
       justify-content: center;
     }
     margin-bottom: 30px;
+  }
+  .filter-modal {
+    width: 200px;
   }
 }
 </style>

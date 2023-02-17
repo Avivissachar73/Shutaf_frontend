@@ -101,12 +101,12 @@ export default {
       height: $height;
       width: 100vw;
       background-color: $blure-clr;
-      z-index: 9;
+      z-index: 11;
     }
     nav {
       display: block;
       position: fixed;
-      z-index: 10;
+      z-index: 12;
       height: $height;
       top: $header-height;
       overflow-y: auto;

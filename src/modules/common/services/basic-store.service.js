@@ -22,9 +22,9 @@ const initState = () => ({
   isLoading: false
 });
 
-async function StoreAjax({ commit, dispatch }, { do: toDo, onSuccess, onError, dontDelay = false }) {
+async function StoreAjax({ commit, dispatch }, { do: toDo, onSuccess, onError, dontDelay = false, loading = true }) {
   try {
-    commit({ type: 'setLoading', val: true });
+    if (loading) commit({ type: 'setLoading', val: true });
     // if (!dontDelay) await delay(700);
   
     const res = await toDo();
@@ -34,7 +34,7 @@ async function StoreAjax({ commit, dispatch }, { do: toDo, onSuccess, onError, d
     }
     else if (onSuccess) onSuccess(res);
   
-    commit({ type: 'setLoading', val: false });
+    if (loading) commit({ type: 'setLoading', val: false });
     
     if (typeof res === 'object') return JSON.parse(JSON.stringify(res));
     return res;
@@ -44,7 +44,7 @@ async function StoreAjax({ commit, dispatch }, { do: toDo, onSuccess, onError, d
     // else alertService.toast({type: 'danger', msg: `Error ${err.status || 500}: ${err.err || err.message || err.msg || err.error || 'internal error'}`})
     else alertService.toast({type: 'danger', msg: `Error ${err.status || 500}: ${$t(err.err) || err.err || err.message || err.msg || err.error || 'internal error'}`})
     setTimeout(() => {
-      commit({ type: 'setLoading', val: false });
+      if (loading) commit({ type: 'setLoading', val: false });
     }, 3000);
     throw err;
   }

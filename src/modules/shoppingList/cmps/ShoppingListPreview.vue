@@ -70,7 +70,7 @@ export default {
         if (!prev || !curr) return;
         if (this.dontEmit) return;
         if (JSON.stringify(prev) === JSON.stringify(curr)) return;
-        await this.$store.dispatch({type: 'shoppingList/saveShoppingList', shoppingList: this.shoppingListToEdit, organizationId: this.orgId });
+        await this.$store.dispatch({type: 'shoppingList/saveShoppingList', shoppingList: this.shoppingListToEdit, organizationId: this.orgId, loading: false });
       }
     },
     shoppingList: {

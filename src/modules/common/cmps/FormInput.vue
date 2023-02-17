@@ -96,14 +96,7 @@
 </template>
 
 <script>
-function generateId(length = 8) {
-  var txt = '';
-  var opts = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  for (var i = 0; i < length; i++) {
-    txt += opts.charAt(Math.floor(Math.random() * opts.length));
-  }
-  return txt;
-}
+import { getRandomId, padNum } from '../services/util.service';
 
 const inputTypes = [
   'text',
@@ -137,7 +130,7 @@ export default {
   data() {
     return {
       val: this.value,
-      inputId: this.id || generateId(),
+      inputId: this.id || getRandomId(),
       isOpen: false,
     };
   },
@@ -146,6 +139,10 @@ export default {
       if (!this.val) this.val = '';
       // if (!this.val || typeof this.val === 'string') this.val = { value: this.value || '', label: this.value || '' };  
       else this.val = this.val?.value || this.val;
+    }
+    if (this.type === 'date') {
+      const date = new Date(this.val || undefined);
+      this.val = `${date.getFullYear()}-${padNum(date.getMonth()+1)}-${padNum(date.getDate())}`;
     }
   },
   computed: {

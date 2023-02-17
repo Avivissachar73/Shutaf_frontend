@@ -55,7 +55,7 @@ export default {
   },
   async created() {
     this.isLoading = true;
-    setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       if (this.isLoading) this.showSleepMsg = true;
     }, 5000);
     await socketService.connect();
@@ -66,6 +66,7 @@ export default {
         this.$store.dispatch('auth/getUserInfo')
       ]);
     } catch(e) {}
+    clearTimeout(timeoutId);
     this.showSleepMsg = false;
     this.isLoading = false;
     evEmmiter.on('set_darkmode', (val) => {
