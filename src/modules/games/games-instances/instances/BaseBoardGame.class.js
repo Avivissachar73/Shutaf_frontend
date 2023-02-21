@@ -93,5 +93,7 @@ export class BaseGameController extends BaseGameEntity {
     super.destroy();
     this.tableService.destroy();
     this.tableService = null;
+    this.popup.reset?.();
+    this.popup.destroy?.();
   }
 }
