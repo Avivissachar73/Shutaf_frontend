@@ -13,7 +13,8 @@ export const Utils = {
     stringToLowerKabab,
     getStyleStr,
     deepSearch,
-    getElPosOnScreen
+    getElPosOnScreen,
+    createBoard
 };
 
 
@@ -42,11 +43,11 @@ export function getQuerysStr2(criteria = {}) {
     return queryStr;
 } 
 
-export function getRandomId() {
+export function getRandomId(s = '-') {
     var pt1 = Date.now().toString(16);
     var pt2 = getRandomInt(1000, 9999).toString(16);
     var pt3 = getRandomInt(1000, 9999).toString(16);
-    return `${pt3}-${pt1}-${pt2}`.toUpperCase();
+    return `ID_${pt3}${s}${pt1}${s}${pt2}`.toUpperCase();
 }
 
 export function getRandomInt(num1, num2, inclusive = false) {
@@ -58,8 +59,10 @@ export function getRandomInt(num1, num2, inclusive = false) {
 
 export const randItem = (arr, start = 0, end = arr.length) => arr[getRandomInt(start, end)];
 
-export function copy(obj) {
+export function copy(obj, hard = false) {
+    if (hard) return JSON.parse(JSON.stringify(obj));
     if (typeof(obj) !== 'object') return obj;
+    if (!obj) return obj;
     var copied = (Array.isArray(obj))? [...obj] : {...obj};
     var keys = Object.keys(obj);
     for (let key of keys) {

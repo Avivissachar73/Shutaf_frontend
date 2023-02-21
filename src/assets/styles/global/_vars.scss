@@ -8,7 +8,7 @@ $font-size-big: 1.125rem;     // 18px;
 
 // FONTS:
 $app-font: sans-serif;
-// $app-font: 'Courier New', Courier, monospace;
+$app-font: 'Courier New', Courier, monospace, sans-serif;
 
 // SREEN BREAK BREAK POINTS:
 // $small-screen-breake: 800px;
@@ -36,6 +36,28 @@ $clr-light-red: rgb(228, 145, 145);
 $header-height: 60px;
 $footer-height: 100px;
 $app-aside-width: 50px;
+
+
+// $layout-clr: black;
+// $layout-clr2: black;
+// $layout-bg-clr1: #c4fad3;
+// $layout-bg-clr2: rgb(222, 250, 196);
+
+// $layout-dark-clr: white;
+// $layout-dark-clr2: white;
+// $layout-dark-bg-clr1: #505050;
+// $layout-dark-bg-clr2: #252525;
+
+$layout-clr: black;
+$layout-clr2: rgb(252, 47, 47);
+$layout-bg-clr1: rgb(252, 47, 47);
+$layout-bg-clr2: #fff;
+
+$layout-dark-clr: white;
+$layout-dark-clr2: white;
+$layout-dark-bg-clr1: #505050;
+$layout-dark-bg-clr2: #252525;
+
 
 // oters:
 

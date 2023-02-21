@@ -10,6 +10,7 @@ import { postRoutes } from '@/modules/post/routes';
 import { dashboardRoutes } from '../modules/dashboard/routes';
 import { bugRoutes } from '../modules/bug/routes';
 import { shoppingListRoutes } from '../modules/shoppingList/routes';
+import { gamesRoutes } from '../modules/games/routes';
 
 Vue.use(VueRouter)
 
@@ -24,6 +25,7 @@ const routes = [
   ...bugRoutes,
   
   ...shoppingListRoutes,
+  ...gamesRoutes
 ]
 
 export const router = new VueRouter({

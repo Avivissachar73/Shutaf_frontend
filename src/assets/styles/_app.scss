@@ -8,8 +8,11 @@ html {
 }
 
 .app {
-  background-color: #c4fad3;
-  color: black;
+  background-color: $layout-bg-clr1;
+  color: $layout-clr;
+  
+  // background-color: rgb(252, 47, 47);
+  // color: #fff;
 }
 
 .app-header {
@@ -19,9 +22,13 @@ html {
 .app-main {
   // min-height: calc(100vh - #{$header-height} - #{$footer-height});
   height: calc(100vh - #{$header-height} - #{$footer-height});
-  background-color: rgb(222, 250, 196);
   overflow-y: auto;
   position: relative;
+  
+  color: $layout-clr2;
+  background-color: $layout-bg-clr2;
+  // background-color: #fff;
+  // color: rgb(252, 47, 47);
 }
 
 .app-footer {
@@ -60,11 +67,12 @@ html {
 }
 
 .app.dark {
-  color: white;
-  background-color: #505050;
+  color: $layout-dark-clr;
+  background-color: $layout-dark-bg-clr1;
 }
 .app.dark .app-main {
-  background-color: #252525;
+  color: $layout-dark-clr2;
+  background-color: $layout-dark-bg-clr2;
 }
 .app.dark .app-aside {
   background-color: rgba(255,255,255,0.1);

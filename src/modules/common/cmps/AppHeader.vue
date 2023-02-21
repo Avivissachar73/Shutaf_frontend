@@ -18,7 +18,8 @@
         <router-link :to="{name: 'AboutPage'}">{{$t('about')}}</router-link> 
         <!-- <router-link :to="{name: 'SettingsPage'}">{{$t('settings')}}</router-link> -->
         <router-link :to="{name: 'SettingsPage'}">{{$t('settings.settings')}}</router-link>
-          <router-link :to="{name: 'BugEdit'}">{{$t('bug.reportABug')}}</router-link>
+        <router-link :to="{name: 'BugEdit'}">{{$t('bug.reportABug')}}</router-link>
+        <router-link :to="{name: 'GamePage'}">{{$t('games')}}</router-link>
         <router-link v-if="!loggedUser" :to="{name: 'LoginPage'}">{{$t('login')}}</router-link>
         <template v-else>
           <router-link :to="{name: 'AccountDetails', params: {id: loggedUser._id} }"><Avatar :account="loggedUser"/></router-link>
@@ -86,6 +87,7 @@ export default {
   }
   @media (max-width: $small-screen-breake) {
     $height: calc(100vh - #{$header-height});
+    // color: ;
     .nav-burger {
       display: block;
       width: 25px;
