@@ -1,17 +1,17 @@
 <template>
-  <section class="games-page container inner-app flex column height-all">
-    <div class="games-ul container flex wrap space-around">
+  <section class="games-page container inner-app flex column gap10 height-all">
+    <nav class="games-ul flex wrap space-between">
       <!-- <RouterLink url="/games">Games</RouterLink> -->
       <RouterLink v-for="gameName in allGamesNames" :key="gameName" :to="{ name: 'GamePage', params: { gameName } }">
         {{gameName}}
       </RouterLink>
-    </div>
-    <section class="content-container flex-1 flex column align-center space-around">
+    </nav>
+    <section class="content-container flex-1 flex column align-center space-between">
       <!-- <h2>Game: {{currGameName}}</h2> -->
       
-      <div v-if="currGame" class="game-container"></div>
+      <div v-if="currGame" class="curr-game-container height-all width-all"></div>
 
-      <div v-if="!currGame" class="error-container flex column align-center space-between">
+      <div v-else class="error-container flex column align-center space-between">
         <h2>404</h2>
         <p>Unknown game "{{routeGameName}}"</p>
       </div>
@@ -65,12 +65,12 @@ export default {
         this.stopGame();
         if (!this.currGame) return;
         const popup = new A_Alert('.content-container', true);
-        gGame = new this.currGame('.game-container', popup);
+        gGame = new this.currGame('.curr-game-container', popup);
       },
       stopGame() {
         gGame?.destroy();
         gGame = null;
-        // const gameCotainer = document.querySelector('.game-container');
+        // const gameCotainer = document.querySelector('.curr-game-container');
         // if (gameCotainer) gameCotainer.innerHTML = '';
       }
     }
@@ -80,6 +80,7 @@ export default {
 <style lang="scss">
 @import '@/assets/styles/global/index';
 .games-page {
+  // all: unset;
   direction: ltr;
   button {
     border: unset;
@@ -108,13 +109,14 @@ export default {
   .content-container {
     position: relative;
   }
-  .game-container {
+  .curr-game-container {
     width: 100%;
+    flex: 1;
     display: flex;
     align-items: center;
     flex-direction: column;
     .board-container {
-      max-width: 400px;
+      max-width: 300px;
     }
   }
   .games-ul {

@@ -6,7 +6,7 @@
       <!-- <button @click="mobileShow = !mobileShow" class="nav-burger">☰</button> -->
       <button @click="mobileShow = !mobileShow" class="btn nav-burger"><img :src="require('@/assets/images/mine/navBurger.png')"/></button>
       <div class="blure" v-if="mobileShow" @click="mobileShow = false"></div>
-      <nav :class="{show: mobileShow}">
+      <nav class="flex align-center wrap gap15" :class="{show: mobileShow}">
         <template v-if="loggedUser">
           <router-link v-if="orgId" :to="{name: 'OrganizationDetails', params: {id: orgId} }">{{$t('organization.organization')}}</router-link>
           <!-- <router-link v-if="orgId" :to="{name: 'PostPage', params: {organizationId: orgId} }">{{$t('post.posts')}}</router-link> -->

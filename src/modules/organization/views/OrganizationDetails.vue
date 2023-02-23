@@ -5,9 +5,10 @@
       <button class="btn mid danger" @click="updateStatus('declined')">{{$t('decline')}}</button>
     </div>
     
-    <nav v-if="orgId" class="flex align-center gap10">
+    <nav v-if="orgId" class="flex align-center gap15">
       <router-link :to="{name: 'PostPage', params: {organizationId: orgId} }">{{$t('post.posts')}}</router-link>
       <router-link :to="{name: 'ShoppingListPage', params: {organizationId: orgId} }">{{$t('shoppingList.shoppingLists')}}</router-link>
+      <router-link :to="{name: 'DashboardPage', params: {organizationId: orgId} }">{{$t('dashboard.dashboard')}}</router-link>
     </nav>
     
     <section class="flex column gap20">
