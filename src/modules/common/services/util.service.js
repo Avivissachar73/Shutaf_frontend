@@ -320,6 +320,14 @@ export function deepIterateWithObj(obj, cb, seperator = '.', rootKey = '') {
     }
 }
 
+export function deepParseObject(obj) {
+    const res = {};
+    deepIterateWithObj(obj, (key, val) => {
+        res[key] = val;
+    }, '_');
+    return res;
+}
+
 export function delay(timeMs = 2000) {
     return new Promise((resolve => {
         setTimeout(resolve, timeMs);

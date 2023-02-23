@@ -130,6 +130,7 @@ export default {
 
       setFilter() {
         this.filter = {...this.filterToEdit};
+        this.showFilterModal = false;
       },
       initFilter() {
         const filterByToSet = JSON.parse(JSON.stringify(this.filter));

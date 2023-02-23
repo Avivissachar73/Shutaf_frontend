@@ -20,7 +20,7 @@ function toast({type = 'danger', msg = '', html = '', timeout = 7000} = {}, olCl
     ${elementService.dataToCss('.toast-alert', {
       ...config,
       position: 'fixed',
-      zIndex: 20,
+      zIndex: 40,
       top: '40px',
       right: '50%',
       transform: 'translateX(50%)',
