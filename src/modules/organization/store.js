@@ -8,40 +8,16 @@ const initState = () => ({
   ...basicStoreService.initState()
 });
 
+const basicStore = basicStoreService.getSimpleStore(initState);
+
 const _organizationStore = {
   namespaced: true,
-  state: initState(),
+  state: basicStore.state,
   getters: {
-    organizationData: (state) => state.data,
-    organizations: (state) => state.data.items,
-    totalItems: (state) => state.data.total,
-    selectedOrganization: (state) => state.selectedItem,
-    filterBy: (state) => state.filterBy,
-    isLoading: (state) => state.isLoading,
+    ...basicStore.getters
   },
   mutations: {
-    setProp(state, { key, val }) {
-      state[key] = val;
-    },
-    setOrganizaions(state, { data }) {
-      state.data = data;
-    },
-    setSelectedOrganization(state, { organization }) {
-      state.selectedItem = organization;
-    },
-    removeOrganization(state, { id }) {
-    },
-    setFilterBy(state, { filterBy }) {
-      state.filterBy = filterBy;
-    },
-    setLoading(state, { val }) {
-      state.isLoading = val;
-    },
-    resetState(state) {
-      const newState = initState();
-      for (let key in state) state[key] = newState[key];
-    },
-
+    ...basicStore.mutations,
     updateOrgStatus(state, { organizationId, newStatus }) {
       const doUpdateSttatus = (org) => org.loggedAccountData.status = newStatus;
       if (state.selectedItem?._id === organizationId) doUpdateSttatus(state.selectedItem);
@@ -63,14 +39,14 @@ const _organizationStore = {
           const organizationsRes = await organizationService.query(filterBy);
           return organizationsRes;
         },
-        onSuccess: (data) => commit({ type: 'setOrganizaions', data })
+        onSuccess: (data) => commit({ type: 'setData', data })
       });
     },
     async loadOrganization({ commit, dispatch }, { id }) {
       return dispatch({
         type: '_Ajax',
         do: async () => organizationService.get(id),
-        onSuccess: (organization) => commit({ type: 'setSelectedOrganization', organization })
+        onSuccess: (organization) => commit({ type: 'setSelectedItem', item: organization })
       });
     },
     async removeOrganization({ commit, dispatch }, { id, toConfirm = true }) {

@@ -1,7 +1,8 @@
 <template>
-  <div class="bug-edit simple-form flex column gap20">
+  <div class="bug-edit flex column gap30">
     <h2>{{$t('bug.reportABug')}}!</h2>
-    <form v-if="bugToEdit" @submit.prevent="saveBug" class="flex column align-start gap15">
+    <p>{{$t('bug.reportABugMsg')}}</p>
+    <form v-if="bugToEdit" @submit.prevent="saveBug" class="flex column align-start gap15 simple-form">
       <FormInput type="text" labelholder="title" v-model="bugToEdit.title"/>
       <FormInput type="textarea" labelholder="description" v-model="bugToEdit.desc"/>
       <button class="btn primary" :disabled="!isBugValid">{{$t('submit')}}</button>

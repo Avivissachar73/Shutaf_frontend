@@ -8,39 +8,16 @@ const initState = () => ({
   ...basicStoreService.initState()
 });
 
+const basicStore = basicStoreService.getSimpleStore(initState);
+
 export const _accountStore = {
   namespaced: true,
-  state: initState(),
+  state: basicStore.state,
   getters: {
-    data: (state) => state.data,
-    accounts: (state) => state.data.items,
-    totalAccounts: (state) => state.data.total,
-    selectedAccount: (state) => state.selectedItem,
-    filterBy: (state) => state.filterBy,
-    isLoading: (state) => state.isLoading
+    ...basicStore.getters
   },
   mutations: {
-    setProp(state, { key, val }) {
-      state[key] = val;
-    },
-    setAccountData(state, { data }) {
-      state.data = data;
-    },
-    setSelectedAccount(state, { account }) {
-      state.selectedItem = account;
-    },
-    removeAccount(state, { id }) {
-    },
-    setFilterBy(state, { filterBy }) {
-      state.filterBy = filterBy;
-    },
-    setLoading(state, { val }) {
-      state.isLoading = val;
-    },
-    resetState(state) {
-      const newState = initState();
-      for (let key in state) state[key] = newState[key];
-    }
+    ...basicStore.mutations
   },
   actions: {
     _Ajax: basicStoreService.StoreAjax,
@@ -52,14 +29,14 @@ export const _accountStore = {
           const accountsRes = await accountService.query(filterBy);
           return accountsRes;
         },
-        onSuccess: (data) => commit({ type: 'setAccountData', data })
+        onSuccess: (data) => commit({ type: 'setData', data })
       });
     },
     async loadAccount({ commit, dispatch }, { id }) {
       return dispatch({
         type: '_Ajax',
         do: async () => accountService.get(id),
-        onSuccess: (account) => commit({ type: 'setSelectedAccount', account })
+        onSuccess: (account) => commit({ type: 'setSelectedItem', item: account })
       });
     },
     async removeAccount({ commit, dispatch }, { id }) {

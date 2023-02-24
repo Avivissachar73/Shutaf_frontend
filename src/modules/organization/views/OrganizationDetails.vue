@@ -73,7 +73,7 @@ export default {
       return this.$store.getters['auth/loggedUser'];
     },
     organization() {
-      return this.$store.getters['organization/selectedOrganization'];
+      return this.$store.getters['organization/selectedItem'];
     }
   },
   created() {

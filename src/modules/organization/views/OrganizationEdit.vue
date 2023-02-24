@@ -54,8 +54,8 @@ export default {
       return this.$store.getters['auth/loggedUser'];
     },
     accounts() {
-      // return this.$store.getters['account/accounts'].filter(c => c._id !== this.loggedUser?._id);
-      return this.$store.getters['account/accounts'].filter(c => !this.organization.members.find(_ => _._id === c._id));
+      // return this.$store.getters['account/items'].filter(c => c._id !== this.loggedUser?._id);
+      return this.$store.getters['account/items'].filter(c => !this.organization.members.find(_ => _._id === c._id));
     },
     orgRoles() {
         const roles = {

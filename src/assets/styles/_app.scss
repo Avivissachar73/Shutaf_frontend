@@ -78,23 +78,6 @@ html {
   background-color: rgba(255,255,255,0.1);
 }
 
-.app.dark {
-  @media (max-width: $small-screen-breake) {
-    .app-header {
-      nav {
-        background-color: #1a1a1a;
-        border-color: white;
-        >* {
-          border-color: white;
-          &:hover {
-            background-color: #505050;
-          }
-        }
-      }
-    }
-  }
-}
-
 
 .rtl {
   direction: rtl;

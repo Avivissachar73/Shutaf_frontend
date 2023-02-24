@@ -12,49 +12,16 @@ const initState = () => {
   return state;
 }
 
+const basicStore = basicStoreService.getSimpleStore(initState);
+
 export const _shoppingListStore = {
   namespaced: true,
-  state: initState(),
+  state: basicStore.state,
   getters: {
-    shoppingListsData: (state) => state.data,
-    shoppingLists: (state) => state.data.items,
-    totalShoppingList: (state) => state.data.total,
-    selectedShoppingList: (state) => state.selectedItem,
-    filterBy: (state) => state.filterBy,
-    isLoading: (state) => state.isLoading,
+    ...basicStore.getters
   },
   mutations: {
-    setProp(state, { key, val }) {
-      state[key] = val;
-    },
-    setShoppingList(state, { data }) {
-      state.data = data;
-    },
-    setSelectedShoppingList(state, { shoppingList }) {
-      state.selectedItem = shoppingList;
-    },
-    removeShoppingList(state, { id }) {
-      const idx = state.data.items.findIndex(c => c._id === id);
-      if (idx !== -1) {
-        state.data.items.splice(idx, 1);
-        state.data.total++;
-      }
-    },
-    setFilterBy(state, { filterBy }) {
-      state.filterBy = filterBy;
-    },
-    setLoading(state, { val }) {
-      state.isLoading = val;
-    },
-    resetState(state) {
-      const newState = initState();
-      for (let key in state) state[key] = newState[key];
-    },
-    saveShoppingList(state, { shoppingList }) {
-      const idx = state.data.items.findIndex(c => c._id === shoppingList._id);
-      if (idx === -1) state.data.items.unshift(shoppingList);
-      else state.data.items.splice(idx, 1, shoppingList);
-    }
+    ...basicStore.mutations
   },
   actions: {
     _Ajax: basicStoreService.StoreAjax,
@@ -66,24 +33,24 @@ export const _shoppingListStore = {
           const shoppingListsRes = await shoppingListService.query(filterBy, organizationId);
           return shoppingListsRes;
         },
-        onSuccess: (data) => commit({ type: 'setShoppingList', data })
+        onSuccess: (data) => commit({ type: 'setData', data })
       });
     },
     async loadShoppingList({ commit, dispatch }, { id, organizationId }) {
-      commit({ type: 'setSelectedShoppingList', shoppingList: null });
+      commit({ type: 'setSelectedItem', item: null });
       return dispatch({
         type: '_Ajax',
         do: async () => shoppingListService.get(id, organizationId),
-        onSuccess: (shoppingList) => commit({ type: 'setSelectedShoppingList', shoppingList })
+        onSuccess: (shoppingList) => commit({ type: 'setSelectedItem', item: shoppingList })
       });
     },
-    async removeShoppingList({ commit, dispatch, getters }, { id, organizationId, reload = false }) {
+    async removeItem({ commit, dispatch, getters }, { id, organizationId, reload = false }) {
       if (!await alertService.Confirm($t('shoppingList.alerts.confirmRemove'))) return;
       return dispatch({
         type: '_Ajax',
         do: async () => shoppingListService.remove(id, organizationId),
         onSuccess: () => {
-          commit({ type: 'removeShoppingList', id });
+          commit({ type: 'removeItem', id });
           alertService.toast({type: 'safe', msg: `${$t('shoppingList.alerts.removeSuccess')}! id: ${id}`});
           if (reload) dispatch({ type: 'loadShoppingLists', organizationId, filterBy: getters.filterBy });
         }
@@ -96,7 +63,7 @@ export const _shoppingListStore = {
         do: async () => shoppingListService.save(shoppingList, organizationId),
         onSuccess: (shoppingList) => {
           // alertService.toast({type: 'safe', msg: `${$t('shoppingList.alerts.savedSuccess')}! id: ${data._id}`})
-          // commit({ type: 'saveShoppingList', shoppingList });
+          // commit({ type: 'saveItem', item: shoppingList });
         }
       });
     },

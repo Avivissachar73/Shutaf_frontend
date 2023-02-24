@@ -40,7 +40,7 @@ export default {
       return this.$route.params.organizationId;
     },
     postsData() {
-      return this.$store.getters['post/postsData'];
+      return this.$store.getters['post/data'];
     },
     filterBy() {
       return this.$store.getters['post/filterBy'];

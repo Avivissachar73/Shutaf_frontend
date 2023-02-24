@@ -8,44 +8,16 @@ const initState = () => ({
   ...basicStoreService.initState()
 });
 
+const basicStore = basicStoreService.getSimpleStore(initState);
+
 export const _bugStore = {
   namespaced: true,
-  state: initState(),
+  state: basicStore.state,
   getters: {
-    data: (state) => state.data,
-    accounts: (state) => state.data.items,
-    totalAccounts: (state) => state.data.total,
-    selectedAccount: (state) => state.selectedItem,
-    filterBy: (state) => state.filterBy,
-    isLoading: (state) => state.isLoading
+    ...basicStore.getters
   },
   mutations: {
-    setProp(state, { key, val }) {
-      state[key] = val;
-    },
-    setBugData(state, { data }) {
-      state.data = data;
-    },
-    setSelectedBug(state, { item }) {
-      state.selectedItem = item;
-    },
-    removeBug(state, { id }) {
-    },
-    setFilterBy(state, { filterBy }) {
-      state.filterBy = filterBy;
-    },
-    setLoading(state, { val }) {
-      state.isLoading = val;
-    },
-    resetState(state) {
-      const newState = initState();
-      for (let key in state) state[key] = newState[key];
-    },
-    saveBug(state, { bug }) {
-      const idx = state.data.items.findIndex(c => c._id === bug._id);
-      if (idx === -1) state.data.items.unshift(bug);
-      else state.data.items.splice(idx, 1, bug);
-    }
+    ...basicStore.mutations
   },
   actions: {
     _Ajax: basicStoreService.StoreAjax,
@@ -57,14 +29,14 @@ export const _bugStore = {
           const accountsRes = await bugService.query(filterBy);
           return accountsRes;
         },
-        onSuccess: (data) => commit({ type: 'setBugData', data })
+        onSuccess: (data) => commit({ type: 'setData', data })
       });
     },
     async loadBug({ commit, dispatch }, { id }) {
       return dispatch({
         type: '_Ajax',
         do: async () => bugService.get(id),
-        onSuccess: (item) => commit({ type: 'setSelectedBug', item })
+        onSuccess: (item) => commit({ type: 'setSelectedItem', item })
       });
     },
     async removeBug({ commit, dispatch }, { id }) {
@@ -79,8 +51,8 @@ export const _bugStore = {
       return dispatch({
         type: '_Ajax',
         do: async () => bugService.save(bug),
-        onSuccess: () => {
-          commit({ type: 'saveBug', bug });
+        onSuccess: (item) => {
+          commit({ type: 'saveItem', item });
           alertService.toast({type: 'safe', msg: bug._id? `${$t('bug.alerts.savedAccountSuccess')} id: ${bug._id}` : $t('bug.alerts.reportBugSuccess')+'!'})
         }
       });

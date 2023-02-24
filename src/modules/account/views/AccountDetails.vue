@@ -30,7 +30,7 @@ export default {
   },
   computed: {
     account() {
-      return this.$store.getters['account/selectedAccount'];
+      return this.$store.getters['account/selectedItem'];
     },
     isLoggedUser() {
       return this.$route.params.id === this.$store.getters['auth/loggedUser']?._id;

@@ -8,45 +8,16 @@ const initState = () => ({
   ...basicStoreService.initState()
 });
 
+const basicStore = basicStoreService.getSimpleStore(initState);
+
 export const _postStore = {
   namespaced: true,
-  state: initState(),
+  state: basicStore.state,
   getters: {
-    postsData: (state) => state.data,
-    posts: (state) => state.data.items,
-    totalPosts: (state) => state.data.total,
-    selectedPost: (state) => state.selectedItem,
-    filterBy: (state) => state.filterBy,
-    isLoading: (state) => state.isLoading,
+    ...basicStore.getters
   },
   mutations: {
-    setProp(state, { key, val }) {
-      state[key] = val;
-    },
-    setPosts(state, { data }) {
-      state.data = data;
-    },
-    setSelectedPost(state, { post }) {
-      state.selectedItem = post;
-    },
-    removePost(state, { id }) {
-      const idx = state.data.items.findIndex(c => c._id === id);
-      if (idx !== -1) {
-        state.data.items.splice(idx, 1);
-        state.data.total++;
-      }
-    },
-    setFilterBy(state, { filterBy }) {
-      state.filterBy = filterBy;
-    },
-    setLoading(state, { val }) {
-      state.isLoading = val;
-    },
-    resetState(state) {
-      const newState = initState();
-      for (let key in state) state[key] = newState[key];
-    },
-
+    ...basicStore.mutations,
     addComment(state, { comment }) {
       state.selectedItem.comments.items.unshift(comment);
       state.selectedItem.comments.total++;
@@ -58,6 +29,7 @@ export const _postStore = {
       state.selectedItem.comments.total--;
     }
   },
+
   actions: {
     _Ajax: basicStoreService.StoreAjax,
     async loadPosts({ commit, dispatch }, { filterBy, organizationId }) {
@@ -68,15 +40,15 @@ export const _postStore = {
           const postsRes = await postService.query(filterBy, organizationId);
           return postsRes;
         },
-        onSuccess: (data) => commit({ type: 'setPosts', data })
+        onSuccess: (data) => commit({ type: 'setData', data })
       });
     },
     async loadPost({ commit, dispatch }, { id, organizationId }) {
-      commit({ type: 'setSelectedPost', post: null });
+      commit({ type: 'setSelectedItem', item: null });
       return dispatch({
         type: '_Ajax',
         do: async () => postService.get(id, organizationId),
-        onSuccess: (post) => commit({ type: 'setSelectedPost', post })
+        onSuccess: (post) => commit({ type: 'setSelectedItem', item: post })
       });
     },
     async removePost({ commit, dispatch }, { id, organizationId }) {

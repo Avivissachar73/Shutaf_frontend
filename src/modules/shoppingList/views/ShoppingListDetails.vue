@@ -35,7 +35,7 @@ export default {
       return this.$route.params.organizationId;
     },
     shoppingList() {
-      return this.$store.getters['shoppingList/selectedShoppingList'];
+      return this.$store.getters['shoppingList/selectedItem'];
     }
   },
   created() {

@@ -11,6 +11,7 @@
       :isLoading="isLoading"
       :showLoader="false"
       @remove="removeAccount"
+      @edit="removeAccount"
     />
     <Loader v-if="isLoading" />
   </section>
@@ -33,6 +34,9 @@ export default {
     },
     removeAccount(id) {
       this.$store.dispatch({type: 'account/removeAccount', id });
+    },
+    editAccount(account) {
+      this.$store.dispatch({type: 'account/saveAccount', account });
     },
   },
   computed: {

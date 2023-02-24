@@ -74,6 +74,22 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/assets/styles/global/index';
+.dark {
+  @media (max-width: $small-screen-breake) {
+    .app-header {
+      nav {
+        background-color: #1a1a1a;
+        border-color: white;
+        >* {
+          border-color: white;
+          &:hover {
+            background-color: #505050;
+          }
+        }
+      }
+    }
+  }
+}
 .app-header {
   position: relative;
   nav {

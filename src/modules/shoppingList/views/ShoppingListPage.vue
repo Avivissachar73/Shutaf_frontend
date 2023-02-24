@@ -40,7 +40,7 @@ export default {
       return this.$route.params.organizationId;
     },
     shoppingListsData() {
-      return this.$store.getters['shoppingList/shoppingListsData'];
+      return this.$store.getters['shoppingList/data'];
     },
     filterBy() {
       return this.$store.getters['shoppingList/filterBy'];

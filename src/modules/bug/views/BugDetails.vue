@@ -22,7 +22,7 @@ export default {
   },
   computed: {
     bug() {
-      return this.$store.getters['bug/selectedBug'];
+      return this.$store.getters['bug/selectedItem'];
     }
   },
   created() {

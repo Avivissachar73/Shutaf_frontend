@@ -5,7 +5,14 @@
       <router-link v-if="newItemPageName" :to="{name: newItemPageName}"><button class="btn secondary mid">{{$t('addNew')}}</button></router-link>
     </div>
     <template v-if="!isLoading && items?.length">
-      <ItemList @remove="id => $emit('remove', id)" class="width-all" :items="items" v-if="items" :singlePreviewCmp="singlePreviewCmp" :itemDetailesPageName="itemDetailesPageName"/>
+      <ItemList 
+        v-if="items"
+        class="width-all" :items="items"
+        :singlePreviewCmp="singlePreviewCmp"
+        :itemDetailesPageName="itemDetailesPageName"
+        @edit="item => $emit('edit', item)"
+        @remove="id => $emit('remove', id)"
+      />
       <PaginationBtns v-if="filterBy" :total="totalItems" :perPage="filterBy.pagination.limit" v-model="filterBy.pagination.page"/>
     </template>
     <div v-else-if="!isLoading" class="flex column space-between align-center no-results-preview">

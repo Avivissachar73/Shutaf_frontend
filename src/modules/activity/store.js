@@ -6,37 +6,16 @@ const initState = () => ({
   ...basicStoreService.initState()
 });
 
+const basicStore = basicStoreService.getSimpleStore(initState);
+
 export const _activityStore = {
   namespaced: true,
-  state: initState(),
+  state: basicStore.state,
   getters: {
-    commentsData: (state) => state.data,
-    comments: (state) => state.data.items,
-    totalComments: (state) => state.data.total,
-    selectedComment: (state) => state.selectedItem,
-    filterBy: (state) => state.filterBy,
-    isLoading: (state) => state.isLoading,
+    ...basicStore.getters
   },
   mutations: {
-    setProp(state, { key, val }) {
-      state[key] = val;
-    },
-    setActivities(state, { data }) {
-      state.data = data;
-    },
-    setSelectedActivity(state, { activity }) {
-      state.selectedItem = activity;
-    },
-    setFilterBy(state, { filterBy }) {
-      state.filterBy = filterBy;
-    },
-    setLoading(state, { val }) {
-      state.isLoading = val;
-    },
-    resetState(state) {
-      const newState = initState();
-      for (let key in state) state[key] = newState[key];
-    },
+    ...basicStore.mutations
   },
   actions: {
     _Ajax: basicStoreService.StoreAjax,
@@ -53,11 +32,11 @@ export const _activityStore = {
       });
     },
     async loadActivity({ commit, dispatch }, { id }) {
-      commit({ type: 'setSelectedActivity', activity: null });
+      commit({ type: 'setSelectedItem', item: null });
       return dispatch({
         type: '_Ajax',
         do: async () => activityService.get(id),
-        onSuccess: (activity) => commit({ type: 'setSelectedActivity', activity })
+        onSuccess: (item) => commit({ type: 'setSelectedItem', item })
       });
     },
     async addActivity({ commit, dispatch }, { activity, attachedId }) {

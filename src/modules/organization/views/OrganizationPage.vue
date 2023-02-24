@@ -37,7 +37,7 @@ export default {
   },
   computed: {
     organizationData() {
-      return this.$store.getters['organization/organizationData'];
+      return this.$store.getters['organization/data'];
     },
     filterBy() {
       return this.$store.getters['organization/filterBy'];

@@ -8,39 +8,16 @@ const initState = () => ({
   ...basicStoreService.initState()
 });
 
+const basicStore = basicStoreService.getSimpleStore(initState);
+
 export const _commentStore = {
   namespaced: true,
-  state: initState(),
+  state: basicStore.state,
   getters: {
-    commentsData: (state) => state.data,
-    comments: (state) => state.data.items,
-    totalComments: (state) => state.data.total,
-    selectedComment: (state) => state.selectedItem,
-    filterBy: (state) => state.filterBy,
-    isLoading: (state) => state.isLoading,
+    ...basicStore.getters
   },
   mutations: {
-    setProp(state, { key, val }) {
-      state[key] = val;
-    },
-    setComments(state, { data }) {
-      state.data = data;
-    },
-    setSelectedComment(state, { comment }) {
-      state.selectedItem = comment;
-    },
-    removeComment(state, { id }) {
-    },
-    setFilterBy(state, { filterBy }) {
-      state.filterBy = filterBy;
-    },
-    setLoading(state, { val }) {
-      state.isLoading = val;
-    },
-    resetState(state) {
-      const newState = initState();
-      for (let key in state) state[key] = newState[key];
-    },
+    ...basicStore.mutations
   },
   actions: {
     _Ajax: basicStoreService.StoreAjax,
@@ -57,11 +34,11 @@ export const _commentStore = {
       });
     },
     async loadComment({ commit, dispatch }, { id }) {
-      commit({ type: 'setSelectedComment', comment: null });
+      commit({ type: 'setSelectedItem', comment: null });
       return dispatch({
         type: '_Ajax',
         do: async () => commentService.get(id),
-        onSuccess: (comment) => commit({ type: 'setSelectedComment', comment })
+        onSuccess: (comment) => commit({ type: 'setSelectedItem', item: comment })
       });
     },
     async removeComment({ commit, dispatch }, { id }) {
