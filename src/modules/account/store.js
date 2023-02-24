@@ -52,6 +52,7 @@ export const _accountStore = {
         type: '_Ajax',
         do: async () => accountService.save(account),
         onSuccess: (savedAccount) => {
+          commit({ type: 'saveItem', item: savedAccount });
           alertService.toast({type: 'safe', msg: `${$t('account.alerts.savedAccountSuccess')} id: ${account._id}`});
           const loggedUser = this.getters['auth/loggedUser'];
           if (account._id === loggedUser?._id) this.commit({ type: 'auth/setLoggedUser', user: savedAccount });

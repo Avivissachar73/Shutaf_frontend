@@ -1,13 +1,14 @@
 <template>
-  <li class="bug-preview item-preview flex column gap15">
-    <div class="flex align-center space-between width-all gap10">
+  <li class="bug-preview item-preview flex column gap20 align-start">
+    <div class="flex-1 flex column gap20">
       <h3>{{item.title}}</h3>
-      <div class="flex align-center space-between gap5">
-        <button class="btn primary" @click="updateBugStatus('resolved')">{{$t('bug.resolve')}}</button>
-        <button class="btn danger" @click="updateBugStatus('ignored')">{{$t('bug.ignore')}}</button>
-      </div>
+      <p>{{item.desc}}</p>
     </div>
-    <p>{{item.desc}}</p>
+    <div class="toggle-btns">
+      <button :class="{selected: item.status === 'resolved'}" @click="updateBugStatus('resolved')">{{$t('bug.resolve')}}</button>
+      <button :class="{selected: item.status === 'pending'}" @click="updateBugStatus('pending')">{{$t('bug.pending')}}</button>
+      <button :class="{selected: item.status === 'ignored'}" @click="updateBugStatus('ignored')">{{$t('bug.ignore')}}</button>
+    </div>
     <!-- <router-link :to="{ name: 'BugDetails', params: { id: item._id } }">
     </router-link> -->
   </li>

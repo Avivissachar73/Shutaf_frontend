@@ -11,7 +11,7 @@
       :isLoading="isLoading"
       :showLoader="false"
       @remove="removeAccount"
-      @edit="removeAccount"
+      @edit="editAccount"
     />
     <Loader v-if="isLoading" />
   </section>

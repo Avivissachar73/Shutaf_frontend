@@ -1,6 +1,14 @@
 <template>
   <ul class="item-list flex align-start space-around wrap gap20">
-    <component @remove="id => $emit('remove', id)" :is="componentToRender" :item="item" v-for="item in items" :itemDetailesPageName="itemDetailesPageName" :key="item._id"/>
+    <component 
+      :is="componentToRender"
+      v-for="item in items"
+      :key="item._id"
+      :item="item"
+      :itemDetailesPageName="itemDetailesPageName"
+      @remove="id => $emit('remove', id)"
+      @edit="item => $emit('edit', item)"
+    />
   </ul>
 </template>
 

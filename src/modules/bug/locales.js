@@ -5,6 +5,7 @@ const  en = {
     "reportABug": "Report a bug",
     "resolve": "resolve",
     "ignore": "Ignore",
+    "pending": "Pending",
     "reportABugMsg:": "Found a bug in our system? getting errors? something feels wrong or just could work better? tell us about it!",
     "alerts": {
       "confirmRemove": "Are you sure you want to remove this bug?",
@@ -21,6 +22,7 @@ const he = {
     "reportABug": "דווח על באג",
     "resolve": "פתור",
     "ignore": "התעלם",
+    "pending": "בעבודה",
     "reportABugMsg:": "מצאת באג במערכת? חוטף שגיאות וארורים? משהו מרגיש לא כשורה או פשוט יכול לעבוד טוב יותר? ספר לנו!",
     "alerts": {
       "confirmRemove": "האם אתה בטוח שאתה רוצה למחוק את הבאג?",

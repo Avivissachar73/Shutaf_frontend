@@ -11,6 +11,8 @@ const en = {
     "newPassword": "New password",
     "confirmPassword": "Confirm password",
     "gender": "Gender",
+    "block": "block",
+    "unBlock": "Un block",
     "alerts": {
       "confirmRemove": "Are you sure you want to remove this account?",
       "removeSuccess": "Account removed successfully!",
@@ -31,6 +33,8 @@ const he = {
     "newPassword": "סיסמה חדשה",
     "confirmPassword": "הזן שוב סיסמה",
     "gender": "מגדר",
+    "block": "חסום",
+    "unBlock": "בטל חסימה",
     "alerts": {
       "confirmRemove": "האם אתה בטוח שאתה רוצה למחוק את המשתמש?",
       "removeSuccess": "משתמש נמחק בהצלחה!",
@@ -44,6 +48,8 @@ const heF = {
     ...he.account,
     "editAccount": "ערכי פרטי משתמש",
     "confirmPassword": "הזיני שוב סיסמה",
+    "block": "חסמי",
+    "unBlock": "בטלי חסימה",
     alerts: {
       ...he.account.alerts,
       "confirmRemove": "האם את בטוחה שאת רוצה למחוק את המשתמש?",
