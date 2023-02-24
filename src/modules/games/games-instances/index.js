@@ -6,7 +6,7 @@ import { MineSweeperGame } from './instances/mine-sweeper/index.js';
 import { SheshBeshGame } from './instances/shesh-besh/index.js';
 
 
-const allGames = [DamkaGame, PackmanGame, SnakeGame, SpaceInvadersGame, MineSweeperGame, SheshBeshGame];
+const allGames = [DamkaGame, PackmanGame, SnakeGame];
 
 export const Games = {
   allGames

@@ -251,7 +251,7 @@ export default {
       else this.shoppingListToEdit.cart.splice(idx, 1);
     },
     isProdactInCart(id) {
-      return this.shoppingList.cart.includes(id);
+      return this.shoppingListToEdit.cart.includes(id);
     },
     settleUpCatr() {
       this.createProductCountActivity(

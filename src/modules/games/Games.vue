@@ -124,12 +124,23 @@ export default {
     a {
       color: $layout-clr;
       &.router-link-active {
-        color: $layout-clr2;
+        // color: $layout-clr2;
+        color: $clr-light-red;
       }
     }
   }
   .error-container {
 
+  }
+
+  .game-container {
+    justify-content: unset;
+    // justify-content: space-around;
+    .mobile-controllers {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+    }
   }
 }
 </style>
