@@ -2,14 +2,27 @@
   <section class="games-page container inner-app flex column gap10 height-all">
     <nav class="games-ul flex wrap space-between">
       <!-- <RouterLink url="/games">Games</RouterLink> -->
-      <RouterLink v-for="gameName in allGamesNames" :key="gameName" :to="{ name: 'GamePage', params: { gameName } }">
+      <!-- <RouterLink v-for="gameName in allGamesNames" :key="gameName" :to="{ name: 'GamePage', params: { gameName } }">
         {{gameName}}
-      </RouterLink>
+      </RouterLink> -->
+      <FormInput 
+        type="select" 
+        @input="val => $router.push({ name: 'GamePage', params: { gameName: val } })" 
+        :value="currGameName" 
+        :items="allGamesNames.map(c => ({label: c, value: c}))"
+      />
+      <button class="btn" @click="viewScoreMode = !viewScoreMode">::</button>
     </nav>
     <section class="content-container flex-1 flex column align-center space-between">
       <!-- <h2>Game: {{currGameName}}</h2> -->
       
-      <div v-if="currGame" class="curr-game-container height-all width-all"></div>
+      <template v-if="currGame">
+        <div v-show="!viewScoreMode" class="curr-game-container height-all width-all"></div>
+
+        <div v-show="viewScoreMode">
+          <h3>{{currGameName}} - SCORES</h3>
+        </div>
+      </template>
 
       <div v-else class="error-container flex column align-center space-between">
         <h2>404</h2>
@@ -25,12 +38,19 @@ import { alertService } from '@/modules/common/services/alert.service.js';
 const A_Alert = alertService.A_Alert;
 
 import { Games } from './games-instances/index.js';
+import FormInput from '../common/cmps/FormInput.vue';
 const allGames = Games.allGames;
 
 var gGame = null;
 
 export default {
+  components: { FormInput },
     name: 'GamesPage',
+    data() {
+      return {
+        viewScoreMode: false
+      }
+    },
     computed: {
       routeGameName() {
         return this.$route.params.gameName;
@@ -55,7 +75,12 @@ export default {
       this.stopGame();
     },
     watch: {
+      viewScoreMode(val) {
+        if (val) this.stopGame();
+        else this.setupGame();
+      },
       '$route.params.gameName'(val) {
+        if (this.viewScoreMode) return;
         if (!val) return;
         this.setupGame();
       }
@@ -64,14 +89,22 @@ export default {
       setupGame() {
         this.stopGame();
         if (!this.currGame) return;
-        const popup = new A_Alert('.content-container', true);
-        gGame = new this.currGame('.curr-game-container', popup);
+        setTimeout(() => {
+          const popup = new A_Alert('.content-container', true);
+          gGame = new this.currGame('.curr-game-container', popup, [
+            {on: 'game-over', do: this.onGameOver},
+            {on: 'game_over', do: this.onGameOver}
+          ]);
+        });
       },
       stopGame() {
         gGame?.destroy();
         gGame = null;
         // const gameCotainer = document.querySelector('.curr-game-container');
         // if (gameCotainer) gameCotainer.innerHTML = '';
+      },
+      onGameOver(overData) {
+        console.log('WOOWOWWO GAME OVER', overData);
       }
     }
 }
@@ -117,6 +150,7 @@ export default {
     flex-direction: column;
     .board-container {
       max-width: 300px;
+      width: 100%;
     }
   }
   .games-ul {
