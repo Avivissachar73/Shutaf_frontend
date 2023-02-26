@@ -2,7 +2,7 @@
   <Modal class="loader" :styling="false">
     <!-- <img class="preview" :src="require('@/assets/images/loader.gif')"> -->
     <div v-if="msg" class="preview width-all flex column align-center">
-      <h3><pre>{{msg}}</pre></h3>
+      <h3 class="width-all text-center">{{msg}}</h3>
       <AnimationLoader class="inner-loader"/>
     </div>
     <AnimationLoader v-else class="preview" />
@@ -26,6 +26,7 @@ export default {
 
 <style lang="scss" scoped>
 .loader {
+  white-space: pre-wrap;
   &:hover {
     pointer-events: none;
   }
@@ -35,6 +36,7 @@ export default {
     height: 150px;
     &.width-all {
       width: 100%;
+      width: 100vw;
       height: auto;
       line-height: 2rem;
       .inner-loader {

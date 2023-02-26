@@ -380,6 +380,8 @@ function _getDefaultAlertStyle() {
                     border: unset;
                     background: unset;
                     border-bottom: 1px solid black;
+                    border-radius: 0;
+                    color: black;
                 }
     
                 
