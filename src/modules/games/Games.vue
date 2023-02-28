@@ -11,7 +11,7 @@
         :value="currGameName" 
         :items="allGamesNames.map(c => ({label: c, value: c}))"
       />
-      <button class="btn" @click="viewScoreMode = !viewScoreMode">::</button>
+      <button class="btn" @click="viewScoreMode = !viewScoreMode">Show Scores</button>
     </nav>
     <section class="content-container flex-1 flex column align-center space-between">
       <!-- <h2>Game: {{currGameName}}</h2> -->

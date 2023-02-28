@@ -3,7 +3,7 @@
   <section class="dashboard-page flex column align-center space-around">
       <div class="width-all flex align-center space-between">
         <h2>{{$t('dashboard.dashboard')}}</h2>
-        <button class="btn" @click="showFilterModal = !showFilterModal">::</button>
+        <button class="btn" @click="showFilterModal = !showFilterModal">{{$t('filter')}}</button>
       </div>
       <Modal @close="showFilterModal = false" v-if="showFilterModal">
         <div class="filter-modal flex column align-center gap5">

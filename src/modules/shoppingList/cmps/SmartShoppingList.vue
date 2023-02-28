@@ -14,8 +14,10 @@
       <ul v-if="shoppingListToEdit.products.length" class="width-all flex column gap5">
         <li v-for="item in shoppingListToEdit.products" :key="item.id" class="flex gap5 space-between">
           <div class="flex align-center gap5">
-            <button @click="updateProductIdx(item.id, -1)" class="btn small icon"><img :src="require('@/assets/images/small-arrow-head-up.png')"/></button>
-            <button @click="updateProductIdx(item.id, 1)" class="btn small icon"><img :src="require('@/assets/images/small-arrow-head-down.png')"/></button>
+            <template v-if="showActions">
+              <button @click="updateProductIdx(item.id, -1)" class="btn small icon"><img :src="require('@/assets/images/small-arrow-head-up.png')"/></button>
+              <button @click="updateProductIdx(item.id, 1)" class="btn small icon"><img :src="require('@/assets/images/small-arrow-head-down.png')"/></button>
+            </template>
             <p class="flex-1">{{item.name}}:</p>
           </div>
           <div class="flex align-center gap5">

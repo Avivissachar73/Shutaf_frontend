@@ -43,7 +43,7 @@ const en = {
 }
 const he = {
   "hello": "שלום",
-  "filter": "לפלטר",
+  "filter": "סינון",
   "edit": "ערוך",
   "submit": "שלח",
   "signup": "הרשם",
