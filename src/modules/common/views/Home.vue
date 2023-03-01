@@ -15,6 +15,11 @@ export default {
 
 <style lang="scss">
 @import '@/assets/styles/global/index';
+.dark {
+  .app-logo {
+    color: white;
+  }
+}
 .home-page {
   font-family: 'Nanum Brush Script', cursive;
   h3 {
