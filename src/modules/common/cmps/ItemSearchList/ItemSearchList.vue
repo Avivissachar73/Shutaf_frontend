@@ -104,7 +104,7 @@ export default {
 
 <style lang="scss">
 @import '@/assets/styles/global/index';
-.dark {
+.dark-theme {
   .item-preview {
     color: black;
   }

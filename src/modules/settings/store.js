@@ -9,7 +9,7 @@ const initState = () => ({
 
   uiConfig: localStorage.uiConfig ? JSON.parse(localStorage.uiConfig) : {
     locale: 'en',
-    darkMode: false,
+    theme: 'red-theme',
     accessabilityMode: false
   }
 });

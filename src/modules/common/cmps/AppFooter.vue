@@ -24,17 +24,14 @@ export default {
 
 <style lang="scss">
 @import '@/assets/styles/global/index';
-.dark {
+.red-theme {
   .app-footer { // RED_LAYOUT_FIX
     .credit-logo {
-      color: $layout-clr2;
+      color: white;
     }
   }
 }
-.app-footer { // RED_LAYOUT_FIX
-  direction: ltr;
-  .credit-logo {
-    color: white;
+.app-footer {
+    direction: ltr;
   }
-}
 </style>

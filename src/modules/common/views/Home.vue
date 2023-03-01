@@ -15,9 +15,11 @@ export default {
 
 <style lang="scss">
 @import '@/assets/styles/global/index';
-.dark {
-  .app-logo {
-    color: white;
+.dark-theme {
+  .home-page {
+    .app-logo {
+      color: white;
+    }
   }
 }
 .home-page {

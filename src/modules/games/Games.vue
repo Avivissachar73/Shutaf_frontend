@@ -112,6 +112,7 @@ export default {
 
 <style lang="scss">
 @import '@/assets/styles/global/index';
+@import '@/assets/styles/themes/index';
 .games-page {
   // all: unset;
   direction: ltr;
@@ -156,9 +157,9 @@ export default {
   .games-ul {
     gap: 10px;
     a {
-      color: $layout-clr;
+      color: $red-theme-body-clr;
       &.router-link-active {
-        // color: $layout-clr2;
+        // color: $layout-body-clr;
         color: $clr-light-red;
       }
     }

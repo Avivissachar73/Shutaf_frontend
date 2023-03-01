@@ -6,9 +6,12 @@
       <FormInput label="Google API key" v-model="settings.GOOGLE_API_KEY"/>
       <button>{{$t('save')}}</button>
     </form> -->
-    <FormInput class="width-content gap10" labelholder="settings.locale" :value="currLocale" type="select" :items="langs" @change="setLocale"/>
-    <FormInput class="width-content gap10 row-reverse" label="settings.darkMode" :value="uiConfig.darkMode" type="checkbox" @input="setDarkMode"/>
-    <FormInput class="width-content gap10 row-reverse" label="settings.accessability" :value="uiConfig.accessabilityMode" type="checkbox" @input="setAccessabilityMode"/>
+    <div class="simple-form">
+      <FormInput type="select" class="gap10" labelholder="settings.locale" v-model="uiConfig.locale" :items="langs"/>
+      <FormInput type="select" class="gap10" labelholder="settings.theme" v-model="uiConfig.theme" :items="themes"/>
+      <!-- <FormInput class="gap10 row-reverse" label="settings.darkMode" :value="uiConfig.darkMode" type="checkbox" @input="setDarkMode"/> -->
+      <FormInput type="checkbox" class="gap10" label="settings.accessability" v-model="uiConfig.accessabilityMode"/>
+    </div>
   </div>
 </template>
 
@@ -16,14 +19,13 @@
 import FormInput from '@/modules/common/cmps/FormInput.vue';
 import evEmmiter from '@/modules/common/services/event-emmiter.service';
 
-const langs = [{value: 'en', label: 'english'}, {value: 'he', label: 'hebrew'}];
 
 export default {
   name: 'SettingsPage',
   data() {
     return {
-      langs,
-      currLocale: langs.find(c => c.value === this.$store.getters['settings/uiConfig'].locale),
+      langs: [{value: 'en', label: 'english'}, {value: 'he', label: 'hebrew'}],
+      themes: ['lemon', 'red', 'dark'].map(c => ({value: `${c}-theme`, label: `settings.${c}-theme`})),
       settings: null,
       uiConfig: {...this.$store.getters['settings/uiConfig']},
     }
@@ -34,19 +36,6 @@ export default {
     }
   },
   methods: {
-    setLocale(locale) {
-      if (!locale) return;
-      this.uiConfig.locale = locale;
-      this.saveUiConfig();
-    },
-    setDarkMode(val) {
-      this.uiConfig.darkMode = val;
-      this.saveUiConfig();
-    },
-    setAccessabilityMode(val) {
-      this.uiConfig.accessabilityMode = val;
-      this.saveUiConfig();
-    },
     saveUiConfig() {
       this.$store.dispatch({ type: 'settings/saveUiConfig', config: this.uiConfig });
       evEmmiter.emit('app_config_update', this.uiConfig);
@@ -59,6 +48,25 @@ export default {
   created() {
     this.settings = JSON.parse(JSON.stringify(this.$store.getters['settings/settings']));
   },
+  watch: {
+    uiConfig: {
+      deep: true,
+      handler() {
+        this.saveUiConfig();
+      }
+    }
+  },
   components: { FormInput }
 }
 </script>
+
+<style lang="scss">
+@import '@/assets/styles/global/index';
+.settings-page {
+  .simple-form {
+    .form-input {
+      width: rem(150px);
+    }
+  }
+}
+</style>

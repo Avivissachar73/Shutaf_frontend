@@ -1,5 +1,5 @@
 <template>
-  <div class="app" id="app" :class="{ rtl: isRtl, dark: isDarkMode, accessability: isAccessabilityMode }">
+  <div class="app" id="app" :class="{ rtl: isRtl, [appTheme]: true, accessability: isAccessabilityMode }">
     <div class="app-content">
       <AppAside/>
       <div class="right">
@@ -50,6 +50,9 @@ export default {
     isDarkMode() {
       return this.uiConfig.darkMode
     },
+    appTheme() {
+      return this.uiConfig.theme
+    },
     isAccessabilityMode() {
       return this.uiConfig.accessabilityMode
     },
@@ -59,7 +62,7 @@ export default {
     },
     loggedUser() {
       return this.$store.getters['auth/loggedUser'];
-    },
+    }
   },
   async created() {
     this.isLoading = true;

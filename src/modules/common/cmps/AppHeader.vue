@@ -74,13 +74,14 @@ export default {
 
 <style lang="scss">
 @import '@/assets/styles/global/index';
-.dark {
+@import '@/assets/styles/themes/index';
+.dark-theme {
   .app-header {
     @media (max-width: $small-screen-breake) {
       nav {
         background-color: #1a1a1a;
         border-color: white;
-        color: $layout-clr;
+        color: white;
         >* {
           border-color: white;
           &:hover {
@@ -89,21 +90,28 @@ export default {
         }
       }
     }
-    .app-logo { // RED_LAYOUT_FIX
-      span {
-        color: $layout-clr2 !important;
-      }
+    .app-logo {
+      color: white;
     }
   }
 }
 
-.app-header {
-  .app-logo { // RED_LAYOUT_FIX
-    color: white;
-    span {
-      color: black !important;
+.red-theme {
+  .app-header {
+    .app-logo { // RED_LAYOUT_FIX
+      color: white;
+      span {
+        color: black !important;
+      }
     }
-  } 
+    @media (max-width: $small-screen-breake) {
+      nav {
+        color: $red-theme-body-clr;
+      }
+    }
+  }
+}
+.app-header {
   position: relative;
   nav {
     @include flex-center;
@@ -141,7 +149,7 @@ export default {
     }
     nav {
       font-weight: bold;
-      color: $layout-clr2;
+      color: white;
       display: block;
       position: fixed;
       z-index: 32;

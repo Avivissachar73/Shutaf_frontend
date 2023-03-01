@@ -1,0 +1,13 @@
+@mixin theme($header-clr, $body-clr, $header-bg, $body-bg) {
+  background-color: $header-bg;
+  color: $header-clr;
+  .app-main {
+    color: $body-clr;
+    background-color: $body-bg;
+  }
+}
+
+@import "./_default.scss";
+@import "./_lemon.scss";
+@import "./_dark.scss";
+@import "./_red.scss";

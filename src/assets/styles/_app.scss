@@ -8,8 +8,8 @@ html {
 }
 
 .app {
-  background-color: $layout-bg-clr1;
-  color: $layout-clr;
+  // background-color: $layout-header-bg;
+  // color: $layout-header-clr;
   
   // background-color: rgb(252, 47, 47);
   // color: #fff;
@@ -25,8 +25,8 @@ html {
   overflow-y: auto;
   position: relative;
   
-  color: $layout-clr2;
-  background-color: $layout-bg-clr2;
+  // color: $layout-body-clr;
+  // background-color: $layout-body-bg;
   // background-color: #fff;
   // color: rgb(252, 47, 47);
 }
@@ -66,17 +66,17 @@ html {
   }
 }
 
-.app.dark {
-  color: $layout-dark-clr;
-  background-color: $layout-dark-bg-clr1;
-}
-.app.dark .app-main {
-  color: $layout-dark-clr2;
-  background-color: $layout-dark-bg-clr2;
-}
-.app.dark .app-aside {
-  background-color: rgba(255,255,255,0.1);
-}
+// .app.dark-theme {
+//   color: $layout-dark-header-clr;
+//   background-color: $layout-dark-header-bg;
+// }
+// .app.dark-theme .app-main {
+//   color: $layout-dark-body-clr;
+//   background-color: $layout-dark-body-bg;
+// }
+// .app.dark-theme .app-aside {
+//   background-color: rgba(255,255,255,0.1);
+// }
 
 
 .rtl {
