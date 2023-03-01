@@ -1,6 +1,7 @@
 <template>
-  <div class="home-page container flex-center height-all">
+  <div class="home-page container flex column align-center justify-center gap30 height-all">
     <AppLogo/>
+    <h3>Make living easier</h3>
   </div>
 </template>
 
@@ -11,3 +12,13 @@ export default {
   name: 'Home'
 }
 </script>
+
+<style lang="scss">
+@import '@/assets/styles/global/index';
+.home-page {
+  font-family: 'Nanum Brush Script', cursive;
+  h3 {
+    font-size: rem(30px);
+  }
+}
+</style>
