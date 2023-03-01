@@ -15,12 +15,26 @@ export default {
   components: { CreditLogo },
   data() {
     return {
-      cvLink: 'https://docs.google.com/document/d/1chtvUmRJo38ZakzSWxqIyDgI6K1xi0eS/edit?usp=sharing&ouid=103323829961679615098&rtpof=true&sd=true'
+      // cvLink: 'https://docs.google.com/document/d/1chtvUmRJo38ZakzSWxqIyDgI6K1xi0eS/edit?usp=sharing&ouid=103323829961679615098&rtpof=true&sd=true'
+      cvLink: 'https://avivissachar73.github.io/AvivJs-Notes/#/cv'
     }
   }
 }
 </script>
 
-<style>
-
+<style lang="scss">
+@import '@/assets/styles/global/index';
+.dark {
+  .app-footer { // RED_LAYOUT_FIX
+    .credit-logo {
+      color: $layout-clr2;
+    }
+  }
+}
+.app-footer { // RED_LAYOUT_FIX
+  direction: ltr;
+  .credit-logo {
+    color: white;
+  }
+}
 </style>

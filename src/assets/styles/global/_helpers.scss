@@ -50,6 +50,12 @@
 .stretch-self {
   align-self: stretch;
 }
+.row-reverse {
+  flex-direction: row-reverse;
+}
+.column-reverse {
+  flex-direction: column-reverse;
+}
 
 .column-layout {
   display: flex;

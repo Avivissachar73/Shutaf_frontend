@@ -53,7 +53,7 @@ export const _bugStore = {
         do: async () => bugService.save(bug),
         onSuccess: (item) => {
           commit({ type: 'saveItem', item });
-          alertService.toast({type: 'safe', msg: bug._id? `${$t('bug.alerts.savedAccountSuccess')} id: ${bug._id}` : $t('bug.alerts.reportBugSuccess')+'!'})
+          alertService.toast({type: 'safe', msg: bug._id? `${$t('bug.alerts.savedBugSuccess')} id: ${bug._id}` : $t('bug.alerts.reportBugSuccess')+'!'})
         }
       });
     }

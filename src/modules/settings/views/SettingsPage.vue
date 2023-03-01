@@ -7,8 +7,8 @@
       <button>{{$t('save')}}</button>
     </form> -->
     <FormInput class="width-content gap10" labelholder="settings.locale" :value="currLocale" type="select" :items="langs" @change="setLocale"/>
-    <FormInput class="width-content gap10" label="settings.darkMode" :value="uiConfig.darkMode" type="checkbox" @input="setDarkMode"/>
-    <FormInput class="width-content gap10" label="settings.accessability" :value="uiConfig.accessabilityMode" type="checkbox" @input="setAccessabilityMode"/>
+    <FormInput class="width-content gap10 row-reverse" label="settings.darkMode" :value="uiConfig.darkMode" type="checkbox" @input="setDarkMode"/>
+    <FormInput class="width-content gap10 row-reverse" label="settings.accessability" :value="uiConfig.accessabilityMode" type="checkbox" @input="setAccessabilityMode"/>
   </div>
 </template>
 

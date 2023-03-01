@@ -65,7 +65,7 @@ export default {
     this.isLoading = true;
     const timeoutId = setTimeout(() => {
       if (this.isLoading) this.showSleepMsg = true;
-    }, 5000);
+    }, 7000);
     await socketService.connect();
     try {
       await Promise.all([

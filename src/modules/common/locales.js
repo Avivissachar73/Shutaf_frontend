@@ -91,7 +91,7 @@ const heF = {
   "logout": "התנתקי",
   "delete": "מחקי",
   "addNew": "הוסיפי חדש",
-  "approve": "אשיר",
+  "approve": "אשרי",
   "decline": "דחי",
   "close": "סגרי",
   "save": "שמרי",

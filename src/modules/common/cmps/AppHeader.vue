@@ -72,14 +72,15 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '@/assets/styles/global/index';
 .dark {
-  @media (max-width: $small-screen-breake) {
-    .app-header {
+  .app-header {
+    @media (max-width: $small-screen-breake) {
       nav {
         background-color: #1a1a1a;
         border-color: white;
+        color: $layout-clr;
         >* {
           border-color: white;
           &:hover {
@@ -88,15 +89,32 @@ export default {
         }
       }
     }
+    .app-logo { // RED_LAYOUT_FIX
+      span {
+        color: $layout-clr2 !important;
+      }
+    }
   }
 }
+
 .app-header {
+  .app-logo { // RED_LAYOUT_FIX
+    color: white;
+    span {
+      color: black !important;
+    }
+  } 
   position: relative;
   nav {
     @include flex-center;
     flex-wrap: wrap;
     justify-content: flex-end;
-    gap: 10px;
+    >* {
+      &:hover {
+        transform: scale(1.1);
+        transition: 0.1s;
+      }
+    }
   }
   .nav-burger {
     display: none;
@@ -122,6 +140,8 @@ export default {
       z-index: 31;
     }
     nav {
+      font-weight: bold;
+      color: $layout-clr2;
       display: block;
       position: fixed;
       z-index: 32;
@@ -149,10 +169,11 @@ export default {
         border-bottom: 1px solid black;
         text-align: center;
         &.router-link-exact-active {
-          color: rgb(157, 255, 157);
+          color: rgb(157, 193, 255);
         }
         &:hover {
           background-color: rgb(190, 190, 250);
+          transform: unset;
         }
       }
     }

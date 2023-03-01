@@ -7,7 +7,7 @@
     <template v-if="!isLoading && items?.length">
       <ItemList 
         v-if="items"
-        class="width-all" :items="items"
+        class="width-all height-all" :items="items"
         :singlePreviewCmp="singlePreviewCmp"
         :itemDetailesPageName="itemDetailesPageName"
         @edit="item => $emit('edit', item)"
