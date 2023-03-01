@@ -149,7 +149,6 @@ export default {
     }
     nav {
       font-weight: bold;
-      color: white;
       display: block;
       position: fixed;
       z-index: 32;
