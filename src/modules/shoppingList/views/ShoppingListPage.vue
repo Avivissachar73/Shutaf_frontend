@@ -2,6 +2,7 @@
   <section class="shoppingList-page height-all width-all flex column gap10">
     <h2>{{$t('shoppingList.shoppingList')}}</h2>
     <ItemSearchList
+      class="width-all"
       :itemsData="shoppingListsData"
       :initFilterBy="filterBy"
       @filter="getShoppingList"

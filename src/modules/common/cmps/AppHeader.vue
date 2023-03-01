@@ -50,7 +50,7 @@ export default {
     orgId() {
       // return localStorage.logged_organization_id || this.$store.getters['organization/selectedOrganization']?._id || 'public';
       // return localStorage.logged_organization_id || this.$store.getters['organization/selectedOrganization']?._id;
-      return this.$store.getters['organization/selectedOrganization']?._id || this.$route.params.organizationId;
+      return this.$store.getters['organization/selectedItem']?._id || this.$route.params.organizationId;
     }
   },
   methods: {
@@ -147,6 +147,7 @@ export default {
         border: unset;
         border-radius: unset;
         border-bottom: 1px solid black;
+        text-align: center;
         &.router-link-exact-active {
           color: rgb(157, 255, 157);
         }

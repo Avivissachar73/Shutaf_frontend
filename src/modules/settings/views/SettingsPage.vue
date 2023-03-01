@@ -7,7 +7,8 @@
       <button>{{$t('save')}}</button>
     </form> -->
     <FormInput class="width-content gap10" labelholder="settings.locale" :value="currLocale" type="select" :items="langs" @change="setLocale"/>
-    <FormInput class="width-content gap10" label="settings.darkMode" :value="isDarkMode" type="checkbox" @input="setDarkMode"/>
+    <FormInput class="width-content gap10" label="settings.darkMode" :value="uiConfig.darkMode" type="checkbox" @input="setDarkMode"/>
+    <FormInput class="width-content gap10" label="settings.accessability" :value="uiConfig.accessabilityMode" type="checkbox" @input="setAccessabilityMode"/>
   </div>
 </template>
 
@@ -22,10 +23,9 @@ export default {
   data() {
     return {
       langs,
-      currLocale: langs.find(c => c.value === this.$i18n.locale),
-      locale: this.$i18n.locale,
-      isDarkMode: (localStorage.isDarkMode === 'true') || false,
-      settings: null
+      currLocale: langs.find(c => c.value === this.$store.getters['settings/uiConfig'].locale),
+      settings: null,
+      uiConfig: {...this.$store.getters['settings/uiConfig']},
     }
   },
   computed: {
@@ -36,14 +36,20 @@ export default {
   methods: {
     setLocale(locale) {
       if (!locale) return;
-      this.$i18n.locale = localStorage.locale = locale;
-      if ((locale === 'he') && (this.loggedUser?.gender !== 'male')) this.$i18n.locale = 'heF';
-      evEmmiter.emit('set_locale', locale);
+      this.uiConfig.locale = locale;
+      this.saveUiConfig();
     },
     setDarkMode(val) {
-      this.isDarkMode = val;
-      localStorage.isDarkMode = val;
-      evEmmiter.emit('set_darkmode', val);
+      this.uiConfig.darkMode = val;
+      this.saveUiConfig();
+    },
+    setAccessabilityMode(val) {
+      this.uiConfig.accessabilityMode = val;
+      this.saveUiConfig();
+    },
+    saveUiConfig() {
+      this.$store.dispatch({ type: 'settings/saveUiConfig', config: this.uiConfig });
+      evEmmiter.emit('app_config_update', this.uiConfig);
     },
     async saveSettings() {
       const updatedSettings = await this.$store.dispatch({ type: 'settings/updateSettings', settings: this.settings });

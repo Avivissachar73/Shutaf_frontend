@@ -104,16 +104,24 @@ export default {
 
 <style lang="scss">
 @import '@/assets/styles/global/index';
+.dark {
+  .item-preview {
+    color: black;
+  }
+}
 .item-page {
   position: relative;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  // width: 300px;
+  width: 100%;
   .item-list {
     // flex: 1;
     overflow-y: auto;
+    width: 100%;
     .item-preview {
-      width: 300px;
+      width: rem(300px);
       max-width: 98%;
       height: 200px;
       border-radius: 5px;
@@ -127,7 +135,7 @@ export default {
       overflow-y: auto;
       overflow-x: hidden;
 
-      @media (max-width: 370px) {
+      @media (max-width: 400px) {
         width: 98%;
         // max-width: unset;
         // border-radius: 0;

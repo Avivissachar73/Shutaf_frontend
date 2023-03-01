@@ -3,6 +3,7 @@ const  en = {
     "settings": "Settings",
     "darkMode": "Dark mode",
     "locale": "Locale",
+    "accessability": "Accessability",
     "alerts": {}
   }
 }
@@ -11,6 +12,7 @@ const he = {
     "settings": "הגדרות",
     "darkMode": "מצב חשוך",
     "locale": "שפה",
+    "accessability": "נגישות",
     "alerts": {}
   }
 }

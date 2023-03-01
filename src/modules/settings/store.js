@@ -5,7 +5,13 @@ import { basicStoreService } from '@/modules/common/services/basic-store.service
 const initState = () => ({
   settings: null,
   isLoading: false,
-  config: null
+  config: null,
+
+  uiConfig: localStorage.uiConfig ? JSON.parse(localStorage.uiConfig) : {
+    locale: 'en',
+    darkMode: false,
+    accessabilityMode: false
+  }
 });
 
 export const _settingsStore = {
@@ -15,6 +21,7 @@ export const _settingsStore = {
     settings: (state) => state.settings,
     config: (state) => state.config,
     isLoading: (state) => state.isLoading,
+    uiConfig: (state) => state.uiConfig
   },
   mutations: {
     setSettings(state, { settings }) {
@@ -29,6 +36,11 @@ export const _settingsStore = {
     },
     setConfig(state, { config }) {
       state.config = config;
+    },
+
+    saveUiConfig(state, { config }) {
+      state.uiConfig = {...config},
+      localStorage.uiConfig = JSON.stringify(config);
     }
   },
   actions: {
@@ -69,6 +81,10 @@ export const _settingsStore = {
         onError: (err) => {}, // NOOP;,
         dontDelay: true
       });
+    },
+
+    saveUiConfig({ commit }, { config }) {
+      commit({ type: 'saveUiConfig', config });
     }
   }
 }

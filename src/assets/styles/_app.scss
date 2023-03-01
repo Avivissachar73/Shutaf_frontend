@@ -83,6 +83,10 @@ html {
   direction: rtl;
 }
 
+html.accessability {
+  font-size: 25px;
+}
+
 ::-webkit-scrollbar {
   margin-left: 2.5px;
   padding: 1px;

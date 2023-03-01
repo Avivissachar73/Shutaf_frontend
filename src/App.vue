@@ -1,5 +1,5 @@
 <template>
-  <div class="app" id="app" :class="{ rtl: isRtl, dark: isDarkMode }">
+  <div class="app" id="app" :class="{ rtl: isRtl, dark: isDarkMode, accessability: isAccessabilityMode }">
     <div class="app-content">
       <AppAside/>
       <div class="right">
@@ -35,7 +35,6 @@ export default {
     return {
       isLoading: false,
       showSleepMsg: false,
-      isDarkMode: localStorage.isDarkMode === 'true'
     }
   },
   computed: {
@@ -45,13 +44,22 @@ export default {
     config() {
       return this.$store.getters['settings/config'];
     },
+    uiConfig() {
+      return this.$store.getters['settings/uiConfig'];
+    },
+    isDarkMode() {
+      return this.uiConfig.darkMode
+    },
+    isAccessabilityMode() {
+      return this.uiConfig.accessabilityMode
+    },
     isRtl() {
       const locale = this.$i18n.locale;
       return ['he', 'heF'].includes(locale);
     },
     loggedUser() {
       return this.$store.getters['auth/loggedUser'];
-    }
+    },
   },
   async created() {
     this.isLoading = true;
@@ -69,16 +77,25 @@ export default {
     clearTimeout(timeoutId);
     this.showSleepMsg = false;
     this.isLoading = false;
-    evEmmiter.on('set_darkmode', (val) => {
-      this.isDarkMode = val;
-    });
 
-    alertService.setConfig({ direction: this.isRtl? 'rtl' : 'ltr' });
-    evEmmiter.on('set_locale', (locale) => {
-      alertService.setConfig({ direction: this.isRtl? 'rtl' : 'ltr' });
-    });
+    this.displayUiConfig()
+    evEmmiter.on('app_config_update', this.displayUiConfig);
 
     if (['HomePage'].includes(this.$route.name) && this.loggedUser && localStorage.logged_organization_id) this.$router.push({ name: 'OrganizationDetails', params: {id: localStorage.logged_organization_id} })
+  },
+  methods: {
+    setLocale() {
+      let locale = this.uiConfig.locale;
+      if ((locale === 'he') && (this.loggedUser?.gender !== 'male')) locale = 'heF';
+      this.$i18n.locale = locale;
+    },
+    displayUiConfig() {
+      const config = this.uiConfig;
+      this.setLocale();
+      alertService.setConfig({ direction: this.isRtl? 'rtl' : 'ltr' });
+      if (config.accessabilityMode) document.querySelector('html').classList.add('accessability');
+      else document.querySelector('html').classList.remove('accessability');
+    }
   }
 }
 </script>

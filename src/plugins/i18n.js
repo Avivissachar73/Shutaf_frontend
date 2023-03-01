@@ -9,7 +9,7 @@ import messages from '@/assets/locales/index.js';
 Vue.use(VueI18n);
 
 const i18n = new VueI18n({
-  locale: localStorage.locale || 'en',
+  locale: 'en', // being resetted in app.js
   messages: JSON.parse(JSON.stringify(messages))
   // messages: {
   //   en,

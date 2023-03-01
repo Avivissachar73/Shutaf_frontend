@@ -225,6 +225,7 @@ class A_Alert {
         this._resetState();
 
         var elAlert = document.querySelector('.' + this.idClass);
+        if (!elAlert) return;
         elAlert.classList.remove(currTypeClassName);
         elAlert.innerHTML = null;
         return prmCbFunc?.(val);
