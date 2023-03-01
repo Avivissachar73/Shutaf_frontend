@@ -9,13 +9,9 @@ export default {
 </script>
 
 <style lang="scss">
-// @import url('https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@1,800&display=swap');
-// @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Shantell+Sans:ital,wght@1,800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap');
 .app-logo {
   // font-family: 'Courier New', Courier, monospace;
-  // font-family: 'Shantell Sans', cursive;
-  // font-family: 'Pacifico', cursive;
   font-family: 'Nanum Brush Script', cursive;
   font-weight: bold;
   font-size: 40px;
