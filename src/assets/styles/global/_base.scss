@@ -1,38 +1,25 @@
-// button, .button-like {
-//   border: unset;
-//   background: unset;
-//   outline: none;
-//   // padding: 0 5px;
-//   // border: 1px solid black;
-//   // box-shadow: $light-shadow;
-//   // color: black;
-//   // border-radius: 5px;
-// } button:hover, .button-like:hover {cursor: pointer;}
-// button:active, .button-like:active {
-//     color: white;
-//     border-color: white;
-//   }
 
-// input[type="text"], input[type="password"], select, textarea {
-input, select, textarea {
-  // width: 200px;
-  border: 0;
-  outline: none;
-}
 
-// input[type="text"], input[type="password"], select {
 input, select, textarea {
   padding: 5px;
   padding-left: none;
   border: unset;
   background: unset;
-  // border-bottom: 1px solid black;
+  outline: none;
 
   border-radius: 5px;
   border: 0.5px solid rgba(114, 114, 114, 0.5);
   background-color: rgba(0, 0, 0, 0.01);
   color: black;
 }
+.dark-theme {
+  input, select, textarea {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+  }
+
+}
+
 
 a, .router-link {
   text-decoration: none !important;
@@ -45,104 +32,6 @@ img {
   object-fit: cover;
 }
 
-.dark-theme {
-  button, .button-like, input, select, textarea {
-    background-color: rgba(255, 255, 255, 0.2);
-    color: white;
-  }
-
-  input {
-    // border-color: white;
-    // color: white;
-  }
-  ::placeholder {
-    // color: white;
-  }
-
-}
-
-.btn {
-  color: white;
-}
-.btn {
-  // height: 20px;
-  background-color: #ffffff;
-  box-shadow: $light-shadow;
-  color: black !important;
-  border-radius: 5px;
-  padding: 0 5px;
-
-  &.icon {
-    height: 20px;
-    width: 20px;
-    padding: 0;
-    border: unset;
-    // padding: 1px;
-    // img {
-    //   height: calc(100% - 2px);
-    //   width: calc(100% - 2px);
-    // }
-  }
-  &.small {
-    height: 13px;
-    width: 13px;
-    padding: 0;
-    border-radius: 2px;
-    font-size: 11px;
-  }
-
-  &.big {
-    padding: 10px 20px;
-  }
-  &.mid {
-    padding: 7px 15px;
-  }
-
-  &.primary {
-    background-color: $clr-light-green;
-  }
-  &.secondary {
-    background-color: $clr-light-blue;
-  }
-  &.danger {
-    background-color: $clr-light-red;
-  }
-
-  // &.safe {
-  //   background-color: green;
-  // }
-  // &.danger {
-  //   background-color: red;
-  // }
-
-  &:hover {cursor: pointer;}
-  &:active {
-    color: white;
-    border-color: white;
-  }
-}
-
-.toggle-btns { // flex align-center space-between gap5 
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  // border: 1px solid $clr-light-blue;
-  border-radius: 3px;
-  overflow: hidden;
-  background-color: #fff;
-  box-shadow: $light-shadow;
-  button {
-    padding: 3px;
-    color: black;
-    height: 100%;
-    &:not(:last-child) {
-      border-inline-end: 1px solid $clr-light-blue;
-    }
-    &.selected {
-      background-color: $clr-light-green;
-    }
-  }
-}
 
 
 h1 {
@@ -160,4 +49,26 @@ h3 {
 h4 {
   font-size: rem(16px);
   font-weight: bold;
+}
+
+
+
+::-webkit-scrollbar {
+  margin-left: 2.5px;
+  padding: 1px;
+  width: 5px;
+  /* background-color: rgb(255, 137, 137); */
+  background-color: rgb(228, 59, 59);
+}
+::-webkit-scrollbar-thumb {
+  /* width: 5px; */
+  /* background-color: rgb(255, 239, 149); */
+  background-color: rgb(255, 137, 137);
+  border-radius: 10px;
+  
+}
+::-webkit-scrollbar-button {
+  /* width: 5px; */
+  /* background-color: blue; */
+  background-color: rgb(228, 59, 59);
 }

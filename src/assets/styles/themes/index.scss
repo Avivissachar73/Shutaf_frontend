@@ -1,6 +1,8 @@
 @mixin theme($header-clr, $body-clr, $header-bg, $body-bg) {
-  background-color: $header-bg;
-  color: $header-clr;
+  .app-header, .app-footer {
+    background-color: $header-bg;
+    color: $header-clr;
+  }
   .app-main {
     color: $body-clr;
     background-color: $body-bg;

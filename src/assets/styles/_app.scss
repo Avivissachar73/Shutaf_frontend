@@ -87,26 +87,6 @@ html.accessability {
   font-size: 25px;
 }
 
-::-webkit-scrollbar {
-  margin-left: 2.5px;
-  padding: 1px;
-  width: 5px;
-  /* background-color: rgb(255, 137, 137); */
-  background-color: rgb(228, 59, 59);
-}
-::-webkit-scrollbar-thumb {
-  /* width: 5px; */
-  /* background-color: rgb(255, 239, 149); */
-  background-color: rgb(255, 137, 137);
-  border-radius: 10px;
-  
-}
-::-webkit-scrollbar-button {
-  /* width: 5px; */
-  /* background-color: blue; */
-  background-color: rgb(228, 59, 59);
-}
-
 
 .container {
   margin: 0 auto;
