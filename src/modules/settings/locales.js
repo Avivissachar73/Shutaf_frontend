@@ -8,6 +8,8 @@ const  en = {
     "themes": {
       "lemon": "Lemon",
       "red": "Simply Red",
+      "purple": "Deep Purple",
+      "pink": "la Vie en Rose",
       "dark": "Dark",
     },
     "alerts": {}
@@ -23,6 +25,8 @@ const he = {
     "themes": {
       "lemon": "לימון",
       "red": "פשוט אדום",
+      "purple": "סגול עמוק",
+      "pink": "החיים בורוד",
       "dark": "חשוך",
     },
     "alerts": {}

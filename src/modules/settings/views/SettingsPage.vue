@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       langs: [{value: 'en', label: 'english'}, {value: 'he', label: 'hebrew'}],
-      themes: ['lemon', 'red', 'dark'].map(c => ({value: c, label: `settings.themes.${c}`})),
+      themes: ['lemon', 'red', 'purple', 'pink', 'dark'].map(c => ({value: c, label: `settings.themes.${c}`})),
       settings: null,
       uiConfig: {...this.$store.getters['settings/uiConfig']},
     }
@@ -64,7 +64,7 @@ export default {
 .settings-page {
   .simple-form {
     .form-input {
-      width: rem(150px);
+      width: rem(180px);
     }
   }
 }

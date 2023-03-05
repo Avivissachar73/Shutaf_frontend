@@ -1,0 +1,9 @@
+$main-purple-theme-color: rgb(137, 51, 154);
+
+$purple-theme-body-clr: $main-purple-theme-color;
+$purple-theme-header-clr: white;
+$purple-theme-header-bg: $main-purple-theme-color;
+$purple-theme-body-bg: #fff;
+.purple-theme {
+  @include theme($purple-theme-header-clr, $purple-theme-body-clr, $purple-theme-header-bg, $purple-theme-body-bg);
+}

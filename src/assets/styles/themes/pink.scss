@@ -1,0 +1,9 @@
+$main-pink-theme-color: rgb(255, 114, 241);
+
+$pink-theme-body-clr: $main-pink-theme-color;
+$pink-theme-header-clr: white;
+$pink-theme-header-bg: $main-pink-theme-color;
+$pink-theme-body-bg: #fff;
+.pink-theme {
+  @include theme($pink-theme-header-clr, $pink-theme-body-clr, $pink-theme-header-bg, $pink-theme-body-bg);
+}

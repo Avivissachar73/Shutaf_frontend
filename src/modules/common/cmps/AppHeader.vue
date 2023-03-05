@@ -111,6 +111,15 @@ export default {
     }
   }
 }
+.purple-theme, .pink-theme {
+  .app-header {
+    @media (max-width: $small-screen-breake) {
+      nav {
+        color: black;
+      }
+    }
+  }
+}
 .app-header {
   position: relative;
   nav {
