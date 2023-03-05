@@ -111,7 +111,7 @@ export default {
     }
   }
 }
-.purple-theme, .pink-theme {
+.purple-theme, .pink-theme, .blue-theme {
   .app-header {
     @media (max-width: $small-screen-breake) {
       nav {

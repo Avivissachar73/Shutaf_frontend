@@ -7,10 +7,11 @@ const  en = {
     "theme": "Theme",
     "themes": {
       "lemon": "Lemon",
+      "dark": "Dark",
       "red": "Simply Red",
       "purple": "Deep Purple",
       "pink": "la Vie en Rose",
-      "dark": "Dark",
+      "blue": "Baby Blue",
     },
     "alerts": {}
   }
@@ -24,10 +25,11 @@ const he = {
     "theme": "נושא",
     "themes": {
       "lemon": "לימון",
+      "dark": "חשוך",
       "red": "פשוט אדום",
       "purple": "סגול עמוק",
       "pink": "החיים בורוד",
-      "dark": "חשוך",
+      "blue": "ערב כחול עמוק",
     },
     "alerts": {}
   }
