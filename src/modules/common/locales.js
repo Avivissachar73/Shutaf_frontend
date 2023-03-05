@@ -39,7 +39,13 @@ const en = {
   "internalServerError": "Internal server error",
   "internalError": "Internal error",
 
-  "serverSleepsMsg": "Seems like the server fell asleep..\nHang in there,\nFew more seconds and we'r Waking it up!"
+  "serverSleepsMsg": "Seems like the server fell asleep..\nHang in there,\nFew more seconds and we'r Waking it up!",
+
+  "aboutPage": {
+    "about": "About",
+    "aboutUs": "Something About Us",
+    "meatTheTeam": "Meat the team",
+  }
 }
 const he = {
   "hello": "שלום",
@@ -80,7 +86,13 @@ const he = {
   "internalServerError": "תקלת שרת",
   "internalError": "תקלה כללית",
   
-  "serverSleepsMsg": "נראה שהשרת הלך לישון..\nהחזיקו מעמד,\n כמה רגעים והוא מתעורר!"
+  "serverSleepsMsg": "נראה שהשרת הלך לישון..\nהחזיקו מעמד,\n כמה רגעים והוא מתעורר!",
+
+  "aboutPage": {
+    "about": "אודות",
+    "aboutUs": "משהו עלינו",
+    "meatTheTeam": "פגשו את הצוות",
+  }
 }
 const heF = {
   ...he,
@@ -100,7 +112,7 @@ const heF = {
   "createYourFirstOne": "צרי את הראשון",
   "createNew": "צרי חדש",
   "leave": "עזבי",
-  "add": "הוסיפי",
+  "add": "הוסיפי"
 }
 
 export const commonLocales = {
