@@ -48,7 +48,9 @@ html {
 
 .app-aside {
   width: $app-aside-width;
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgba(0,0,0,0.05);
+  // background-color: rgba(255,255,255,0.3);
+  border-inline-end: 0.5px solid rgba(0,0,0,0.1);
   @media (max-width: $small-screen-breake) {
     display: none !important;
   }

@@ -4,10 +4,12 @@ $default-theme-header-bg: #c4fad3;
 $default-theme-body-bg: rgb(222, 250, 196);
 
 .app {
-  background-color: $default-theme-header-bg;
-  color: $default-theme-header-clr;
-  .app-main {
-    color: $default-theme-body-clr;
-    background-color: $default-theme-body-bg;
+  color: $default-theme-body-clr;
+  background-color: $default-theme-body-bg;
+  // .app-main {
+  // }
+  .app-header, .app-footer {
+    background-color: $default-theme-header-bg;
+    color: $default-theme-header-clr;
   }
 }

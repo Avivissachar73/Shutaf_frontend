@@ -3,10 +3,10 @@
     background-color: $header-bg;
     color: $header-clr;
   }
-  .app-main {
-    color: $body-clr;
-    background-color: $body-bg;
-  }
+  // .app-main {
+  // }
+  color: $body-clr;
+  background-color: $body-bg;
 }
 
 @import "./_default.scss";

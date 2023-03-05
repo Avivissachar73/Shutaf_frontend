@@ -5,9 +5,11 @@ const  en = {
     "locale": "Locale",
     "accessability": "Accessability",
     "theme": "Theme",
-    "lemon-theme": "Lemon",
-    "red-theme": "Red",
-    "dark-theme": "Dark",
+    "themes": {
+      "lemon": "Lemon",
+      "red": "Simply Red",
+      "dark": "Dark",
+    },
     "alerts": {}
   }
 }
@@ -18,9 +20,11 @@ const he = {
     "locale": "שפה",
     "accessability": "נגישות",
     "theme": "נושא",
-    "lemon-theme": "לימון",
-    "red-theme": "אדום",
-    "dark-theme": "חשוך",
+    "themes": {
+      "lemon": "לימון",
+      "red": "פשוט אדום",
+      "dark": "חשוך",
+    },
     "alerts": {}
   }
 }

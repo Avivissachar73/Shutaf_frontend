@@ -19,13 +19,12 @@
 import FormInput from '@/modules/common/cmps/FormInput.vue';
 import evEmmiter from '@/modules/common/services/event-emmiter.service';
 
-
 export default {
   name: 'SettingsPage',
   data() {
     return {
       langs: [{value: 'en', label: 'english'}, {value: 'he', label: 'hebrew'}],
-      themes: ['lemon', 'red', 'dark'].map(c => ({value: `${c}-theme`, label: `settings.${c}-theme`})),
+      themes: ['lemon', 'red', 'dark'].map(c => ({value: c, label: `settings.themes.${c}`})),
       settings: null,
       uiConfig: {...this.$store.getters['settings/uiConfig']},
     }

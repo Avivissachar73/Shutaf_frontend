@@ -51,7 +51,7 @@ export default {
       return this.uiConfig.darkMode
     },
     appTheme() {
-      return this.uiConfig.theme
+      return this.uiConfig.theme + '-theme';
     },
     isAccessabilityMode() {
       return this.uiConfig.accessabilityMode
@@ -89,7 +89,7 @@ export default {
   methods: {
     setLocale() {
       let locale = this.uiConfig.locale;
-      if ((locale === 'he') && (this.loggedUser?.gender !== 'male')) locale = 'heF';
+      if ((locale === 'he') && (this.loggedUser?.gender === 'female')) locale = 'heF';
       this.$i18n.locale = locale;
     },
     displayUiConfig() {
