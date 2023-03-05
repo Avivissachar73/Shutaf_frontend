@@ -8,7 +8,7 @@ const initState = () => ({
   ...basicStoreService.initState()
 });
 
-const basicStore = basicStoreService.getSimpleStore(initState);
+const basicStore = basicStoreService.createSimpleCrudStore(initState);
 
 export const _bugStore = {
   namespaced: true,

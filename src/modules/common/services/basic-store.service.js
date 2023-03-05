@@ -50,7 +50,7 @@ async function StoreAjax({ commit, dispatch }, { do: toDo, onSuccess, onError, d
   }
 }
 
-const getSimpleStore = (_initState = initState, service = {}, moduleName = 'item') => {
+const createSimpleCrudStore = (_initState = initState, service = {}, moduleName = 'item') => {
   return {
     namespaced: true,
     state: _initState(),
@@ -149,5 +149,5 @@ export const basicStoreService = {
   initFilterBy,
   StoreAjax,
   initState,
-  getSimpleStore
+  createSimpleCrudStore
 }

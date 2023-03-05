@@ -12,7 +12,7 @@ const initState = () => {
   return state;
 }
 
-const basicStore = basicStoreService.getSimpleStore(initState);
+const basicStore = basicStoreService.createSimpleCrudStore(initState);
 
 export const _shoppingListStore = {
   namespaced: true,

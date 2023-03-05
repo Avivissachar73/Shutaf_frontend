@@ -3,7 +3,6 @@ import { alertService } from '@/modules/common/services/alert.service';
 import { basicStoreService } from '@/modules/common/services/basic-store.service';
 
 import { $t } from '@/plugins/i18n';
-import i18n from '@/plugins/i18n';
 
 const initState = () => ({
   loggedUser: null,
@@ -25,13 +24,6 @@ export const _authStore = {
 
     setLoggedUser(state, { user }) {
       state.loggedUser = user;
-               
-      if (!user) return;
-      let storedLocale = localStorage.locale;
-      if (storedLocale === 'he') {
-        if (user.gender !== 'male') i18n.locale = 'heF';
-        else i18n.locale = 'he';
-      }
     },
     resetState(state) {
       const newState = initState();
