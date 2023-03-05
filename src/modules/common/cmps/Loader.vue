@@ -26,7 +26,6 @@ export default {
 
 <style lang="scss" scoped>
 .loader {
-  white-space: pre-wrap;
   &:hover {
     pointer-events: none;
   }

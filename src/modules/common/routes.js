@@ -1,5 +1,6 @@
 import Home from './views/Home';
 import About from './views/About';
+import MeatTheTeamPage from './views/MeatTheTeamPage';
 import SandBox from './views/SandBox';
 
 import AdminPage from './views/AdminPage';
@@ -16,6 +17,11 @@ export const commonRoutes = [
     path: '/about',
     component: About,
     name: 'AboutPage'
+  },
+  {
+    path: '/meat-the-team',
+    component: MeatTheTeamPage,
+    name: 'MeatTheTeamPage'
   },
   {
     path: '/sand-box',
